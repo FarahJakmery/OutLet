@@ -1,6 +1,9 @@
 <!-- Title -->
 <title>@yield('title')</title>
 
+<!-- Favicon -->
+<link rel="icon" href="../../assets/img/brand/favicon.png" type="image/x-icon" />
+
 <!-- Icons css -->
 <link href="../../assets/css/icons.css" rel="stylesheet">
 
@@ -30,5 +33,3 @@
 
 <!---Skinmodes css-->
 <link href="../../assets/css-rtl/skin-modes.css" rel="stylesheet" />
-
-@yield('css')
