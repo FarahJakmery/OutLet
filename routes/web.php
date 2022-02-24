@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +23,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+
+// Route::group(['middleware' => ['auth']], function () {
+Route::resource('users', UserController::class);
+Route::resource('roles', RoleController::class);
+// });
+
+require __DIR__ . '/auth.php';
