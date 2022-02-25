@@ -33,3 +33,5 @@
 
 <!---Skinmodes css-->
 <link href="../../assets/css-rtl/skin-modes.css" rel="stylesheet" />
+
+@yield('css')
