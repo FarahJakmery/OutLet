@@ -14,8 +14,8 @@ class CreateBrandMcatrgoryTable extends Migration
     public function up()
     {
         Schema::create('brand_mcategory', function (Blueprint $table) {
-            $table->foreignId('brand_id')->constrained()->onDelete('cascade');;
-            $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('brand_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');
         });
     }
 
