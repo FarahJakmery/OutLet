@@ -14,8 +14,8 @@ class CreateMcategorySubcategoryTable extends Migration
     public function up()
     {
         Schema::create('mcategory_subcategory', function (Blueprint $table) {
-            $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');;
-            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
         });
     }
 
