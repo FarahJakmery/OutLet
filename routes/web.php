@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\MainCategoryController;
+use App\Http\Controllers\Admin\McategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +33,10 @@ Route::get('/dashboard', function () {
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('brands', BrandController::class);
-Route::resource('mainCategories', MainCategoryController::class);
+Route::resource('mcategories', McategoryController::class);
+Route::resource('subcategories', SubcategoryController::class);
+Route::resource('branches', BranchController::class);
+Route::resource('products', ProductController::class);
 // });
 
 require __DIR__ . '/auth.php';
