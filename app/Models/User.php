@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'roles_name', 'Status'
     ];
 
     /**
@@ -37,5 +37,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'roles_name'        => 'array', // I want to store this in the database as array so I changed its type
     ];
 }
