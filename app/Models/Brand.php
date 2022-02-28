@@ -12,5 +12,14 @@ class Brand extends Model
     protected $fillable = [
         'brand_name',
         'description',
+        'logo_name'
     ];
+
+    /**
+     * The main_categories that belong to the brand.
+     */
+    public function mcategories()
+    {
+        return $this->belongsToMany(Mcategory::class);
+    }
 }
