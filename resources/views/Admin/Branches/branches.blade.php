@@ -29,6 +29,9 @@
 
     <!---Internal Fancy uploader css-->
     <link href="../../assets/plugins/fancyuploder/fancy_fileupload.css" rel="stylesheet" />
+
+    <!--Internal  Font Awesome -->
+    <link href="../../assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
 @endsection
 
 @section('title')
@@ -108,10 +111,10 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">Branch Name</th>
-                                    <th class="border-bottom-0">SubCategory</th>
-                                    <th class="border-bottom-0">Option</th>
+                                    <th class="border-bottom-0"><b>#</b></th>
+                                    <th class="border-bottom-0"><b>Branch Name</b></th>
+                                    <th class="border-bottom-0"><b>SubCategory</b></th>
+                                    <th class="border-bottom-0"><b>Option</b></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,7 +171,7 @@
                             </div>
 
                             <div class=" form-group">
-                                <p class="mg-b-10">Subcategory</p>
+                                <p class="mg-b-10"><b>Subcategory</b></p>
                                 <select class="SlectBox form-control" name="subcategory_id">
                                     @foreach ($Subcategories as $Subcategory)
                                         <option value="{{ $Subcategory->id }}">
@@ -207,11 +210,11 @@
                             </div>
 
                             <div class=" form-group">
-                                <p class="mg-b-10">Subcategory</p>
+                                <p class="mg-b-10"><b>Subcategory</b></p>
                                 <select class="SlectBox form-control" name="subcategory_id">
                                     @foreach ($Subcategories as $Subcategory)
-                                        <option value="{{ $Subcategory->id }}"
-                                            {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}>
+                                        <option value="{{ $Subcategory->id }}">
+                                            {{-- {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}> --}}
                                             {{ $Subcategory->subcategory_name }}
                                         </option>
                                     @endforeach
@@ -283,8 +286,18 @@
     <!--Internal  Datepicker js -->
     <script src="../../assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
 
+    <!--Internal  Form-elements js-->
+    <script src="../../assets/js/advanced-form-elements.js"></script>
+    <script src="../../assets/js/select2.js"></script>
+
     <!-- Internal Select2.min js -->
     <script src="../../assets/plugins/select2/js/select2.min.js"></script>
+
+    <!--Internal Sumoselect js-->
+    <script src="../../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+    <!--Internal Sumoselect css-->
+    <link rel="stylesheet" href="../../assets/plugins/sumoselect/sumoselect-rtl.css">
 
     <!-- Internal Modal js-->
     <script src="../../assets/js/modal.js"></script>
