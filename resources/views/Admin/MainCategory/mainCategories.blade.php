@@ -35,7 +35,7 @@
 @endsection
 
 @section('title')
-    Main Categories
+    التصنيف الرئيسي
 @endsection
 
 @section('page-header')
@@ -43,8 +43,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Categories</h4><span class="text-muted mt-1 tx-13 ms-2 mb-0">/
-                    Main Categories</span>
+                <h4 class="content-title mb-0 my-auto">التصنيفات</h4><span class="text-muted mt-1 tx-13 ms-2 mb-0">/
+                    التصنيفات الرئيسية</span>
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
                     {{-- Add Main Category Button --}}
                     <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
                         <a class="modal-effect btn btn-outline-primary btn-block" data-bs-effect="effect-flip-vertical"
-                            data-bs-toggle="modal" href="#modaldemo8">Add Main Category</a>
+                            data-bs-toggle="modal" href="#modaldemo8">إضافة تصنيف رئيسي</a>
                     </div>
                 </div>
 
@@ -112,11 +112,11 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">Main Category</th>
-                                    <th class="border-bottom-0">Brand</th>
-                                    <th class="border-bottom-0">Description</th>
-                                    <th class="border-bottom-0">Logo</th>
-                                    <th class="border-bottom-0">Option</th>
+                                    <th class="border-bottom-0">تصنيف رئيسي</th>
+                                    <th class="border-bottom-0">العلامة التجارية</th>
+                                    <th class="border-bottom-0">الوصف</th>
+                                    <th class="border-bottom-0">لوغو</th>
+                                    <th class="border-bottom-0">الخيارات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,7 +170,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
-                        <h6 class="modal-title">Add Main Category</h6>
+                        <h6 class="modal-title">إضافة تصنيف رئيسي</h6>
                         <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -180,18 +180,18 @@
                             {{ csrf_field() }}
 
                             <div class=" form-group">
-                                <label for="exampleInputEmail1"><b>Main Category Name</b></label>
+                                <label for="exampleInputEmail1"><b>اسم التصنيف الرئيسي</b></label>
                                 <input type="text" class="form-control" id="category_name" name="category_name" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>Description</b></label>
+                                <label for="exampleFormControlTextarea1"><b>الوصف</b></label>
                                 <textarea class="form-control" id="description" name="description" rows="3" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </textarea>
                             </div>
 
                             <div class="form-group">
-                                <p class="mg-b-10"><b>Brand</b></p>
+                                <p class="mg-b-10"><b>العلامات التجارية</b></p>
                                 <select multiple="multiple" class="testselect2" name="brands[]" id="brand[]" required>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">
@@ -202,14 +202,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>Main Category Logo</b></label>
+                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
                                 <p class="text-danger">Logo format jpeg, jpg, png</p>
                                 <input type="file" name="photo_name" class="dropify" data-height="70" />
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">تأكيد</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                             </div>
                         </form>
                     </div>
@@ -223,8 +223,9 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
-                        <h6 class="modal-title">Edit Main Category</h6><button aria-label="Close" class="close"
-                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                        <h6 class="modal-title">تعديل التصنيف الرئيسي</h6><button aria-label="Close"
+                            class="close" data-bs-dismiss="modal" type="button"><span
+                                aria-hidden="true">&times;</span></button>
                     </div>
                     <form method="POST" action="mcategories/update" autocomplete="off" enctype="multipart/form-data">
                         {{ method_field('patch') }}
@@ -232,17 +233,17 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label"><b>Main Category Name</b></label>
+                                <label for="recipient-name" class="col-form-label"><b>اسم التصنيف الرئيسي</b></label>
                                 <input class="form-control" name="category_name" id="category_name" type="text">
                             </div>
 
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label"><b>Description</b></label>
+                                <label for="message-text" class="col-form-label"><b>الوصف</b></label>
                                 <textarea class="form-control" id="description" name="description"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <p class="mg-b-10">Brand</p>
+                                <p class="mg-b-10">العلامة التجارية</p>
                                 <select multiple="multiple" class="testselect2" name="brands[]" id="brand[]" required>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
@@ -254,14 +255,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>Main Category Logo</b></label>
+                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
                                 <p class="text-danger">Logo format jpeg, jpg, png</p>
                                 <input type="file" name="photo_name" class="dropify" data-height="70" />
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -282,17 +283,16 @@
                             </button>
                             <i class="icon icon ion-ios-close-circle-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block">
                             </i>
-                            <h1 class="tx-danger mg-b-20">!! Danger</h1>
-                            <p class="mg-b-20 mg-x-20">
-                            <h3>Are you sure you want to delete this Main Category</h3>
+                            <h1 class="tx-danger mg-b-20">خطر !!</h1>
+                            <p class="mg-b-20 mg-x-20">هل تريد حقا حذف هذا التصنيف الرئيسي؟؟</h3>
                             </p>
                             <input type="hidden" name="id" id="id" value="">
                             <input class="form-control" name="category_name" id="category_name" type="text" readonly>
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn ripple btn-danger">Save Changes</button>
-                            <button type="button" class="btn ripple btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn ripple btn-danger">حفظ التغييرات</button>
+                            <button type="button" class="btn ripple btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                         </div>
                     </form>
                 </div>
