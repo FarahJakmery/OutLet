@@ -18,6 +18,7 @@ class CreateSubcategoriesTable extends Migration
             $table->string('subcategory_name', 999);
             $table->text('description')->nullable();
             $table->string('photo_name');
+            $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
