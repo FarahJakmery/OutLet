@@ -45,7 +45,7 @@ class SubcategoryController extends Controller
                 'subcategory_name'  => 'required|unique:subcategories|max:255',
                 'description'       => 'required|string|min:10|max:255',
                 'photo_name'        => 'required|mimes:jpeg,png,jpg',
-                'MCategories'       => 'required|array'
+                'mcategory_id'      => 'required|exists:mcategories,id'
             ],
             [
                 'subcategory_name.required' => 'Please enter the Subcategory Name',
@@ -61,10 +61,9 @@ class SubcategoryController extends Controller
         $Subcate = Subcategory::create([
             'subcategory_name' => $request->subcategory_name,
             'description'      => $request->description,
-            'photo_name'       => $file_name
+            'photo_name'       => $file_name,
+            'mcategory_id'     => $request->mcategory_id,
         ]);
-
-        $Subcate->mcategories()->attach($request->MCategories);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
@@ -112,7 +111,7 @@ class SubcategoryController extends Controller
                 'subcategory_name'  => 'required|max:255|unique:subcategories,subcategory_name,' . $id,
                 'description'       => 'required|string|min:10|max:255',
                 'photo_name'        => 'required|mimes:jpeg,png,jpg',
-                'MCategories'       => 'required|array'
+                'mcategory_id'      => 'required|exists:mcategories,id'
             ],
             [
                 'subcategory_name.required' => 'Please enter the Subcategory Name',
@@ -130,10 +129,9 @@ class SubcategoryController extends Controller
         $Subcate->update([
             'subcategory_name' => $request->subcategory_name,
             'description'      => $request->description,
-            'photo_name'       => $file_name
+            'photo_name'       => $file_name,
+            'mcategory_id'     => $request->mcategory_id,
         ]);
-
-        $Subcate->mcategories()->sync($request->MCategories);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
