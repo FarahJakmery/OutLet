@@ -24,10 +24,10 @@ class Mcategory extends Model
     }
 
     /**
-     * The subcategories that belong to the main_categories.
+     * Get the subcategories for the blog post.
      */
     public function subcategories()
     {
-        return $this->belongsToMany(Subcategory::class);
+        return $this->hasMany(Subcategory::class);
     }
 }

@@ -13,14 +13,15 @@ class Subcategory extends Model
         'subcategory_name',
         'description',
         'photo_name',
+        'mcategory_id'
     ];
 
     /**
-     * The mcategories that belong to the subcategories.
+     * Get the mcategory that owns the subcategory.
      */
-    public function mcategories()
+    public function mcategory()
     {
-        return $this->belongsToMany(Mcategory::class);
+        return $this->belongsTo(Mcategory::class);
     }
 
     /**
