@@ -124,13 +124,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $Subctegory->subcategory_name }}</td>
-                                        <td>
-                                            <ul>
-                                                @foreach ($Subctegory->mcategories as $mcategory)
-                                                    <li>{{ $mcategory->category_name }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
+                                        <td>{{ $Subctegory->mcategory->category_name }}</td>
                                         <td>{{ $Subctegory->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
@@ -143,6 +137,7 @@
                                                     data-bs-effect="effect-newspaper" data-id="{{ $Subctegory->id }}"
                                                     data-subcategory_name="{{ $Subctegory->subcategory_name }}"
                                                     data-description="{{ $Subctegory->description }}"
+                                                    data-mcategory_id="{{ $Subctegory->mcategory_id }}"
                                                     data-bs-toggle="modal" href="#EditModal" title="Edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -188,12 +183,12 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1"><b>Description</b></label>
                                 <textarea class="form-control" id="description" name="description" rows="3" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </textarea>
                             </div>
 
                             <div class="form-group">
                                 <p class="mg-b-10"><b>Main Category</b></p>
-                                <select multiple="multiple" class="testselect2" name="MCategories[]" required>
+                                <select class="SlectBox form-control" name="mcategory_id" id="mcategory_id" required>
                                     @foreach ($MCategories as $MCategory)
                                         <option value="{{ $MCategory->id }}">
                                             {{ $MCategory->category_name }}
@@ -244,10 +239,9 @@
 
                             <div class="form-group">
                                 <p class="mg-b-10"><b>Main Category</b></p>
-                                <select multiple="multiple" class="testselect2" name="MCategories[]" required>
+                                <select class="SlectBox form-control" name="mcategory_id" id="mcategory_id" required>
                                     @foreach ($MCategories as $MCategory)
                                         <option value="{{ $MCategory->id }}">
-                                            {{-- {{ in_array($MCategory->id, $Subctegory->mcategories->pluck('id')->toArray()) ? 'selected' : '' }}> --}}
                                             {{ $MCategory->category_name }}
                                         </option>
                                     @endforeach
@@ -370,10 +364,12 @@
             var id = button.data('id')
             var subcategory_name = button.data('subcategory_name')
             var description = button.data('description')
+            var mcategory_id = button.data('mcategory_id')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #subcategory_name').val(subcategory_name);
             modal.find('.modal-body #description').val(description);
+            modal.find('.modal-body #mcategory_id').val(mcategory_id);
         })
     </script>
 
