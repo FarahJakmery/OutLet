@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -17,8 +17,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all();
-        return view("Admin.Brands.brands", compact('brands'));
+        $brands = Brand::translated()->get();
+
+        return view('Admin.Brands.brands', compact('brands'));
     }
 
     /**
@@ -39,16 +40,20 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'brand_name'   => 'required|unique:brands|max:255',
-                'description'  => 'required|string|min:10|max:255',
-                'logo_name'    => 'required|mimes:jpeg,png,jpg'
+                'brand_name_ar'       => ['required|unique:brands|max:255'],
+                'brand_name_en'       => ['required|unique:brands|max:255'],
+                'description_ar'      => ['required|string|min:10|max:255'],
+                'description_en'      => ['required|string|min:10|max:255'],
+                'logo_name'           => ['required|mimes:jpeg,png,jpg'],
+
             ],
             [
-                'brand_name.required'  => 'Please enter the Brand Name',
+                'brand_name_ar.required'  => 'Please enter the Brand Name',
                 'brand_name.unique'    => 'Brand Name is already registered',
-                'description.required' => 'Please enter the Brand Description',
+                'description_ar.required' => 'Please enter the Brand Description',
                 'logo_name.mimes'      => 'Error, Logo must be in one of the required formats'
             ]
         );
@@ -56,18 +61,25 @@ class BrandController extends Controller
         $image = $request->file('logo_name');
         $file_name = $image->getClientOriginalName();
 
-        Brand::create([
-            'brand_name'  => $request->brand_name,
-            'description' => $request->description,
-            'logo_name'   => $file_name
-        ]);
+        $data = [
+            'logo_name'        => $file_name,
+            'ar' => [
+                'brand_name'   => $request['brand_name_ar'],
+                'description'  => $request['description_ar'],
+            ],
+            'en' => [
+                'brand_name'   => $request['brand_name_en'],
+                'description'  => $request['description_en'],
+            ],
+        ];
+        $brand = Brand::create($data);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
         $imageName = $request->logo_name->getClientOriginalName();
-        $request->logo_name->move(public_path('BrandsLogos/' . $request->brand_name), $imageName);
+        $request->logo_name->move(public_path('BrandsLogos/' . $request['brand_name_en']), $imageName);
 
-        session()->flash('Add', 'Brand added successfully');
+        session()->flash('Add', 'تم إضافة العلامة التجارية بنجاح');
         return redirect('/brands');
     }
 
@@ -103,37 +115,49 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'brand_name'   => 'required|max:255|unique:brands,brand_name,' . $id,
-                'description'  => 'required|string|min:10|max:255',
-                'logo_name'    => 'required|mimes:jpeg,png,jpg'
+                'brand_name_ar'       => ['required|max:255|unique:brand_translations,brand_name_ar,' . $id],
+                'brand_name_en'       => ['required|max:255|unique:brand_translations,brand_name_en,' . $id],
+                'description_ar'      => ['required|string|min:10|max:255'],
+                'description_en'      => ['required|string|min:10|max:255'],
+                'logo_name'           => ['required|mimes:jpeg,png,jpg'],
+
             ],
             [
-                'brand_name.required'  => 'Please enter the Brand Name',
-                'brand_name.unique'    => 'Brand Name is already registered',
-                'description.required' => 'Please enter the Brand Description',
-                'logo_name.mimes'      => 'Error, Logo must be in one of the required formats'
+                'brand_name_ar.required'  => 'Please enter the Brand Name',
+                'brand_name.unique'       => 'Brand Name is already registered',
+                'description_ar.required' => 'Please enter the Brand Description',
+                'logo_name.mimes'         => 'Error, Logo must be in one of the required formats'
             ]
         );
 
         $image = $request->file('logo_name');
         $file_name = $image->getClientOriginalName();
 
+        $data = [
+            'logo_name'        => $file_name,
+            'ar' => [
+                'brand_name'   => $request['brand_name_ar'],
+                'description'  => $request['description_ar'],
+            ],
+            'en' => [
+                'brand_name'   => $request['brand_name_en'],
+                'description'  => $request['description_en'],
+            ],
+        ];
+
         $brand = Brand::find($id);
 
-        $brand->update([
-            'brand_name'   => $request->brand_name,
-            'description'  => $request->description,
-            'logo_name'    => $file_name
-        ]);
+        $brand->update($data);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
         $imageName = $request->logo_name->getClientOriginalName();
-        $request->logo_name->move(public_path('BrandsLogos/' . $request->brand_name), $imageName);
+        $request->logo_name->move(public_path('BrandsLogos/' . $request['brand_name_en']), $imageName);
 
-        session()->flash('edit', 'Brand has been successfully modified');
+        session()->flash('edit', 'تم تعديل العلامة التجارية بنجاح');
         return redirect('/brands');
     }
 
@@ -147,7 +171,7 @@ class BrandController extends Controller
     {
         $id = $request->id;
         Brand::find($id)->delete();
-        session()->flash('delete', 'Brand has been removed successfully');
+        session()->flash('delete', 'تم حذف العلامة التجارية بنجاح');
         return redirect('/brands');
     }
 }
