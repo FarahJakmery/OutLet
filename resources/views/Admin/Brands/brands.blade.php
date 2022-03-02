@@ -109,8 +109,10 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">العلامة التجارية</th>
-                                    <th class="border-bottom-0">الوصف</th>
+                                    <th class="border-bottom-0">اسم العلامة التجارية عربي</th>
+                                    <th class="border-bottom-0">اسم العلامة التجارية انجليزي</th>
+                                    <th class="border-bottom-0">الوصف عربي</th>
+                                    <th class="border-bottom-0">الوصف انجليزي</th>
                                     <th class="border-bottom-0">اللوغو</th>
                                     <th class="border-bottom-0">الخيارات</th>
                                 </tr>
@@ -119,27 +121,32 @@
                                 @foreach ($brands as $brand)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $brand->brand_name }}</td>
-                                        <td>{{ $brand->description }}</td>
+                                        <td>{{ $brand->translate('ar')->brand_name }}</td>
+                                        <td>{{ $brand->translate('en')->brand_name }}</td>
+                                        <td>{{ $brand->translate('ar')->description }}</td>
+                                        <td>{{ $brand->translate('en')->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="../../BrandsLogos/{{ $brand->brand_name }}/{{ $brand->logo_name }}">
+                                                src="../../BrandsLogos/{{ $brand->translate('en')->brand_name }}/{{ $brand->logo_name }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">
                                                 {{-- The Edit Button --}}
                                                 <a class="modal-effect btn btn-info btn-icon"
                                                     data-bs-effect="effect-newspaper" data-id="{{ $brand->id }}"
-                                                    data-brand_name="{{ $brand->brand_name }}"
-                                                    data-description="{{ $brand->description }}" data-bs-toggle="modal"
-                                                    href="#EditModal" title="Edit">
+                                                    data-arabic_brand_name="{{ $brand->translate('ar')->brand_name }}"
+                                                    data-english_brand_name="{{ $brand->translate('en')->brand_name }}"
+                                                    data-arabic_description="{{ $brand->translate('ar')->description }}"
+                                                    data-english_description="{{ $brand->translate('en')->description }}"
+                                                    data-bs-toggle="modal" href="#EditModal" title="تعديل">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 {{-- The Delete Button --}}
                                                 <a class="modal-effect btn btn-danger btn-icon"
                                                     data-bs-effect="effect-flip-vertical" data-id="{{ $brand->id }}"
-                                                    data-brand_name="{{ $brand->brand_name }}" data-bs-toggle="modal"
-                                                    href="#DeleteModal" title="Delete">
+                                                    data-arabic_brand_name="{{ $brand->translate('ar')->brand_name }}"
+                                                    data-english_brand_name="{{ $brand->translate('en')->brand_name }}"
+                                                    data-bs-toggle="modal" href="#DeleteModal" title="حذف">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -164,33 +171,77 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                    <form action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data"
+                        autocomplete="on">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            <li><a href="#tab4" class="nav-link active" data-bs-toggle="tab">عربي</a>
+                                            </li>
+                                            <li><a href="#tab5" class="nav-link" data-bs-toggle="tab">انكليزي</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        {{-- Add Brand in Arabic --}}
+                                        <div class="tab-pane active" id="tab4">
+                                            {{-- حقل إدخال اسم العلامة التجارية باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم العلامة التجارية باللغة العربية</b></label>
+                                                <input type="text" class="form-control" name="brand_name_ar"
+                                                    id="brand-arabic-name" required>
+                                            </div>
+                                            {{-- حقل إدخال وصف العلامة التجارية باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>الوصف باللغة العربية</b></label>
+                                                <textarea class="form-control" name="description_ar"
+                                                    id="arabic-description" rows="3" required>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </textarea>
+                                            </div>
+                                            {{-- حقل اختيار اللوغو --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">
+                                                    <b>لوغو العلامة التجارية</b>
+                                                </label>
+                                                <p class="text-danger">Logo format jpeg, jpg, png</p>
+                                                <input type="file" name="logo_name" class="dropify"
+                                                    data-height="70" />
+                                            </div>
+                                        </div>
 
-                            <div class=" form-group">
-                                <label for="exampleInputEmail1"><b>اسم العلامة التجارية</b></label>
-                                <input type="text" class="form-control" id="brand_name" name="brand_name" required>
+                                        {{-- Add Brand in English --}}
+                                        <div class="tab-pane" id="tab5">
+                                            {{-- حقل إدخال اسم العلامة التجارية باللغة الإنجليزية --}}
+                                            <div class=" form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم العلامة التجارية باللغة الإنجليزية</b></label>
+                                                <input type="text" class="form-control" name="brand_name_en"
+                                                    id="brand-english-name" required>
+                                            </div>
+                                            {{-- حقل إدخال وصف العلامة التجارية باللغة الإنجليزية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>الوصف</b></label>
+                                                <textarea class="form-control" name="description_en"
+                                                    id="english-description" rows="3" required>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>الوصف</b></label>
-                                <textarea class="form-control" id="description" name="description" rows="3" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>لوغو العلامة التجارية</b></label>
-                                <p class="text-danger">Logo format jpeg, jpg, png</p>
-                                <input type="file" name="logo_name" class="dropify" data-height="70" />
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">تأكيد</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">تأكيد</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -205,30 +256,77 @@
                             class="close" data-bs-dismiss="modal" type="button"><span
                                 aria-hidden="true">&times;</span></button>
                     </div>
-                    <form method="POST" action="brands/update" autocomplete="off" enctype="multipart/form-data">
+                    <form action="brands/update" method="POST" enctype="multipart/form-data">
                         {{ method_field('patch') }}
                         {{ csrf_field() }}
                         <div class="modal-body">
-                            <div class="form-group">
-                                <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label"><b>اسم العلامة التجارية</b></label>
-                                <input class="form-control" name="brand_name" id="brand_name" type="text">
-                            </div>
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            <li><a href="#tab8" class="nav-link active" data-bs-toggle="tab">عربي</a>
+                                            </li>
+                                            <li><a href="#tab10" class="nav-link" data-bs-toggle="tab">انكليزي</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        {{-- Edit Brand in Arabic --}}
+                                        <div class="tab-pane active" id="tab8">
+                                            {{-- حقل تعديل اسم العلامة التجارية باللغة العربية --}}
+                                            <div class=" form-group">
+                                                <input type="hidden" name="id" id="id" value="">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم العلامة التجارية باللغة العربية</b></label>
+                                                <input type="text" class="form-control" name="brand_name_ar"
+                                                    id="arabic_brand_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف العلامة التجارية باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1" class="col-form-label">
+                                                    <b>الوصف باللغة العربية</b></label>
+                                                <textarea class="form-control" name="description_ar"
+                                                    id="arabic_description" rows="3" required></textarea>
+                                            </div>
+                                            {{-- حقل اختيار اللوغو --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">
+                                                    <b>لوغو العلامة التجارية</b>
+                                                </label>
+                                                <p class="text-danger">Logo format jpeg, jpg, png</p>
+                                                <input type="file" name="logo_name" class="dropify"
+                                                    data-height="70" />
+                                            </div>
+                                        </div>
 
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label"><b>الوصف</b></label>
-                                <textarea class="form-control" id="description" name="description"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>لوغو العلامة التجارية</b></label>
-                                <p class="text-danger">Logo format jpeg, jpg, png</p>
-                                <input type="file" name="logo_name" class="dropify" data-height="70" />
+                                        {{-- Edit Brand in English --}}
+                                        <div class="tab-pane" id="tab10">
+                                            {{-- حقل تعديل اسم العلامة التجارية باللغة الإنجليزية --}}
+                                            <div class=" form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم العلامة التجارية باللغة الإنجليزية</b></label>
+                                                <input type="text" class="form-control" name="brand_name_en"
+                                                    id="english_brand_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف العلامة التجارية باللغة الإنجليزية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">
+                                                    <b>الوصف باللغة الإنجليزية</b></label>
+                                                <textarea class="form-control" name="description_en"
+                                                    id="english_description" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {{-- Footer --}}
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                            <button type="submit" class="btn btn-success">تأكيد</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -254,7 +352,7 @@
                             <h3>هل تريد حقا حذف هذة العلامة التجارية؟؟</h3>
                             </p>
                             <input type="hidden" name="id" id="id" value="">
-                            <input class="form-control" name="brand_name" id="brand_name" type="text" readonly>
+                            <input class="form-control" name="brand_name_ar" id="arabic_brand_name" type="text" readonly>
                         </div>
 
                         <div class="modal-footer">
@@ -320,12 +418,16 @@
         $('#EditModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var brand_name = button.data('brand_name')
-            var description = button.data('description')
+            var arabic_brand_name = button.data('arabic_brand_name')
+            var english_brand_name = button.data('english_brand_name')
+            var arabic_description = button.data('arabic_description')
+            var english_description = button.data('english_description')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #brand_name').val(brand_name);
-            modal.find('.modal-body #description').val(description);
+            modal.find('.modal-body #arabic_brand_name').val(arabic_brand_name);
+            modal.find('.modal-body #english_brand_name').val(english_brand_name);
+            modal.find('.modal-body #arabic_description').val(arabic_description);
+            modal.find('.modal-body #english_description').val(english_description);
         })
     </script>
 
@@ -334,10 +436,12 @@
         $('#DeleteModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var brand_name = button.data('brand_name')
+            var arabic_brand_name = button.data('arabic_brand_name')
+            var english_brand_name = button.data('english_brand_name')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #brand_name').val(brand_name);
+            modal.find('.modal-body #arabic_brand_name').val(arabic_brand_name);
+            modal.find('.modal-body #english_brand_name').val(english_brand_name);
         })
     </script>
 @endsection
