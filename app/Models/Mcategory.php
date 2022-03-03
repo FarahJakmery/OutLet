@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class Mcategory extends Model
+class Mcategory extends Model implements TranslatableContract
 {
-    use HasFactory;
+    use HasFactory, Translatable;
 
-    protected $fillable = [
-        'category_name',
-        'description',
-        'photo_name'
-    ];
+    protected $table = 'mcategories';
+    protected $fillable = ['photo_name'];
+    public $translatedAttributes = ['category_name', 'description'];
+
 
     /**
      * The brands that belong to the main_categories.
