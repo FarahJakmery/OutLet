@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class Branch extends Model
+class Branch extends Model implements TranslatableContract
 {
-    use HasFactory;
+    use HasFactory, Translatable;
 
-    protected $fillable = [
-        'branch_name',
-        'subcategory_id',
-    ];
+    protected $table = 'branches';
+    protected $fillable = ['subcategory_id'];
+    public $translatedAttributes = ['branch_name'];
 
     /**
      * Get the subcategory that owns the branch.
