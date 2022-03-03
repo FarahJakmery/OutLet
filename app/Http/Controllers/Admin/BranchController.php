@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Branch;
-use App\Models\Brand;
-use App\Models\Mcategory;
-use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Branch;
+use App\Models\Subcategory;
 
 class BranchController extends Controller
 {
@@ -18,8 +17,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $Subcategories = Subcategory::all();
-        $Branches = Branch::all();
+        $Subcategories = Subcategory::translated()->get();
+        $Branches = Branch::translated()->get();
         return view('Admin.Branches.branches', compact('Subcategories', 'Branches'));
     }
 
@@ -41,11 +40,12 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'branch_name'      => 'required|unique:branches|max:255',
-                'subcategory_id'   => 'required|exists:subcategories,id',
-
+                'branch_name_ar'      => ['required|unique:branches|max:255'],
+                'branch_name_en'      => ['required|unique:branches|max:255'],
+                'subcategory_id'      => ['required|exists:subcategories,id'],
             ],
             [
                 'branch_name.required'  => 'Please enter the Branch Name',
@@ -53,12 +53,15 @@ class BranchController extends Controller
             ]
         );
 
-        Branch::create([
-            'branch_name'     => $request->branch_name,
-            'subcategory_id'  => $request->subcategory_id,
-        ]);
+        $data = [
+            'subcategory_id'         => $request->subcategory_id,
+            'ar' => ['branch_name'   => $request['branch_name_ar']],
+            'en' => ['branch_name'   => $request['branch_name_en']],
+        ];
 
-        session()->flash('Add', 'Branch added successfully');
+        Branch::create($data);
+
+        session()->flash('Add', 'تم إضافة الفرع بنجاح');
         return redirect('/branches');
     }
 
@@ -94,11 +97,12 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'branch_name'      => 'required|max:255|unique:branches,branch_name,' . $id,
-                'subcategory_id'   => 'required|exists:subcategories,id',
-
+                'branch_name_ar'      => ['required|unique:branches|max:255'],
+                'branch_name_en'      => ['required|unique:branches|max:255'],
+                'subcategory_id'      => ['required|exists:subcategories,id'],
             ],
             [
                 'branch_name.required'  => 'Please enter the Branch Name',
@@ -108,12 +112,15 @@ class BranchController extends Controller
 
         $branch = Branch::find($id);
 
-        $branch->update([
-            'branch_name'     => $request->branch_name,
-            'subcategory_id'  => $request->subcategory_id,
-        ]);
+        $data = [
+            'subcategory_id'         => $request->subcategory_id,
+            'ar' => ['branch_name'   => $request['branch_name_ar']],
+            'en' => ['branch_name'   => $request['branch_name_en']],
+        ];
 
-        session()->flash('Add', 'Branch has been successfully modified');
+        $branch->update($data);
+
+        session()->flash('Add', 'تم تعديل الفرع بنجاح');
         return redirect('/branches');
     }
 
@@ -127,7 +134,7 @@ class BranchController extends Controller
     {
         $id = $request->id;
         Branch::find($id)->delete();
-        session()->flash('delete', 'Branch has been removed successfully');
+        session()->flash('delete', 'تم حذف الفرع بنجاح');
         return redirect('/branches');
     }
 }
