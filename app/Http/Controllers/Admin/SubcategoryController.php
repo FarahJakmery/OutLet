@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Mcategory;
 use App\Models\Subcategory;
-use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
@@ -17,8 +17,8 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $Subctegories = Subcategory::all();
-        $MCategories = Mcategory::all();
+        $Subctegories = Subcategory::translated()->get();
+        $MCategories = Mcategory::translated()->get();
         return view('Admin.SubCategory.SubCtegories', compact('Subctegories', 'MCategories'));
     }
 
@@ -40,12 +40,15 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'subcategory_name'  => 'required|unique:subcategories|max:255',
-                'description'       => 'required|string|min:10|max:255',
-                'photo_name'        => 'required|mimes:jpeg,png,jpg',
-                'mcategory_id'      => 'required|exists:mcategories,id'
+                'subcategory_name_ar'  => ['required|unique:subcategories|max:255'],
+                'subcategory_name_en'  => ['required|unique:subcategories|max:255'],
+                'description_ar'       => ['required|string|min:10|max:255'],
+                'description_en'       => ['required|string|min:10|max:255'],
+                'photo_name'           => ['required|mimes:jpeg,png,jpg'],
+                'mcategory_id'         => ['required|exists:mcategories,id']
             ],
             [
                 'subcategory_name.required' => 'Please enter the Subcategory Name',
@@ -58,19 +61,27 @@ class SubcategoryController extends Controller
         $image = $request->file('photo_name');
         $file_name = $image->getClientOriginalName();
 
-        $Subcate = Subcategory::create([
-            'subcategory_name' => $request->subcategory_name,
-            'description'      => $request->description,
-            'photo_name'       => $file_name,
-            'mcategory_id'     => $request->mcategory_id,
-        ]);
+        $data = [
+            'photo_name'             => $file_name,
+            'mcategory_id'           => $request->mcategory_id,
+            'ar' => [
+                'subcategory_name'   => $request['subcategory_name_ar'],
+                'description'        => $request['description_ar'],
+            ],
+            'en' => [
+                'subcategory_name'   => $request['subcategory_name_en'],
+                'description'        => $request['description_en'],
+            ],
+        ];
+
+        $Subcate = Subcategory::create($data);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
         $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request->subcategory_name), $imageName);
+        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request['subcategory_name_en']), $imageName);
 
-        session()->flash('Add', 'Subcategory added successfully');
+        session()->flash('Add', 'تم إضافة التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
     }
 
@@ -106,12 +117,15 @@ class SubcategoryController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $request->validate(
+        $validator = Validator::make(
+            $request->all(),
             [
-                'subcategory_name'  => 'required|max:255|unique:subcategories,subcategory_name,' . $id,
-                'description'       => 'required|string|min:10|max:255',
-                'photo_name'        => 'required|mimes:jpeg,png,jpg',
-                'mcategory_id'      => 'required|exists:mcategories,id'
+                'subcategory_name_ar'  => ['required|max:255|unique:subcategories,subcategory_name,' . $id],
+                'subcategory_name_en'  => ['required|max:255|unique:subcategories,subcategory_name,' . $id],
+                'description_ar'       => ['required|string|min:10|max:255'],
+                'description_en'       => ['required|string|min:10|max:255'],
+                'photo_name'           => ['required|mimes:jpeg,png,jpg'],
+                'mcategory_id'         => ['required|exists:mcategories,id']
             ],
             [
                 'subcategory_name.required' => 'Please enter the Subcategory Name',
@@ -126,19 +140,27 @@ class SubcategoryController extends Controller
 
         $Subcate = Subcategory::find($id);
 
-        $Subcate->update([
-            'subcategory_name' => $request->subcategory_name,
-            'description'      => $request->description,
-            'photo_name'       => $file_name,
-            'mcategory_id'     => $request->mcategory_id,
-        ]);
+        $data = [
+            'photo_name'             => $file_name,
+            'mcategory_id'           => $request->mcategory_id,
+            'ar' => [
+                'subcategory_name'   => $request['subcategory_name_ar'],
+                'description'        => $request['description_ar'],
+            ],
+            'en' => [
+                'subcategory_name'   => $request['subcategory_name_en'],
+                'description'        => $request['description_en'],
+            ],
+        ];
+
+        $Subcate->update($data);
 
         // move logo
         // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
         $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request->subcategory_name), $imageName);
+        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request['subcategory_name_en']), $imageName);
 
-        session()->flash('edit', 'Subcategory has been successfully modified');
+        session()->flash('edit', 'تم تعديل التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
     }
 
@@ -152,7 +174,7 @@ class SubcategoryController extends Controller
     {
         $id = $request->id;
         Subcategory::find($id)->delete();
-        session()->flash('delete', 'Subcategory has been removed successfully');
+        session()->flash('delete', 'تم حذف التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
     }
 }
