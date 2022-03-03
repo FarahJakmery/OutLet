@@ -15,7 +15,6 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->string('branch_name', 999);
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
