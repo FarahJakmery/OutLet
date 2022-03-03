@@ -112,7 +112,8 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0"><b>#</b></th>
-                                    <th class="border-bottom-0"><b>اسم الفرع</b></th>
+                                    <th class="border-bottom-0"><b>اسم الفرع عربي</b></th>
+                                    <th class="border-bottom-0"><b>اسم الفرع إنجليزي</b></th>
                                     <th class="border-bottom-0"><b>التصنيف الثانوي</b></th>
                                     <th class="border-bottom-0"><b>الخيارات</b></th>
                                 </tr>
@@ -121,22 +122,24 @@
                                 @foreach ($Branches as $Branch)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $Branch->branch_name }}</td>
-                                        <td>{{ $Branch->subcategory->subcategory_name }}</td>
+                                        <td>{{ $Branch->translate('ar')->branch_name }}</td>
+                                        <td>{{ $Branch->translate('en')->branch_name }}</td>
+                                        <td>{{ $Branch->subcategory->translate('en')->subcategory_name }}</td>
                                         <td>
                                             <div class="btn-icon-list">
                                                 {{-- The Edit Button --}}
                                                 <a class="modal-effect btn btn-info btn-icon"
                                                     data-bs-effect="effect-newspaper" data-id="{{ $Branch->id }}"
-                                                    data-branch_name="{{ $Branch->branch_name }}" data-bs-toggle="modal"
-                                                    href="#EditModal" title="Edit">
+                                                    data-arabic_branch_name="{{ $Branch->translate('ar')->branch_name }}"
+                                                    data-english_branch_name="{{ $Branch->translate('en')->branch_name }}"
+                                                    data-bs-toggle="modal" href="#EditModal" title="تعديل">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 {{-- The Delete Button --}}
                                                 <a class="modal-effect btn btn-danger btn-icon"
                                                     data-bs-effect="effect-flip-vertical" data-id="{{ $Branch->id }}"
-                                                    data-branch_name="{{ $Branch->branch_name }}" data-bs-toggle="modal"
-                                                    href="#DeleteModal" title="Delete">
+                                                    data-arabic_branch_name="{{ $Branch->translate('ar')->branch_name }}"
+                                                    data-bs-toggle="modal" href="#DeleteModal" title="حذف">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -164,18 +167,25 @@
                     <form action="{{ route('branches.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
-
+                            {{-- حقل إدخال اسم الفرع باللغة العربية --}}
                             <div class=" form-group">
-                                <label for="exampleInputEmail1"><b>اسم الفرع</b></label>
-                                <input type="text" class="form-control" id="branch_name" name="branch_name" required>
+                                <label for="exampleInputEmail1"><b>اسم الفرع باللغة العربية</b></label>
+                                <input type="text" class="form-control" id="arabic_branch_name" name="branch_name_ar"
+                                    required>
                             </div>
-
+                            {{-- حقل إدخال اسم الفرع باللغة الإنجليزية --}}
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1"><b>اسم الفرع باللغة الإنجليزية</b></label>
+                                <input type="text" class="form-control" id="english_branch_name" name="branch_name_en"
+                                    required>
+                            </div>
+                            {{-- حقل اختيار التصنيف الثانوي الذي ينتمي له هذا الفرع --}}
                             <div class=" form-group">
                                 <p class="mg-b-10"><b>التصنيف الثانوي</b></p>
                                 <select class="SlectBox form-control" name="subcategory_id">
                                     @foreach ($Subcategories as $Subcategory)
                                         <option value="{{ $Subcategory->id }}">
-                                            {{ $Subcategory->subcategory_name }}
+                                            {{ $Subcategory->translate('en')->subcategory_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -204,19 +214,27 @@
                         {{ method_field('patch') }}
                         {{ csrf_field() }}
                         <div class="modal-body">
+                            {{-- حقل تعديل اسم الفرع باللغة العربية --}}
                             <div class="form-group">
                                 <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label"><b>اسم الفرع</b></label>
-                                <input class="form-control" name="branch_name" id="branch_name" type="text">
+                                <label for="recipient-name" class="col-form-label"><b>اسم الفرع باللغة العربية</b></label>
+                                <input type="text" class="form-control" id="arabic_branch_name" name="branch_name_ar"
+                                    required>
                             </div>
-
+                            {{-- حقل تعديل اسم الفرع باللغة الإنجليزية --}}
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1"><b>اسم الفرع باللغة الإنجليزية</b></label>
+                                <input type="text" class="form-control" id="english_branch_name" name="branch_name_en"
+                                    required>
+                            </div>
+                            {{-- حقل اختيار التصنيف الثانوي الذي ينتمي له هذا الفرع --}}
                             <div class=" form-group">
                                 <p class="mg-b-10"><b>التصنيف الثانوي</b></p>
                                 <select class="SlectBox form-control" name="subcategory_id">
                                     @foreach ($Subcategories as $Subcategory)
-                                        <option value="{{ $Subcategory->id }}">
-                                            {{-- {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}> --}}
-                                            {{ $Subcategory->subcategory_name }}
+                                        <option value="{{ $Subcategory->id }}"
+                                            {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}>
+                                            {{ $Subcategory->translate('en')->subcategory_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -251,7 +269,8 @@
                             <h3>هل تريد حقا حذف هذا الفرع؟؟</h3>
                             </p>
                             <input type="hidden" name="id" id="id" value="">
-                            <input class="form-control" name="branch_name" id="branch_name" type="text" readonly>
+                            <input class="form-control" name="branch_name_ar" id="arabic_branch_name" type="text"
+                                readonly>
                         </div>
 
                         <div class="modal-footer">
@@ -327,10 +346,12 @@
         $('#EditModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var branch_name = button.data('branch_name')
+            var arabic_branch_name = button.data('arabic_branch_name')
+            var english_branch_name = button.data('english_branch_name')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #branch_name').val(branch_name);
+            modal.find('.modal-body #arabic_branch_name').val(arabic_branch_name);
+            modal.find('.modal-body #english_branch_name').val(english_branch_name);
         })
     </script>
 
@@ -339,10 +360,10 @@
         $('#DeleteModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var branch_name = button.data('branch_name')
+            var arabic_branch_name = button.data('arabic_branch_name')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #branch_name').val(branch_name);
+            modal.find('.modal-body #arabic_branch_name').val(arabic_branch_name);
         })
     </script>
 @endsection
