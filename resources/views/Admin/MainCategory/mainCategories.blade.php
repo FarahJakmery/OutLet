@@ -92,7 +92,6 @@
 
     <!-- row -->
     <div class="row row-sm">
-
         <!--Bordered Table-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
@@ -112,10 +111,12 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">تصنيف رئيسي</th>
+                                    <th class="border-bottom-0">اسم التصنيف الرئيسي عربي</th>
+                                    <th class="border-bottom-0">اسم التصنيف الرئيسي انجليزي</th>
+                                    <th class="border-bottom-0">الوصف عربي</th>
+                                    <th class="border-bottom-0">الوصف انجليزي</th>
                                     <th class="border-bottom-0">العلامة التجارية</th>
-                                    <th class="border-bottom-0">الوصف</th>
-                                    <th class="border-bottom-0">لوغو</th>
+                                    <th class="border-bottom-0">اللوغو</th>
                                     <th class="border-bottom-0">الخيارات</th>
                                 </tr>
                             </thead>
@@ -123,34 +124,39 @@
                                 @foreach ($MCtegories as $MCtegory)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $MCtegory->category_name }}</td>
+                                        <td>{{ $MCtegory->translate('ar')->category_name }}</td>
+                                        <td>{{ $MCtegory->translate('en')->category_name }}</td>
+                                        <td>{{ $MCtegory->translate('ar')->description }}</td>
+                                        <td>{{ $MCtegory->translate('en')->description }}</td>
                                         <td>
                                             <ul>
                                                 @foreach ($MCtegory->brands as $brand)
-                                                    <li>{{ $brand->brand_name }}</li>
+                                                    <li>{{ $brand->translate('en')->brand_name }}</li>
                                                 @endforeach
                                             </ul>
                                         </td>
-                                        <td>{{ $MCtegory->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="../../MainCategoriesLogos/{{ $MCtegory->category_name }}/{{ $MCtegory->photo_name }}">
+                                                src="../../MainCategoriesLogos/{{ $MCtegory->translate('en')->category_name }}/{{ $MCtegory->photo_name }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">
                                                 {{-- The Edit Button --}}
                                                 <a class="modal-effect btn btn-info btn-icon"
                                                     data-bs-effect="effect-newspaper" data-id="{{ $MCtegory->id }}"
-                                                    data-category_name="{{ $MCtegory->category_name }}"
-                                                    data-description="{{ $MCtegory->description }}"
-                                                    data-bs-toggle="modal" href="#EditModal" title="Edit">
+                                                    data-arabic_category_name="{{ $MCtegory->translate('ar')->category_name }}"
+                                                    data-english_category_name="{{ $MCtegory->translate('en')->category_name }}"
+                                                    data-arabic_description="{{ $MCtegory->translate('ar')->description }}"
+                                                    data-english_description="{{ $MCtegory->translate('en')->description }}"
+                                                    data-bs-toggle="modal" href="#EditModal" title="تعديل">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 {{-- The Delete Button --}}
                                                 <a class="modal-effect btn btn-danger btn-icon"
                                                     data-bs-effect="effect-flip-vertical" data-id="{{ $MCtegory->id }}"
-                                                    data-category_name="{{ $MCtegory->category_name }}"
-                                                    data-bs-toggle="modal" href="#DeleteModal" title="Delete">
+                                                    data-arabic_category_name="{{ $MCtegory->translate('ar')->category_name }}"
+                                                    data-english_category_name="{{ $MCtegory->translate('en')->category_name }}"
+                                                    data-bs-toggle="modal" href="#DeleteModal" title="حذف">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -165,60 +171,104 @@
         </div>
         <!--/div-->
 
-        <!-- Add Section -->
+        <!-- Add Main Category -->
         <div class="modal fade" id="modaldemo8">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
+                    {{-- Add Main Category Button --}}
                     <div class="modal-header">
                         <h6 class="modal-title">إضافة تصنيف رئيسي</h6>
                         <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{ route('mcategories.store') }}" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                    {{-- The Form --}}
+                    <form action="{{ route('mcategories.store') }}" method="POST" enctype="multipart/form-data"
+                        autocomplete="on">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            <li><a href="#tab4" class="nav-link active" data-bs-toggle="tab">عربي</a></li>
+                                            <li><a href="#tab5" class="nav-link" data-bs-toggle="tab">انجليزي</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        {{-- Add Main Category in Arabic --}}
+                                        <div class="tab-pane active" id="tab4">
+                                            {{-- حقل تعديل اسم التصنيف الرئيسي باللغة العربية --}}
+                                            <div class=" form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم التصنيف الرئيسي باللغة العربية</b>
+                                                </label>
+                                                <input type="text" class="form-control" name="category_name_ar"
+                                                    id="arabic_category_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف التصنيف الرئيسي باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>الوصف باللغة العربية</b></label>
+                                                <textarea class="form-control" id="arabic_description"
+                                                    name="description_ar" rows="3" required></textarea>
+                                            </div>
+                                            {{-- حقل اختيار العلامات التجارية التي ينتمي إليها هذا التصنيف --}}
+                                            <div class="form-group">
+                                                <p class="mg-b-10"><b>العلامات التجارية</b></p>
+                                                <select multiple="multiple" class="testselect2" name="brands[]"
+                                                    id="brand[]" required>
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{ $brand->id }}">
+                                                            {{ $brand->translate('en')->brand_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            {{-- حقل اختيار اللوغو الخاص بالتصنيف الرئيسي --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
+                                                <p class="text-danger">Logo format jpeg, jpg, png</p>
+                                                <input type="file" name="photo_name" class="dropify"
+                                                    data-height="70" />
+                                            </div>
 
-                            <div class=" form-group">
-                                <label for="exampleInputEmail1"><b>اسم التصنيف الرئيسي</b></label>
-                                <input type="text" class="form-control" id="category_name" name="category_name" required>
+                                        </div>
+                                        <div class="tab-pane" id="tab5">
+                                            {{-- حقل تعديل اسم التصنيف الرئيسي باللغة العربية --}}
+                                            <div class=" form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم التصنيف الرئيسي باللغة الإنجليزية</b>
+                                                </label>
+                                                <input type="text" class="form-control" name="category_name_en"
+                                                    id="english_category_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف التصنيف الرئيسي باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">
+                                                    <b>الوصف باللغة الإنجليزية</b>
+                                                </label>
+                                                <textarea class="form-control" id="english_description"
+                                                    name="description_en" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>الوصف</b></label>
-                                <textarea class="form-control" id="description" name="description" rows="3" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <p class="mg-b-10"><b>العلامات التجارية</b></p>
-                                <select multiple="multiple" class="testselect2" name="brands[]" id="brand[]" required>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">
-                                            {{ $brand->brand_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
-                                <p class="text-danger">Logo format jpeg, jpg, png</p>
-                                <input type="file" name="photo_name" class="dropify" data-height="70" />
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">تأكيد</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">تأكيد</button>
+                            <button type="button" class="btn btn-secondary" data-ds-dismiss="modal">إغلاق</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         <!-- End modal -->
 
-        <!-- Edit Section -->
+        <!-- Edit Main Category -->
         <div class="modal fade" id="EditModal">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
@@ -231,38 +281,84 @@
                         {{ method_field('patch') }}
                         {{ csrf_field() }}
                         <div class="modal-body">
-                            <div class="form-group">
-                                <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label"><b>اسم التصنيف الرئيسي</b></label>
-                                <input class="form-control" name="category_name" id="category_name" type="text">
-                            </div>
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class=" tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs main-nav-line">
+                                            <li><a href="#tab8" class="nav-link active" data-bs-toggle="tab">عربي</a></li>
+                                            <li><a href="#tab10" class="nav-link" data-bs-toggle="tab">انجليزي</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body main-content-body-right border">
+                                    <div class="tab-content">
+                                        {{-- Edit Main Category in Arabic --}}
+                                        <div class="tab-pane active" id="tab8">
+                                            {{-- حقل تعديل اسم التصنيف الرئيسي باللغة العربية --}}
+                                            <div class=" form-group">
+                                                <input type="hidden" name="id" id="id" value="">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم التصنيف الرئيسي باللغة العربية</b>
+                                                </label>
+                                                <input type="text" class="form-control" name="category_name_ar"
+                                                    id="arabic_category_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف التصنيف الرئيسي باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>الوصف باللغة العربية</b></label>
+                                                <textarea class="form-control" id="arabic_description"
+                                                    name="description_ar" rows="3" required></textarea>
+                                            </div>
+                                            {{-- حقل اختيار العلامات التجارية التي ينتمي إليها هذا التصنيف --}}
+                                            <div class="form-group">
+                                                <p class="mg-b-10"><b>العلامات التجارية</b></p>
+                                                <select multiple="multiple" class="testselect2" name="brands[]"
+                                                    id="brand[]" required>
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{ $brand->id }}"
+                                                            {{ in_array($brand->id, $MCtegory->brands->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                            {{ $brand->translate('en')->brand_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            {{-- حقل اختيار اللوغو الخاص بالتصنيف الرئيسي --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
+                                                <p class="text-danger">Logo format jpeg, jpg, png</p>
+                                                <input type="file" name="photo_name" class="dropify"
+                                                    data-height="70" />
+                                            </div>
 
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label"><b>الوصف</b></label>
-                                <textarea class="form-control" id="description" name="description"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <p class="mg-b-10">العلامة التجارية</p>
-                                <select multiple="multiple" class="testselect2" name="brands[]" id="brand[]" required>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            {{ in_array($brand->id, $MCtegory->brands->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                            {{ $brand->brand_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1"><b>لوغو التصنيف الرئيسي</b></label>
-                                <p class="text-danger">Logo format jpeg, jpg, png</p>
-                                <input type="file" name="photo_name" class="dropify" data-height="70" />
+                                        </div>
+                                        {{-- Edit Main Category in English --}}
+                                        <div class="tab-pane" id="tab10">
+                                            {{-- حقل تعديل اسم التصنيف الرئيسي باللغة العربية --}}
+                                            <div class=" form-group">
+                                                <label for="exampleInputEmail1">
+                                                    <b>اسم التصنيف الرئيسي باللغة الإنجليزية</b>
+                                                </label>
+                                                <input type="text" class="form-control" name="category_name_en"
+                                                    id="english_category_name" required>
+                                            </div>
+                                            {{-- حقل تعديل وصف التصنيف الرئيسي باللغة العربية --}}
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">
+                                                    <b>الوصف باللغة الإنجليزية</b>
+                                                </label>
+                                                <textarea class="form-control" name="description_en"
+                                                    id="english_description" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                            <button type="submit" class="btn btn-success">تأكيد</button>
+                            <button type="button" class="btn btn-secondary" data-ds-dismiss="modal">إغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -270,7 +366,7 @@
         </div>
         <!-- End modal -->
 
-        <!-- Delete Brand -->
+        <!-- Delete Main Category -->
         <div class="modal fade" id="DeleteModal">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content tx-size-sm">
@@ -287,7 +383,8 @@
                             <p class="mg-b-20 mg-x-20">هل تريد حقا حذف هذا التصنيف الرئيسي؟؟</h3>
                             </p>
                             <input type="hidden" name="id" id="id" value="">
-                            <input class="form-control" name="category_name" id="category_name" type="text" readonly>
+                            <input class="form-control" name="category_name_ar" id="arabic_category_name" type="text"
+                                readonly>
                         </div>
 
                         <div class="modal-footer">
@@ -298,11 +395,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Delete Brand -->
+        <!-- End modal -->
     </div>
     <!-- row closed -->
-
 @endsection
 
 @section('js')
@@ -366,12 +461,16 @@
         $('#EditModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var category_name = button.data('category_name')
-            var description = button.data('description')
+            var arabic_category_name = button.data('arabic_category_name')
+            var english_category_name = button.data('english_category_name')
+            var arabic_description = button.data('arabic_description')
+            var english_description = button.data('english_description')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #category_name').val(category_name);
-            modal.find('.modal-body #description').val(description);
+            modal.find('.modal-body #arabic_category_name').val(arabic_category_name);
+            modal.find('.modal-body #english_category_name').val(english_category_name);
+            modal.find('.modal-body #arabic_description').val(arabic_description);
+            modal.find('.modal-body #english_description').val(english_description);
         })
     </script>
 
@@ -380,10 +479,12 @@
         $('#DeleteModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var category_name = button.data('category_name')
+            var arabic_category_name = button.data('arabic_category_name')
+            var english_category_name = button.data('english_category_name')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #category_name').val(category_name);
+            modal.find('.modal-body #arabic_category_name').val(arabic_category_name);
+            modal.find('.modal-body #english_category_name').val(english_category_name);
         })
     </script>
 @endsection
