@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\McategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +39,11 @@ Route::resource('mcategories', McategoryController::class);
 Route::resource('subcategories', SubcategoryController::class);
 Route::resource('branches', BranchController::class);
 Route::resource('products', ProductController::class);
+Route::resource('sizes', SizeController::class);
+Route::resource('colors', ColorController::class);
+Route::get('/mcategory/{id}', [ProductController::class, 'getSubCategories']);
+
+
 // });
 
 require __DIR__ . '/auth.php';
