@@ -2,36 +2,39 @@
 
 @section('css')
     <!-- Internal Data table css -->
-    <link href="../../assets/plugins/datatable/datatables.min.css" rel="stylesheet" />
-    <link href="../../assets/plugins/datatable/responsive.dataTables.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/buttons.bootstrap5.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/datatables.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/responsive.bootstrap5.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
     <!--- Animations css-->
-    <link href="../../assets/css/animate.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
 
     <!---Internal Owl Carousel css-->
-    <link href="../../assets/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
 
     <!---Internal  Multislider css-->
-    <link href="../../assets/plugins/multislider/multislider.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
 
     <!--- Select2 css --->
-    <link href="../../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
     <!---Internal  Prism css-->
-    <link href="../../assets/plugins/prism/prism.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/prism/prism.css') }}" rel="stylesheet">
 
     <!---Internal Fileupload css-->
-    <link href="../../assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
 
     <!---Internal Fancy uploader css-->
-    <link href="../../assets/plugins/fancyuploder/fancy_fileupload.css" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
 
     <!--Internal  Font Awesome -->
-    <link href="../../assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+
+    <!--Internal Sumoselect css-->
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
 @endsection
 
 @section('title')
@@ -232,8 +235,8 @@
                                 <p class="mg-b-10"><b>التصنيف الثانوي</b></p>
                                 <select class="SlectBox form-control" name="subcategory_id">
                                     @foreach ($Subcategories as $Subcategory)
-                                        <option value="{{ $Subcategory->id }}"
-                                            {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}>
+                                        <option value="{{ $Subcategory->id }}">
+                                            {{-- {{ $Subcategory->id == $Branch->subcategory_id ? 'selected' : '' }}> --}}
                                             {{ $Subcategory->translate('en')->subcategory_name }}
                                         </option>
                                     @endforeach
@@ -290,56 +293,53 @@
 
 @section('js')
     <!--Internal Data tables -->
-    <script src="../../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../../assets/plugins/datatable/datatables.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../../assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/jszip.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.html5.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.print.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.colVis.min.js"></script>
-    <script src="../../assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
-    <script src="../../assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/datatables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
     <!--Internal  Datatable js -->
-    <script src="../../assets/js/table-data.js"></script>
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 
     <!--Internal  Datepicker js -->
-    <script src="../../assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
 
     <!--Internal  Form-elements js-->
-    <script src="../../assets/js/advanced-form-elements.js"></script>
-    <script src="../../assets/js/select2.js"></script>
+    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
 
     <!-- Internal Select2.min js -->
-    <script src="../../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!--Internal Sumoselect js-->
-    <script src="../../assets/plugins/sumoselect/jquery.sumoselect.js"></script>
-
-    <!--Internal Sumoselect css-->
-    <link rel="stylesheet" href="../../assets/plugins/sumoselect/sumoselect-rtl.css">
+    <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
 
     <!-- Internal Modal js-->
-    <script src="../../assets/js/modal.js"></script>
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
     <!--Internal  Clipboard js-->
-    <script src="../../assets/plugins/clipboard/clipboard.min.js"></script>
-    <script src="../../assets/plugins/clipboard/clipboard.js"></script>
+    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
 
     <!-- Internal Prism js-->
-    <script src="../../assets/plugins/prism/prism.js"></script>
+    <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
 
     <!--Internal Fileuploads js-->
-    <script src="../../assets/plugins/fileuploads/js/fileupload.js"></script>
-    <script src="../../assets/plugins/fileuploads/js/file-upload.js"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
     <!--Internal Fancy uploader js-->
-    <script src="../../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="../../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
     {{-- This script return the value of each input for editing it --}}
     <script>

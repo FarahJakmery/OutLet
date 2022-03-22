@@ -2,33 +2,33 @@
 
 @section('css')
     <!-- Internal Data table css -->
-    <link href="../../assets/plugins/datatable/datatables.min.css" rel="stylesheet" />
-    <link href="../../assets/plugins/datatable/responsive.dataTables.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/buttons.bootstrap5.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link href="../../assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/datatables.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/responsive.bootstrap5.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
     <!--- Animations css-->
-    <link href="../../assets/css/animate.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
 
     <!---Internal Owl Carousel css-->
-    <link href="../../assets/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
 
     <!---Internal  Multislider css-->
-    <link href="../../assets/plugins/multislider/multislider.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
 
     <!--- Select2 css --->
-    <link href="../../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
     <!---Internal  Prism css-->
-    <link href="../../assets/plugins/prism/prism.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/prism/prism.css') }}" rel="stylesheet">
 
     <!---Internal Fileupload css-->
-    <link href="../../assets/plugins/fileuploads/css/fileupload.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
 
     <!---Internal Fancy uploader css-->
-    <link href="../../assets/plugins/fancyuploder/fancy_fileupload.css" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
 @endsection
 
 @section('title')
@@ -127,7 +127,7 @@
                                         <td>{{ $brand->translate('en')->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="../../BrandsLogos/{{ $brand->translate('en')->brand_name }}/{{ $brand->logo_name }}">
+                                                src="{{ asset('images/Brand/' . $brand->logo_name) }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">
@@ -201,8 +201,7 @@
                                             {{-- حقل إدخال وصف العلامة التجارية باللغة العربية --}}
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1"><b>الوصف باللغة العربية</b></label>
-                                                <textarea class="form-control" name="description_ar"
-                                                    id="arabic-description" rows="3" required>
+                                                <textarea class="form-control" name="description_ar" id="arabic-description" rows="3" required>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </textarea>
                                             </div>
                                             {{-- حقل اختيار اللوغو --}}
@@ -228,8 +227,7 @@
                                             {{-- حقل إدخال وصف العلامة التجارية باللغة الإنجليزية --}}
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1"><b>الوصف</b></label>
-                                                <textarea class="form-control" name="description_en"
-                                                    id="english-description" rows="3" required>
+                                                <textarea class="form-control" name="description_en" id="english-description" rows="3" required>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </textarea>
                                             </div>
                                         </div>
@@ -288,8 +286,7 @@
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1" class="col-form-label">
                                                     <b>الوصف باللغة العربية</b></label>
-                                                <textarea class="form-control" name="description_ar"
-                                                    id="arabic_description" rows="3" required></textarea>
+                                                <textarea class="form-control" name="description_ar" id="arabic_description" rows="3" required></textarea>
                                             </div>
                                             {{-- حقل اختيار اللوغو --}}
                                             <div class="form-group">
@@ -315,8 +312,7 @@
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">
                                                     <b>الوصف باللغة الإنجليزية</b></label>
-                                                <textarea class="form-control" name="description_en"
-                                                    id="english_description" rows="3" required></textarea>
+                                                <textarea class="form-control" name="description_en" id="english_description" rows="3" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -372,46 +368,46 @@
 
 @section('js')
     <!--Internal Data tables -->
-    <script src="../../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="../../assets/plugins/datatable/datatables.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-    <script src="../../assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/jszip.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.html5.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.print.min.js"></script>
-    <script src="../../assets/plugins/datatable/js/buttons.colVis.min.js"></script>
-    <script src="../../assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
-    <script src="../../assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/datatables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
     <!--Internal  Datatable js -->
-    <script src="../../assets/js/table-data.js"></script>
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 
     <!--Internal  Datepicker js -->
-    <script src="../../assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
 
     <!-- Internal Select2.min js -->
-    <script src="../../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!-- Internal Modal js-->
-    <script src="../../assets/js/modal.js"></script>
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
     <!--Internal  Clipboard js-->
-    <script src="../../assets/plugins/clipboard/clipboard.min.js"></script>
-    <script src="../../assets/plugins/clipboard/clipboard.js"></script>
+    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
 
     <!-- Internal Prism js-->
-    <script src="../../assets/plugins/prism/prism.js"></script>
+    <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
 
     <!--Internal Fileuploads js-->
-    <script src="../../assets/plugins/fileuploads/js/fileupload.js"></script>
-    <script src="../../assets/plugins/fileuploads/js/file-upload.js"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
     <!--Internal Fancy uploader js-->
-    <script src="../../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="../../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="../../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
     {{-- This script return the value of each input for editing it --}}
     <script>
