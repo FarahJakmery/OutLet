@@ -40,7 +40,7 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
+        Validator::make(
             $request->all(),
             [
                 'branch_name_ar'      => ['required|unique:branches|max:255'],
