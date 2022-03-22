@@ -131,7 +131,7 @@
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">المنتجات</a></li>
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'sizes')) }}">المقاسات</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">الألوان</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'colors')) }}">الألوان</a></li>
                 </ul>
             </li>
             {{-- <li class="side-item side-item-category">General</li>
