@@ -39,4 +39,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'roles_name'        => 'array', // I want to store this in the database as array so I changed its type
     ];
+
+    /**
+     * Get the wishlist of the user.
+     */
+    public function wishlist()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+    }
+
+    public function wishlistHas($productId)
+    {
+        return self::wishlist()->where('product_id', $productId)->exists();
+    }
 }
