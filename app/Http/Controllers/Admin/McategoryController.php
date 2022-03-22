@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Brand;
 use App\Models\Mcategory;
+use Illuminate\Support\Facades\File;
+use App\Http\Traits\SaveImageTrait;
 
 class McategoryController extends Controller
 {
+    use SaveImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +43,7 @@ class McategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
+        Validator::make(
             $request->all(),
             [
                 'category_name_ar'  => ['required|unique:mcategories|max:255'],
@@ -58,11 +61,11 @@ class McategoryController extends Controller
             ]
         );
 
-        $image = $request->file('photo_name');
-        $file_name = $image->getClientOriginalName();
+        // Store Image
+        $image_name = $this->saveImage($request->file('photo_name'), 'images/Main_category');
 
         $data = [
-            'photo_name'          => $file_name,
+            'photo_name'          => $image_name,
             'ar' => [
                 'category_name'   => $request['category_name_ar'],
                 'description'     => $request['description_ar'],
@@ -72,14 +75,10 @@ class McategoryController extends Controller
                 'description'     => $request['description_en'],
             ],
         ];
+
         $mcategory = Mcategory::create($data);
 
         $mcategory->brands()->attach($request->brands);
-
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('MainCategoriesLogos/' . $request['category_name_en']), $imageName);
 
         session()->flash('Add', 'تم إضافة التصنيف الرئيسي بنجاح');
         return redirect('/mcategories');
@@ -117,7 +116,8 @@ class McategoryController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $validator = Validator::make(
+        $mcategory = Mcategory::find($id);
+        Validator::make(
             $request->all(),
             [
                 'category_name_ar' => ['required|max:255|unique:mcategories,category_name,' . $id],
@@ -135,30 +135,30 @@ class McategoryController extends Controller
             ]
         );
 
-        $image = $request->file('photo_name');
-        $file_name = $image->getClientOriginalName();
+        // Update The Image
+        if ($request->hasFile('photo_name')) {
+            $destination = 'images/Main_category/' . $mcategory->photo_name;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $image_name = $this->saveImage($request->file('photo_name'), 'images/Main_category');
+        }
 
         $data = [
-            'photo_name'       => $file_name,
+            'photo_name'       => $image_name,
             'ar' => [
                 'category_name' => $request['category_name_ar'],
-                'description'  => $request['description_ar'],
+                'description'   => $request['description_ar'],
             ],
             'en' => [
                 'category_name' => $request['category_name_en'],
-                'description'  => $request['description_en'],
+                'description'   => $request['description_en'],
             ],
         ];
-        $mcategory = Mcategory::find($id);
 
         $mcategory->update($data);
 
         $mcategory->brands()->sync($request->brands);
-
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('MainCategoriesLogos/' . $request['category_name_en']), $imageName);
 
         session()->flash('edit', 'تم تعديل التصنيف الرئيسي بنجاح');
         return redirect('/mcategories');
@@ -173,7 +173,12 @@ class McategoryController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        Mcategory::find($id)->delete();
+        $mcate = Mcategory::find($id);
+        $destination = 'images/Main_category/' . $mcate->photo_name;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $mcate->delete();
         session()->flash('delete', 'تم حذف التصنيف الرئيسي بنجاح');
         return redirect('/mcategories');
     }

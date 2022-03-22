@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Traits\SaveImageTrait;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
+    use SaveImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +21,6 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::translated()->get();
-
         return view('Admin.Brands.brands', compact('brands'));
     }
 
@@ -40,7 +42,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
+        Validator::make(
             $request->all(),
             [
                 'brand_name_ar'       => ['required|unique:brands|max:255'],
@@ -58,11 +60,11 @@ class BrandController extends Controller
             ]
         );
 
-        $image = $request->file('logo_name');
-        $file_name = $image->getClientOriginalName();
+        // Store Image
+        $image_name = $this->saveImage($request->file('logo_name'), 'images/Brand');
 
         $data = [
-            'logo_name'        => $file_name,
+            'logo_name'        => $image_name,
             'ar' => [
                 'brand_name'   => $request['brand_name_ar'],
                 'description'  => $request['description_ar'],
@@ -72,12 +74,8 @@ class BrandController extends Controller
                 'description'  => $request['description_en'],
             ],
         ];
-        $brand = Brand::create($data);
 
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->logo_name->getClientOriginalName();
-        $request->logo_name->move(public_path('BrandsLogos/' . $request['brand_name_en']), $imageName);
+        Brand::create($data);
 
         session()->flash('Add', 'تم إضافة العلامة التجارية بنجاح');
         return redirect('/brands');
@@ -115,7 +113,8 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $validator = Validator::make(
+        $brand = Brand::find($id);
+        Validator::make(
             $request->all(),
             [
                 'brand_name_ar'       => ['required|max:255|unique:brand_translations,brand_name_ar,' . $id],
@@ -133,11 +132,17 @@ class BrandController extends Controller
             ]
         );
 
-        $image = $request->file('logo_name');
-        $file_name = $image->getClientOriginalName();
+        // Update The Image
+        if ($request->hasFile('logo_name')) {
+            $destination = 'images/Brand/' . $brand->logo_name;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $image_name = $this->saveImage($request->file('logo_name'), 'images/Brand');
+        }
 
         $data = [
-            'logo_name'        => $file_name,
+            'logo_name'        => $image_name,
             'ar' => [
                 'brand_name'   => $request['brand_name_ar'],
                 'description'  => $request['description_ar'],
@@ -148,14 +153,7 @@ class BrandController extends Controller
             ],
         ];
 
-        $brand = Brand::find($id);
-
         $brand->update($data);
-
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->logo_name->getClientOriginalName();
-        $request->logo_name->move(public_path('BrandsLogos/' . $request['brand_name_en']), $imageName);
 
         session()->flash('edit', 'تم تعديل العلامة التجارية بنجاح');
         return redirect('/brands');
@@ -170,7 +168,12 @@ class BrandController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        Brand::find($id)->delete();
+        $brand = Brand::find($id);
+        $destination = 'images/Brand/' . $brand->logo_name;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $brand->delete();
         session()->flash('delete', 'تم حذف العلامة التجارية بنجاح');
         return redirect('/brands');
     }

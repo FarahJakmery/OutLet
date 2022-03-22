@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Mcategory;
 use App\Models\Subcategory;
+use Illuminate\Support\Facades\File;
+use App\Http\Traits\SaveImageTrait;
 
 class SubcategoryController extends Controller
 {
+    use SaveImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +43,7 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
+        Validator::make(
             $request->all(),
             [
                 'subcategory_name_ar'  => ['required|unique:subcategories|max:255'],
@@ -58,11 +61,11 @@ class SubcategoryController extends Controller
             ]
         );
 
-        $image = $request->file('photo_name');
-        $file_name = $image->getClientOriginalName();
+        // Store Image
+        $image_name = $this->saveImage($request->file('photo_name'), 'images/Sub_category');
 
         $data = [
-            'photo_name'             => $file_name,
+            'photo_name'             => $image_name,
             'mcategory_id'           => $request->mcategory_id,
             'ar' => [
                 'subcategory_name'   => $request['subcategory_name_ar'],
@@ -74,12 +77,7 @@ class SubcategoryController extends Controller
             ],
         ];
 
-        $Subcate = Subcategory::create($data);
-
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request['subcategory_name_en']), $imageName);
+        Subcategory::create($data);
 
         session()->flash('Add', 'تم إضافة التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
@@ -117,7 +115,8 @@ class SubcategoryController extends Controller
     public function update(Request $request, $id)
     {
         $id = $request->id;
-        $validator = Validator::make(
+        $Subcate = Subcategory::find($id);
+        Validator::make(
             $request->all(),
             [
                 'subcategory_name_ar'  => ['required|max:255|unique:subcategories,subcategory_name,' . $id],
@@ -135,13 +134,17 @@ class SubcategoryController extends Controller
             ]
         );
 
-        $image = $request->file('photo_name');
-        $file_name = $image->getClientOriginalName();
-
-        $Subcate = Subcategory::find($id);
+        // Update The Image
+        if ($request->hasFile('photo_name')) {
+            $destination = 'images/Sub_category/' . $Subcate->photo_name;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $image_name = $this->saveImage($request->file('photo_name'), 'images/Sub_category');
+        }
 
         $data = [
-            'photo_name'             => $file_name,
+            'photo_name'             => $image_name,
             'mcategory_id'           => $request->mcategory_id,
             'ar' => [
                 'subcategory_name'   => $request['subcategory_name_ar'],
@@ -154,11 +157,6 @@ class SubcategoryController extends Controller
         ];
 
         $Subcate->update($data);
-
-        // move logo
-        // اسم المرفق سيتم حفظه في الداتابيز و لكن المرفق بحد ذاته سيتم حفظه على السيرفر في المكان الذي سنقوم بتحديده
-        $imageName = $request->photo_name->getClientOriginalName();
-        $request->photo_name->move(public_path('SubcategoriesLogos/' . $request['subcategory_name_en']), $imageName);
 
         session()->flash('edit', 'تم تعديل التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
@@ -173,7 +171,12 @@ class SubcategoryController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        Subcategory::find($id)->delete();
+        $subcate = Subcategory::find($id);
+        $destination = 'images/Sub_category/' . $subcate->photo_name;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $subcate->delete();
         session()->flash('delete', 'تم حذف التصنيف الثانوي بنجاح');
         return redirect('/subcategories');
     }
