@@ -140,7 +140,8 @@
                                             @endcan
                                             @can('حذف المستخدم')
                                                 <a class="modal-effect btn btn-sm btn-danger" data-bs-effect="effect-scale"
-                                                    data-bs-toggle="modal" href="#DeleteModal">
+                                                    data-bs-toggle="modal" data-id="{{ $user->id }}"
+                                                    data-name="{{ $user->name }}" href="#DeleteModal">
                                                     <i class="las la-trash"></i>
                                                 </a>
                                             @endcan
