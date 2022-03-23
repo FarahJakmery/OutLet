@@ -17,46 +17,69 @@ class PermissionTableSeeder extends Seeder
         $permissions = [
 
             // Brand Permissions
-            'Brand-list',
-            'Brand-create',
-            'Brand-edit',
-            'Brand-delete',
+            'العلامات التجارية',
+            'قائمة العلامات التجارية',
+            'إضافة العلامة التجارية',
+            'تعديل العلامة التجارية',
+            'حذف العلامة التجارية',
+
+            // Categories
+            'التصنيفات',
 
             // Main-Category Permissions
-            'Main-Category-list',
-            'Main-Category-create',
-            'Main-Category-edit',
-            'Main-Category-delete',
+            'قائمة التصنيفات الرئيسية',
+            'إضافة تصنيف رئيسي',
+            'تعديل تصنيف رئيسي',
+            'حذف تصنيف رئيسي',
 
             // Sub-Category Permissions
-            'Sub-Category-list',
-            'Sub-Category-create',
-            'Sub-Category-edit',
-            'Sub-Category-delete',
+            'قائمة التصنيفات الثانوية',
+            'إنشاء تصنيف ثانوي',
+            'تعديل تصنيف ثانوي',
+            'حذف تصنيف ثانوي',
 
             // Branch Permissions
-            'Branch-list',
-            'Branch-create',
-            'Branch-edit',
-            'Branch-delete',
+            'قائمة الفروع',
+            'إضافة فرع',
+            'تعديل فرع',
+            'حذف فرع',
 
             // Role Permissions
-            'Role-list',
-            'Role-create',
-            'Role-edit',
-            'Role-delete',
+            'صلاحيات المستخدمين',
+            'عرض صلاحيات الدور',
+            'إضافة دور',
+            'تعديل الدور',
+            'حذف الدور',
 
             // User Permissions
-            'User-list',
-            'User-create',
-            'User-edit',
-            'User-delete',
+            'المستخدمين',
+            'قائمة المستخدمين',
+            'إضافة مستخدم',
+            'تعديل المستخدم',
+            'عرض المستخدم',
+            'حذف المستخدم',
+
+            // The shop Permissions
+            'المتجر',
 
             // Product Permissions
-            'Product-list',
-            'Product-create',
-            'Product-edit',
-            'Product-delete',
+            'قائمة المنتجات',
+            'إضافة منتج',
+            'تعديل منتج',
+            'حذف منتج',
+
+            // Size Permissions
+            'قائمة القياسات',
+            'إضافة قياس',
+            'تعديل القياس',
+            'حذف القياس',
+
+            // Color Permissions
+            'قائمة الألوان',
+            'إضافة لون',
+            'تعديل اللون',
+            'حذف اللون',
+
         ];
 
         foreach ($permissions as $permission) {
