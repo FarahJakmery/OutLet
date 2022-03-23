@@ -18,8 +18,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('users.show_users', compact('data'))
+        $users = User::orderBy('id', 'DESC')->paginate(5);
+        return view('Admin.users.all_users', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -31,10 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        // $roles = Role::pluck('name', 'name')->all();
-
-        // return view('Admin.users.add_user', compact('roles'));
-        return view('Admin.users.add_user');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('Admin.users.add_user', compact('roles'));
     }
     /**
      * Store a newly created resource in storage.
@@ -45,21 +43,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'name'       => 'required',
+            'email'      => 'required|email|unique:users,email',
+            'password'   => 'required|same:confirm-password',
             'roles_name' => 'required'
         ]);
 
         $input = $request->all();
-
 
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('roles_name'));
         return redirect()->route('users.index')
-            ->with('success', 'تم اضافة المستخدم بنجاح');
+            ->with('success', 'تم إضافة المستخدم بنجاح');
     }
 
     /**
@@ -71,7 +68,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('Admin.users.show_user', compact('user'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -84,7 +81,10 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view(
+            'Admin.users.edit_user',
+            compact('user', 'roles', 'userRole')
+        );
     }
     /**
      * Update the specified resource in storage.
@@ -122,7 +122,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        User::find($request->user_id)->delete();
+        User::find($request->id)->delete();
         return redirect()->route('users.index')->with('success', 'تم حذف المستخدم بنجاح');
     }
 }
