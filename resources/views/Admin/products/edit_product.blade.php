@@ -34,7 +34,7 @@
 @endsection
 
 @section('title')
-    إضافة منتج
+    تعديل المنتج
 @endsection
 
 @section('page-header')
