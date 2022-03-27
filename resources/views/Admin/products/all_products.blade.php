@@ -242,7 +242,8 @@
                                                 <i class="mdi mdi-heart-outline ms-auto wishlist"></i>
                                             </a>
                                         </div>
-                                        <img class="w-100" src="../../assets/img/ecommerce/01.jpg"
+                                        <img class="w-100"
+                                            src="{{ asset('images/The_Product/' . $product->photo_name) }}"
                                             alt="product-image">
                                     </div>
                                     <div class="text-center pt-3">
