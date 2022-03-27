@@ -304,9 +304,22 @@ class ProductController extends Controller
 
 
 
+
     public function getSubCategories($id)
     {
         $subcategories = Subcategory::where('mcategory_id', $id)->pluck('photo_name', 'id');
         return json_encode($subcategories);
+    }
+
+    public function destroy_image(Request $request)
+    {
+        $Image = ProductImage::findOrFail($request->id);
+        $destination = 'images/The_Product/' . $Image->image_name;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $Image->delete();
+        session()->flash('delete', 'تم حذف المرفق بنجاح');
+        return back();
     }
 }
