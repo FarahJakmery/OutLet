@@ -4,6 +4,16 @@
     <!--- Internal Select2 css-->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
+    <!--Internal  Datetimepicker-slider css -->
+    <link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+
+    <!-- Internal Spectrum-colorpicker css -->
+    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
+
     <!---Internal Fileupload css-->
     <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
 
@@ -22,15 +32,8 @@
     <!--Internal  Font Awesome -->
     <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
-    <!--Internal  Datetimepicker-slider css -->
-    <link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
-        rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
-        rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
-
-    <!-- Internal Spectrum-colorpicker css -->
-    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
+    <!--- Animations css-->
+    <link href="../../assets/css/animate.css" rel="stylesheet">
 @endsection
 
 @section('title')
@@ -123,37 +126,42 @@
                                 {{-- Row 2 --}}
                                 <div class="row">
                                     <div class="col">
-                                        <div class="col">
-                                            <p class="mg-b-20">تاريخ إنشاء المنتج</p>
-                                            <div class="row row-sm">
-                                                <div class="input-group">
+                                        <p class="mg-b-20">تاريخ إنشاء المنتج</p>
+                                        {{-- <div class="row row-sm">
+                                            <div class="input-group">
+                                                <div class="input-group-text">
                                                     <div class="input-group-text">
-                                                        <div class="input-group-text">
-                                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                        </div>
+                                                        <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                     </div>
-                                                    <input class="form-control fc-datepicker" name="product_date"
-                                                        type="text" value="{{ date('Y-m-d H:i:s') }}" required>
                                                 </div>
+                                                <input class="form-control fc-datepicker" name="product_date" type="text"
+                                                    value="{{ date('Y-m-d H:i:s') }}" required>
                                             </div>
+                                        </div> --}}
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-text">
+                                                <div class="input-group-text">
+                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                </div>
+                                            </div><input class="form-control" id="datetimepicker" name="product_date"
+                                                type="text" value="{{ date('Y-m-d H:i:s') }}" required>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="col">
-                                            <p class="mg-b-20">تاريخ إنتهاء فترة عرض المنتج</p>
-                                            <div class="row row-sm">
-                                                <div class="input-group">
+                                    {{-- <div class="col">
+                                        <p class="mg-b-20">تاريخ إنتهاء فترة عرض المنتج</p>
+                                        <div class="row row-sm">
+                                            <div class="input-group">
+                                                <div class="input-group-text">
                                                     <div class="input-group-text">
-                                                        <div class="input-group-text">
-                                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                        </div>
+                                                        <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                     </div>
-                                                    <input type="text" value="2015-02-15 21:05" id="datetimepicker1"
-                                                        name="expiry_date" class="form-control" required>
                                                 </div>
+                                                <input type="text" value="2015-02-15 21:05" id="datetimepicker1"
+                                                    name="expiry_date" class="form-control" required>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div><br>
 
                                 {{-- Row 3 --}}
@@ -184,11 +192,11 @@
                                     <div class="col">
                                         <p class="mg-b-10">التصنيفات الثانوية</p>
                                         <select id="subcategory_id" name="subcategory_id" class="SlectBox form-control">
-                                            {{-- @foreach ($SCates as $SCate)
+                                            @foreach ($SCates as $SCate)
                                                 <option value="{{ $SCate->id }}">
                                                     {{ $SCate->translate('en')->subcategory_name }}
                                                 </option>
-                                            @endforeach --}}
+                                            @endforeach
                                         </select>
 
                                     </div>
@@ -339,35 +347,41 @@
 @endsection
 
 @section('js')
-    <!-- JQuery min js -->
-    <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-
+    <!--Internal  Datepicker js -->
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+    <!--Internal  jquery.maskedinput js -->
+    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+    <!--Internal  spectrum-colorpicker js -->
+    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+    <!-- Internal Select2 js -->
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <!--Internal Ion.rangeSlider.min js -->
+    <script src="{{ URL::asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
     <!-- Internal  jquery-simple-date time picker js -->
     <script src="{{ URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}"></script>
-
     <!-- Internal  pickerjs js -->
     <script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
-
-    <!--Internal  Datepicker js -->
-    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-
-    <!--Internal Ion.rangeSlider.min js -->
-    <script src="{{ URL::asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
-
-    <!--Internal  jquery.maskedinput js -->
-    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
-
-    <!--Internal  spectrum-colorpicker js -->
-    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
-
-    <!-- Internal Select2 js -->
-    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-
     <!-- Internal  Form-elements js -->
     <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
     <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
+
+    <!-- JQuery min js -->
+    {{-- <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--Internal Fileuploads js-->
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
@@ -383,54 +397,12 @@
     <!--Internal Sumoselect js-->
     <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
 
-    <!-- Internal TelephoneInput js-->
-    <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}"></script>
-
 
     {{-- This script to get the current date --}}
     <script>
-        var date = $('.datetimepicker').appendDtpicker({
-            closeOnSelected: true,
-            onInit: function(handler) {
-                var picker = handler.getPicker();
-                $(picker).addClass('main-datetimepicker');
-            }
+        var date = $('#datetimepicker').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            autoclose: true
         }).val();
-    </script>
-
-    {{-- This script to get the products that belongs to specific Section --}}
-    <script>
-        $(document).ready(function() {
-            // السطر التالي يعني: عندما يتم اختيار اسم القسم و يصبح عليه تغيير يبدأ بتنفيذ التابع
-            $('select[name="mcategory_id"]').on('change', function() {
-                // هذا السطر سوف يأخذ "قييييييمة" هذا القسم الذي تم اختياره و يسندها للمتغير
-                var MainCategoryId = $(this).val();
-                if (MainCategoryId) {
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ URL::to('maincategory') }}/" + MainCategoryId,
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="subcategory_id"]').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="subcategory_id"]').append(
-                                    '<option value="' +
-                                    value + '">' + value + '</option>');
-                            });
-                        },
-                    });
-                } else {
-                    console.log('AJAX load did not work');
-                }
-            });
-        });
     </script>
 @endsection
