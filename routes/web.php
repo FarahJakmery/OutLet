@@ -4,13 +4,16 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\McategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WishlistController;
+use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,12 +47,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
     Route::resource('productImages', ProductImageController::class);
-    Route::get('/maincategory/{id}', [ProductController::class, 'getSubCategories']);
+    Route::resource('orders', OrderController::class);
+    Route::resource('statuses', StatusController::class);
+
+    // Product Images Managment Routes
+    Route::post('delete_image', [ProductController::class, 'destroy_image'])->name('delete_image');
 
     // WhishList Routes
     Route::post('wishlist', [WishlistController::class, 'store']);
     Route::delete('wishlistdestroy', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
     Route::get('wishlist/products', [WishlistController::class, 'index']);
 });
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('Products', CustomerProductController::class);
+});
+
+
 
 require __DIR__ . '/auth.php';
