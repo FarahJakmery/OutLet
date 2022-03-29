@@ -1,4 +1,4 @@
-@include('web layouts.master')
+@extends('webLayouts.master')
 
 @section('web_title')
     المنتجات
@@ -111,27 +111,27 @@
                         </div>
                         <!-- <input type="range" multiple value="0,100" /> -->
                         <!-- <div class="selector">
-                                                                                    <div class="price-slider">
-                                                                                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                                                                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                                                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span><span tabindex="0"
-                                                                                                class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                                                                        </div>
-                                                                                        <span id="min-price" data-currency="€" class="slider-price">0</span> <span class="seperator">-</span> <span
-                                                                                            id="max-price" data-currency="€" data-max="3500" class="slider-price">3500 +</span>
-                                                                                    </div>
-                                                                                </div> -->
+                                                                                                                                                                                                                                                <div class="price-slider">
+                                                                                                                                                                                                                                                    <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                                                                                                                                                                                                                                        <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                                                                                                                                                                                                                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span><span tabindex="0"
+                                                                                                                                                                                                                                                            class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                    <span id="min-price" data-currency="€" class="slider-price">0</span> <span class="seperator">-</span> <span
+                                                                                                                                                                                                                                                        id="max-price" data-currency="€" data-max="3500" class="slider-price">3500 +</span>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                            </div> -->
                         <!-- <div class="price-range">
-                                                                                    <div class="range">
-                                                                                        <div class="to">
-                                                                                            0 USD
-                                                                                        </div>
-                                                                                        <div class="from">
-                                                                                            500 USD
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="line"></div>
-                                                                                </div> -->
+                                                                                                                                                                                                                                                <div class="range">
+                                                                                                                                                                                                                                                    <div class="to">
+                                                                                                                                                                                                                                                        0 USD
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                    <div class="from">
+                                                                                                                                                                                                                                                        500 USD
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                <div class="line"></div>
+                                                                                                                                                                                                                                            </div> -->
                     </div>
                     <div class="prudact-group">
                         <span class="title">مجموعة
@@ -194,10 +194,10 @@
                     <div class="prudact-images">
                         @foreach ($Products as $Product)
                             <div class="item">
-                                <a href="{{ route('Products.show', $Product->id) }}" class="item-fav">
+                                <a href="#" class="item-fav addtowishlist" data-product_id="{{ $Product->id }}">
                                     <span class="love"><i class="far fa-heart"></i></span>
                                 </a>
-                                <a href="productevaluation.html" class="to-item-page">
+                                <a href="{{ route('Products.show', $Product->id) }}" class="to-item-page">
                                     <img class="Yellow" src="Web/assets/img/tshirt-06.png" alt="">
                                     <div class="item-info">
                                         <p>{{ $Product->translate('ar')->product_name }}</p>
@@ -205,175 +205,12 @@
                                             <span class="old">${{ $Product->max_price }}</span>
                                             <span class="new">${{ $Product->min_price }}</span>
                                         </div>
+                                        <button class="addtoCart" data-Product_id="{{ $Product->id }}">Add to
+                                            Cart</button>
                                     </div>
                                 </a>
                             </div>
                         @endforeach
-                        {{-- <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/02.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/03.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/04.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/05.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/06.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/07.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/08.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/09.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/10.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/11.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" class="item-fav">
-                                <span class="love"><i class="far fa-heart"></i></span>
-                            </a>
-                            <a href="productevaluation.html" class="to-item-page">
-                                <img class="Yellow" src="Web/assets/img/prudact/12.png" alt="">
-                                <div class="item-info">
-                                    <p>T-shirt Summer Vibes</p>
-                                    <div class="price">
-                                        <span class="old">$119,99</span>
-                                        <span class="new">$89.99</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -409,4 +246,62 @@
         </div>
     </div>
     <!-- End Subscribe -->
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.addtowishlist', function(e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/wishlist",
+                    data: {
+                        'productId': $(this).attr('data-product_id'),
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.addtoCart', function(e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/cart",
+                    data: {
+                        'productId': $(this).attr('data-Product_id'),
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+
+        });
+    </script>
 @endsection

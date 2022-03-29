@@ -1,4 +1,4 @@
-@include('web layouts.master')
+@extends('webLayouts.master')
 
 @section('web_title')
     الصفحة الرئيسية
@@ -63,7 +63,7 @@
                     <a href="#">
                         <img src="Web/assets/img/icon/ammerica.png" alt="">
                     </a>
-                    Web/assets/
+
                 </div>
                 <div class="header-slider swiper">
                     <div class="swiper-wrapper">
@@ -234,22 +234,22 @@
                             </div>
                         </div>
                         <!-- <div class="swiper-slide">
-                                                <a href="#">
-                                                    <img src="Web/assets/img/newCollection-03.png" alt="">
-                                                </a>
-                                                <div class="timer-collec">
-                                                    <h4>السعر قادم في</h4>
-                                                    <div class="timer" id="timer" data-date="jan 20, 2022 11:30:00">
-                                                    </div>
-                                                </div>
-                                                <div class="info-collec">
-                                                    <span>T-shirt Summer Vibes</span>
-                                                    <div class="price">
-                                                        <span class="new">$89.99</span>
-                                                        <span class="old">$119.99</span>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                                            <a href="#">
+                                                                <img src="Web/assets/img/newCollection-03.png" alt="">
+                                                            </a>
+                                                            <div class="timer-collec">
+                                                                <h4>السعر قادم في</h4>
+                                                                <div class="timer" id="timer" data-date="jan 20, 2022 11:30:00">
+                                                                </div>
+                                                            </div>
+                                                            <div class="info-collec">
+                                                                <span>T-shirt Summer Vibes</span>
+                                                                <div class="price">
+                                                                    <span class="new">$89.99</span>
+                                                                    <span class="old">$119.99</span>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
                     </div>
                 </div>
                 <span class="main-slider-btn-next slider-next-btn">
@@ -405,84 +405,84 @@
                 </div>
             </div>
             <!-- <div class="gallery-slider">
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="Dark"  src="Web/assets/img/summer-01.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="White"  src="Web/assets/img/summer-02.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="Yellow"  src="Web/assets/img/summer-03.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="Dark"  src="Web/assets/img/summer-04.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="White"  src="Web/assets/img/summer-05.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="White"  src="Web/assets/img/summer-06.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <span class="offer">30%</span>
-                                        <img class="Yellow"  src="Web/assets/img/summer-07.png" alt="">
-                                        <div class="item-info">
-                                            <p>T-shirt Summer Vibes</p>
-                                            <div class="price">
-                                                <span class="old">$119,99</span>
-                                                <span class="new">$89.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="Dark"  src="Web/assets/img/summer-01.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="White"  src="Web/assets/img/summer-02.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="Yellow"  src="Web/assets/img/summer-03.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="Dark"  src="Web/assets/img/summer-04.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="White"  src="Web/assets/img/summer-05.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="White"  src="Web/assets/img/summer-06.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="offer">30%</span>
+                                                    <img class="Yellow"  src="Web/assets/img/summer-07.png" alt="">
+                                                    <div class="item-info">
+                                                        <p>T-shirt Summer Vibes</p>
+                                                        <div class="price">
+                                                            <span class="old">$119,99</span>
+                                                            <span class="new">$89.99</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
         </div>
     </div>
     <!-- End Gallery -->

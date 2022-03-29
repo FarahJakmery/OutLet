@@ -1,6 +1,6 @@
-@include('web layouts.master')
+@extends('webLayouts.master')
 
-@section('web_content')
+@section('web_title')
     التأكيد
 @endsection
 

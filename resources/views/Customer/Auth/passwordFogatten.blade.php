@@ -47,4 +47,4 @@
         </div>
     </div>
     <!-- End Welome Side -->
-    @eWeb/assets/ndsection
+@endsection

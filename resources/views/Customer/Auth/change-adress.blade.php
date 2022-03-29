@@ -7,7 +7,7 @@
 @section('web_content')
     <!-- Start Complete Process -->
     <div class="change-adress padbtm40 padtop40">
-        Web/assets/ <div class="container">
+        <div class="container">
             <header>
                 <h2 class="title">معلومات</h2>
                 <div class="payment-methods">

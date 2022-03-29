@@ -1,12 +1,12 @@
-@include('web layouts.master')
+@extends('webLayouts.master')
 
 @section('web_title')
     المنتج
-    @eWeb/assets/ndsection
+@endsection
 
 @section('web_content')
     <div class="product-info">
-        <div class="container">
+        <div class="container product_data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="address">
@@ -20,7 +20,7 @@
                                 products
                             </span></a>
                         <span class="slash">\</span>
-                        <a href="#"><span class="title">T-shirt Summer Vibes</span></a>
+                        <a href="#"><span class="title">{{ $product->translate('ar')->product_name }}</span></a>
                     </div>
                 </div>
                 <div class="col-md-3 work-comment">
@@ -56,7 +56,7 @@
                     <div class="col-md-6 product-detiels">
                         <span class="offer">تخفيض</span>
                         <div class="item-info">
-                            <p>T-shirt Summer Vibes</p>
+                            <p>{{ $product->translate('ar')->product_name }}</p>
                             <div class="price">
                                 <span class="old">$119,99</span>
                                 <span class="new">$89.99</span>
@@ -89,6 +89,7 @@
                             </div>
                         </div>
                         <div class="product-amount">
+                            <input type="hidden" name="" value="{{ $product->id }}" class="prod_id">
                             <span class="title">كمية :</span>
                             <div class="increase-decrease">
                                 <span class="minus clickable">
@@ -99,7 +100,7 @@
                                     <i class="fas fa-plus"></i>
                                 </span>
                             </div>
-                            <button>أضف إلى السلة</button>
+                            <button class="addToCart">أضف إلى السلة</button>
                             <span class="love"><i class="far fa-heart"></i></span>
                         </div>
                         <div class="product-timer">
@@ -399,6 +400,8 @@
         </div>
     </div>
     <!-- End Second Gallery -->
+
+
     <!-- Start Subscribe -->
     <div class="subscribe padbtm40">
         <div class="container">
@@ -413,4 +416,34 @@
         </div>
     </div>
     <!-- End Subscribe -->
+@endsection
+
+@section('scripts')
+    {{-- <script>
+        $(document).ready(function() {
+
+            $('.addToCart').click(function(e) {
+                e.preventDefault();
+                var product_id =
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/wishlist",
+                    data: {
+                        'productId': $(this).attr('data-product_id'),
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+
+        });
+    </script> --}}
 @endsection

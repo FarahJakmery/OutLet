@@ -1,4 +1,4 @@
-@include('web layouts.master')
+@extends('webLayouts.master')
 
 @section('web_title')
     مرحبا
