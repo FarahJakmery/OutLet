@@ -12,7 +12,8 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\WishlistController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\WishlistController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -52,17 +53,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Product Images Managment Routes
     Route::post('delete_image', [ProductController::class, 'destroy_image'])->name('delete_image');
-
-    // WhishList Routes
-    Route::post('wishlist', [WishlistController::class, 'store']);
-    Route::delete('wishlistdestroy', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-    Route::get('wishlist/products', [WishlistController::class, 'index']);
 });
 
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('Products', CustomerProductController::class);
-});
+// Route::group(['middleware' => ['auth']], function () {
+Route::resource('Products', CustomerProductController::class);
+
+// WhishList Routes
+Route::post('wishlist', [WishlistController::class, 'store']);
+Route::delete('wishlistdestroy', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+Route::get('wishlist/products', [WishlistController::class, 'index']);
+
+// Add To Cart
+Route::resource('carts', CartController::class);
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+// });
 
 
 
