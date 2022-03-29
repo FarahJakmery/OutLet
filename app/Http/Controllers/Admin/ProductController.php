@@ -100,7 +100,7 @@ class ProductController extends Controller
             'minutes'                    => $request['minutes'],
             'quantity'                   => $request['quantity'],
             'return_option'              => $request['return_option'],
-            'value_status'               => '2',
+            'value_status'               => 'waiting',
             'brand_id'                   => $request['brand_id'],
             'mcategory_id'               => $request['mcategory_id'],
             'subcategory_id'             => $request['subcategory_id'],
