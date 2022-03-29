@@ -311,8 +311,13 @@
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>الرسائل</a>
                         <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i>
                             إعدادات الحساب</a>
-                        <a class="dropdown-item" href="signin.html"><i class="bx bx-log-out"></i>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
+                                class="bx bx-log-out"></i>
                             تسجيل الخروج</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
                 <li class="dropdown main-header-message right-toggle">
