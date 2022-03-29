@@ -1,4 +1,4 @@
-@extends('web layouts.master')
+@extends('webLayouts.master')
 
 @section('web_title')
     العربة
@@ -21,9 +21,12 @@
                     </ul>
                 </div>
             </header>
+
             <div class="item-container">
                 <ul class="cart-item cart-smft items-header">
-                    <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                    <li class="img">
+                        <img src="Web/assets/img/img-item.png" alt="">
+                    </li>
                     <li class="type">
                         T-shirt Summer Vibes
                         <span>#261311</span>
@@ -42,74 +45,10 @@
                     </li>
                     <li>أسود</li>
                     <li class="item-price">$<span class="price">100.99</span></li>
+
                     <li class="cancel"><i class="fas fa-times"></i></li>
                 </ul>
-                <ul class="cart-item cart-smft items-header">
-                    <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                    <li class="type">
-                        T-shirt Summer Vibes
-                        <span>#261311</span>
-                    </li>
-                    <li>XL</li>
-                    <li class="number-of-item">
-                        <div class="increase-decrease">
-                            <span class="minus clickable">
-                                <i class="fas fa-minus"></i>
-                            </span>
-                            <span data-number="1" class="number">1</span>
-                            <span class="plus clickable">
-                                <i class="fas fa-plus"></i>
-                            </span>
-                        </div>
-                    </li>
-                    <li>أسود</li>
-                    <li class="item-price">$<span class="price">100.99</span></li>
-                    <li class="cancel"><i class="fas fa-times"></i></li>
-                </ul>
-                <ul class="cart-item cart-smft items-header">
-                    <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                    <li class="type">
-                        T-shirt Summer Vibes
-                        <span>#261311</span>
-                    </li>
-                    <li>XL</li>
-                    <li class="number-of-item">
-                        <div class="increase-decrease">
-                            <span class="minus clickable">
-                                <i class="fas fa-minus"></i>
-                            </span>
-                            <span data-number="1" class="number">1</span>
-                            <span class="plus clickable">
-                                <i class="fas fa-plus"></i>
-                            </span>
-                        </div>
-                    </li>
-                    <li>أسود</li>
-                    <li class="item-price">$<span class="price">100.99</span></li>
-                    <li class="cancel"><i class="fas fa-times"></i></li>
-                </ul>
-                <ul class="cart-item cart-smft items-header">
-                    <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                    <li class="type">
-                        T-shirt Summer Vibes
-                        <span>#261311</span>
-                    </li>
-                    <li>XL</li>
-                    <li class="number-of-item">
-                        <div class="increase-decrease">
-                            <span class="minus clickable">
-                                <i class="fas fa-minus"></i>
-                            </span>
-                            <span data-number="1" class="number">1</span>
-                            <span class="plus clickable">
-                                <i class="fas fa-plus"></i>
-                            </span>
-                        </div>
-                    </li>
-                    <li>أسود</li>
-                    <li class="item-price">$<span class="price">100.99</span></li>
-                    <li class="cancel"><i class="fas fa-times"></i></li>
-                </ul>
+
             </div>
             <div class="row">
                 <div class="col-md-7 promo-btn">
@@ -132,7 +71,9 @@
                     </div>
                 </div>
                 <div class="col-md-5 continue-shopping">
-                    <button class="continue-shopping-btn">متابعة التسوق</button>
+                    <a href="{{ route('Products.index') }}">
+                        <button class="continue-shopping-btn">متابعة التسوق</button>
+                    </a>
                     <button class="confirm">الخطوة التالية</button>
                 </div>
             </div>
