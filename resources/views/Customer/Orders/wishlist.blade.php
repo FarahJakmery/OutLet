@@ -1,180 +1,131 @@
-@extends('web layouts.master')
-
-@section('css')
-    <!-- Internal Nice-select css  -->
-    <link href="{{ URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet" />
-@endsection
+@extends('webLayouts.master')
 
 @section('web_title')
-    المنتجات
-@endsection
-
-@section('page-header')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">المتجر</h4><span class="text-muted mt-1 tx-13 ms-2 mb-0">/
-                    المنتجات</span>
-            </div>
-            {{-- <div class="col-sm-4"> --}}
-            <a class="modal-effect btn btn-outline-primary btn-block" data-bs-effect="effect-flip-vertical"
-                data-bs-toggle="modal" href="{{ route('products.create') }}">إضافة منتج</a>
-            {{-- </div> --}}
-        </div>
-    </div>
-    <!-- breadcrumb -->
+    الطلبات
 @endsection
 
 @section('web_content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    @if (session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if (session()->has('edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if (session()->has('delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    <!-- row -->
-    <div class="row row-sm">
-        <div class="col-xl-9 col-lg-9 col-md-12">
-            {{-- مربع البحث --}}
-            <div class="card">
-                <div class="card-body p-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search ...">
-                        <span class="input-group-text p-0">
-                            <button class="btn btn-primary" type="button">Search</button>
+    <!-- Start Header -->
+    <!-- Start User Information List -->
+    <div class="profile">
+        <div class="user-list">
+            <div class="hide-show">
+                <i class="fas fa-cog"></i>
+            </div>
+            <div class="user-info">
+                <img src="Web/assets/img/tshirt-02.png" alt="">
+                <h3>اسم المستخدم</h3>
+            </div>
+            <div class="options">
+                <div class="option">
+                    <div class="overlay-bg"></div>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="far fa-user"></i>
                         </span>
-                    </div>
+                        تعديل البيانات
+                    </a>
+                </div>
+                <div class="option active">
+                    <div class="overlay-bg"></div>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </span>
+                        طلباتي
+                    </a>
+                </div>
+                <div class="option">
+                    <div class="overlay-bg"></div>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="far fa-heart"></i>
+                        </span>
+                        المفضلة
+                    </a>
+                </div>
+                <div class="option">
+                    <div class="overlay-bg"></div>
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fas fa-sign-out-alt fa-rotate-180"></i>
+                        </span>
+                        تسجيل الخروج
+                    </a>
                 </div>
             </div>
-            {{-- المنجات --}}
-            <div class="row row-sm">
-                @foreach ($products as $product)
-                    <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
-                        <a href="{{ route('products.show', $product->id) }}">
-                            <div class="card">
-                                <div class="card-body h-100">
-                                    <div class="pro-img-box">
-                                        <div class="d-flex product-sale">
-                                            <div class="badge bg-pink">New</div>
-                                            <a class="removeFromwishlist addtowishlist" href="#"
-                                                data-product_id="{{ $product->id }}">
-                                                <i class="mdi mdi-heart-outline ms-auto wishlist"></i>
-                                            </a>
-                                        </div>
-                                        <img class="w-100" src="../../assets/img/ecommerce/01.jpg"
-                                            alt="product-image">
-                                    </div>
-                                    <div class="text-center pt-3">
-                                        <h3 class="h6 mb-2 mt-4 fw-bold text-uppercase">
-                                            {{ $product->translate('en')->product_name }}
-                                        </h3>
-                                        <span class="tx-15 ms-auto">
-                                            <i class="ion ion-md-star text-warning"></i>
-                                            <i class="ion ion-md-star text-warning"></i>
-                                            <i class="ion ion-md-star text-warning"></i>
-                                            <i class="ion ion-md-star-half text-warning"></i>
-                                            <i class="ion ion-md-star-outline text-warning"></i>
-                                        </span>
-                                        {{-- السعر بعد التخفيضات --}}
-                                        <h4 class="h5 mb-0 mt-2 text-center fw-bold text-danger">
-                                            ${{ $product->max_price }}
-                                            {{-- السعر الأساسي --}}
-                                            <span class="text-secondary fw-normal tx-13 ms-1 prev-price">
-                                                ${{ $product->min_price }}
-                                            </span>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-                {{-- Pagination --}}
-                {{-- <ul class="pagination product-pagination ms-auto float-end">
-                    <li class="page-item page-prev disabled">
-                        <a class="page-link" href="#" tabindex="-1">Prev</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item page-next">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul> --}}
+        </div>
+        <div class="profile-ordres">
+            <header>
+                <h2 class="title">الطلبات</h2>
+            </header>
+            <div class="prudact-container">
+                <div class="purchase-status">
+                    <ul class="head-list">
+                        <li>اسم المنتج</li>
+                        <li>رقم المنتج</li>
+                        <li>من قبل</li>
+                        <li>سعر</li>
+                        <li>وضع مخزون</li>
+                        <li></li>
+                    </ul>
+                    @foreach ($products as $product)
+                        <ul class="item-in-list">
+                            <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                            <li class="prodact-name">{{ $product->translate('ar')->product_name }}</li>
+                            <li class="prodact-name">#{{ $product->product_number }}</li>
+                            {{-- <li class="usr-name">Fleen Flouleni</li> --}}
+                            <li class="price">${{ $product->max_price }}</li>
+                            <li><span class="status">{{ $product->value_status }}</span></li>
+                            <li><button>إضافة للعربة</button></li>
+                        </ul>
+                    @endforeach
+                    {{-- <ul class="item-in-list">
+                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                        <li class="prodact-name">#5511</li>
+                        <li class="usr-name">Fleen Flouleni</li>
+                        <li class="price">$59.98</li>
+                        <li><span class="status"> في الخط</span></li>
+                        <li><button>إضافة للعربة</button></li>
+                    </ul>
+                    <ul class="item-in-list">
+                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                        <li class="prodact-name">#5511</li>
+                        <li class="usr-name">Fleen Flouleni</li>
+                        <li class="price">$59.98</li>
+                        <li><span class="status"> في الخط</span></li>
+                        <li><button>إضافة للعربة</button></li>
+                    </ul>
+                    <ul class="item-in-list">
+                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                        <li class="prodact-name">#5511</li>
+                        <li class="usr-name">Fleen Flouleni</li>
+                        <li class="price">$59.98</li>
+                        <li><span class="status"> في الخط</span></li>
+                        <li><button>إضافة للعربة</button></li>
+                    </ul>
+                    <ul class="item-in-list">
+                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
+                        <li class="prodact-name">#5511</li>
+                        <li class="usr-name">Fleen Flouleni</li>
+                        <li class="price">$59.98</li>
+                        <li><span class="status"> في الخط</span></li>
+                        <li><button>إضافة للعربة</button></li>
+                    </ul> --}}
+                </div>
             </div>
         </div>
     </div>
-    <!-- row closed -->
+    <div class="prudact-page-number padbtm40">
+        <ul class="page-number">
+            <li class="number"><i class="fa fa-angle-right"></i></li>
+            <li class="number active">1</li>
+            <li class="number">2</li>
+            <li class="number">3</li>
+            <li class="number">4</li>
+            <li class="number"><i class="fa fa-angle-left"></i></li>
+        </ul>
+    </div>
 
-
-@endsection
-
-@section('js')
-    <!-- JQuery min js -->
-    <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-
-    <!-- Internal Nice-select js-->
-    <script src="{{ URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-
-            $(document).on('click', '.removeFromwishlist', function(e) {
-                e.preventDefault();
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    type: "delete",
-                    url: "{{ route('wishlist.destroy') }}",
-                    data: {
-                        'productId': $(this).attr('data-product_id'),
-                    },
-                    success: function(data) {
-                        location.reload();
-                    }
-                });
-            });
-
-        });
-    </script>
+    <!-- End User Information List -->
 @endsection
