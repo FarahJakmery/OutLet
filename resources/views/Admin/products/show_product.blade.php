@@ -2,13 +2,13 @@
 
 @section('css')
     <!---Internal  Owl Carousel css-->
-    <link href="../../assets/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
 
     <!---Internal  Multislider css-->
-    <link href="../../assets/plugins/multislider/multislider.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
 
     <!--- Animations css-->
-    <link href="../../assets/css/animate.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
 @endsection
 
 @section('title')
@@ -331,27 +331,27 @@
 
 @section('js')
     <!-- JQuery min js -->
-    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 
     <!--Internal  Datepicker js -->
-    <script src="../../assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
 
     <!-- Bootstrap Bundle js -->
-    <script src="../../assets/plugins/bootstrap/js/bootstrap-rtl.js"></script>
+    <script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap-rtl.js') }}"></script>
 
     <!-- Internal Select2 js-->
-    <script src="../../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!--- Internal Accordion Js -->
-    <script src="../../assets/plugins/accordion/accordion.min.js"></script>
-    <script src="../../assets/js/accordion.js"></script>
+    <script src="{{ URL::asset('assets/plugins/accordion/accordion.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/accordion.js') }}"></script>
 
     <!-- Internal Owl Carousel js-->
-    <script src="../../assets/plugins/owl-carousel/owl.carousel.js"></script>
+    <script src="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.js') }}"></script>
 
     <!---Internal  Multislider js-->
-    <script src="../../assets/plugins/multislider/multislider-rtl.js"></script>
-    <script src="../../assets/js/carousel.js"></script>
+    <script src="{{ URL::asset('assets/plugins/multislider/multislider-rtl.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/carousel.js') }}"></script>
 
     {{-- This script return the value of each input for deleting it --}}
     <script>

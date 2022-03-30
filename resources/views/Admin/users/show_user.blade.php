@@ -2,7 +2,7 @@
 
 @section('css')
     <!--- Animations css-->
-    <link href="../../assets/css/animate.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
 @endsection
 
 @section('title')
@@ -30,7 +30,7 @@
                     <div class="ps-0">
                         <div class="main-profile-overview">
                             <div class="main-img-user profile-user">
-                                <img alt="" src="../../assets/img/faces/6.jpg">
+                                <img alt="" src="{{ URL::asset('assets/img/faces/6.jpg') }}">
                                 <a class="fas fa-camera profile-edit" href="JavaScript:void(0);">
                                 </a>
                             </div>
@@ -140,7 +140,7 @@
 
 @section('js')
     <!-- JQuery min js -->
-    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 @endsection
 
 {{-- <div class="row">

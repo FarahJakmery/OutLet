@@ -43,20 +43,20 @@
 <script src="../../assets/js/modal-popup.js"></script>
 
 <!-- Left-menu js-->
-<script src="../../assets/plugins/side-menu/sidemenu.js"></script>
+<script src="{{ URL::asset('assets/plugins/side-menu/sidemenu.js') }}"></script>
 
 <!-- Internal Map -->
-<script src="../../assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="../../assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="{{ URL::asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
 
 <!--Internal  index js -->
-<script src="../../assets/js/index.js"></script>
+<script src="{{ URL::asset('assets/js/index.js') }}"></script>
 
 <!-- Apexchart js-->
-<script src="../../assets/js/apexcharts.js"></script>
-<script src="../../assets/js/jquery.vmap.sampledata.js"></script>
+<script src="{{ URL::asset('assets/js/apexcharts.js') }}"></script>
+<script src="{{ URL::asset('assets/js/jquery.vmap.sampledata.js') }}"></script>
 
 <!-- custom js -->
-<script src="../../assets/js/custom.js"></script>
+<script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 
 @yield('js')

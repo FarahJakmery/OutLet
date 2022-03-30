@@ -3,12 +3,14 @@
     <div class="container-fluid">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="index.html"><img src="../../assets/img/brand/logo.png" class="logo-1" alt="logo"></a>
-                <a href="index.html"><img src="../../assets/img/brand/logo-white.png" class="dark-logo-1"
+                <a href="index.html"><img src="{{ URL::asset('assets/img/brand/logo.png') }}" class="logo-1"
                         alt="logo"></a>
-                <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="logo-2" alt="logo"></a>
-                <a href="index.html"><img src="../../assets/img/brand/favicon-white.png" class="dark-logo-2"
+                <a href="index.html"><img src="{{ URL::asset('assets/img/brand/logo-white.png') }}"
+                        class="dark-logo-1" alt="logo"></a>
+                <a href="index.html"><img src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="logo-2"
                         alt="logo"></a>
+                <a href="index.html"><img src="{{ URL::asset('assets/img/brand/favicon-white.png') }}"
+                        class="dark-logo-2" alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-bs-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
@@ -26,7 +28,7 @@
                         <a href="#" class="d-flex  nav-item country-flag1" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <span class="avatar country-Flag me-0 align-self-center bg-transparent"><img
-                                    src="../../assets/img/flags/us_flag.jpg" alt="img"></span>
+                                    src="{{ URL::asset('assets/img/flags/us_flag.jpg') }}" alt="img"></span>
                             <div class="my-auto">
                                 <strong class="me-2 ms-2 my-auto">English</strong>
                             </div>
@@ -34,35 +36,35 @@
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
                             <a href="#" class="dropdown-item d-flex ">
                                 <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                        src="../../assets/img/flags/french_flag.jpg" alt="img"></span>
+                                        src="{{ URL::asset('assets/img/flags/french_flag.jpg') }}" alt="img"></span>
                                 <div class="d-flex">
                                     <span class="mt-2">French</span>
                                 </div>
                             </a>
                             <a href="#" class="dropdown-item d-flex">
                                 <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                        src="../../assets/img/flags/germany_flag.jpg" alt="img"></span>
+                                        src="{{ URL::asset('assets/img/flags/germany_flag.jpg') }}" alt="img"></span>
                                 <div class="d-flex">
                                     <span class="mt-2">Germany</span>
                                 </div>
                             </a>
                             <a href="#" class="dropdown-item d-flex">
                                 <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                        src="../../assets/img/flags/italy_flag.jpg" alt="img"></span>
+                                        src="{{ URL::asset('assets/img/flags/italy_flag.jpg') }}" alt="img"></span>
                                 <div class="d-flex">
                                     <span class="mt-2">Italy</span>
                                 </div>
                             </a>
                             <a href="#" class="dropdown-item d-flex">
                                 <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                        src="../../assets/img/flags/russia_flag.jpg" alt="img"></span>
+                                        src="{{ URL::asset('assets/img/flags/russia_flag.jpg') }}" alt="img"></span>
                                 <div class="d-flex">
                                     <span class="mt-2">Russia</span>
                                 </div>
                             </a>
                             <a href="#" class="dropdown-item d-flex">
                                 <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                        src="../../assets/img/flags/spain_flag.jpg" alt="img"></span>
+                                        src="{{ URL::asset('assets/img/flags/spain_flag.jpg') }}" alt="img"></span>
                                 <div class="d-flex">
                                     <span class="mt-2">spain</span>
                                 </div>
@@ -111,7 +113,8 @@
                         </div>
                         <div class="main-message-list chat-scroll">
                             <a href="#" class="p-3 d-flex border-bottom">
-                                <div class="  drop-img  cover-image  " data-bs-image-src="../../assets/img/faces/3.jpg">
+                                <div class="  drop-img  cover-image  "
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/3.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
                                 <div class="wd-90p">
@@ -126,7 +129,8 @@
                                 </div>
                             </a>
                             <a href="#" class="p-3 d-flex border-bottom">
-                                <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/2.jpg">
+                                <div class="drop-img cover-image"
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/2.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
                                 <div class="wd-90p">
@@ -140,7 +144,8 @@
                                 </div>
                             </a>
                             <a href="#" class="p-3 d-flex border-bottom">
-                                <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/9.jpg">
+                                <div class="drop-img cover-image"
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/9.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
                                 <div class="wd-90p">
@@ -153,7 +158,8 @@
                                 </div>
                             </a>
                             <a href="#" class="p-3 d-flex border-bottom">
-                                <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/12.jpg">
+                                <div class="drop-img cover-image"
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/12.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
                                 <div class="wd-90p">
@@ -166,7 +172,8 @@
                                 </div>
                             </a>
                             <a href="#" class="p-3 d-flex border-bottom">
-                                <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/5.jpg">
+                                <div class="drop-img cover-image"
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/5.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
                                 <div class="wd-90p">
@@ -294,12 +301,15 @@
                         </svg></a>
                 </li>
                 <li class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user d-flex" href=""><img alt="" src="../../assets/img/faces/6.jpg"></a>
+                    <a class="profile-user d-flex" href=""><img alt=""
+                            src="{{ URL::asset('assets/img/faces/6.jpg') }}"></a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt="" src="../../assets/img/faces/6.jpg"
-                                        class=""></div>
+                                <div class="main-img-user">
+                                    <img alt="" src="{{ URL::asset('assets/img/faces/6.jpg') }}"
+                                        class="">
+                                </div>
                                 <div class="ms-3 my-auto">
                                     <h6>{{ Auth::user()->name }}</h6><span>{{ Auth::user()->email }}</span>
                                 </div>

@@ -6,7 +6,7 @@
                  <div class="col-xl-4 about">
                      <a href="#">
                          Outletship
-                         <img src="Web/assets/img/logo.png" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/logo.png') }}" alt="">
                      </a>
                      <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
                          العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
@@ -71,8 +71,10 @@
                                      </form>
                                  </div>
                                  <div class="store">
-                                     <a href="#"><img src="Web/assets/img/app-store.png" alt=""></a>
-                                     <a href="#"><img src="Web/assets/img/google-play.png" alt=""></a>
+                                     <a href="#"><img src="{{ URL::asset('Web/assets/img/app-store.png') }}"
+                                             alt=""></a>
+                                     <a href="#"><img src="{{ URL::asset('Web/assets/img/google-play.png') }}"
+                                             alt=""></a>
                                  </div>
                              </ul>
                          </li>
@@ -116,8 +118,8 @@
              </div>
              <div class="col-md-4">
                  <div class="payment">
-                     <img src="Web/assets/img/visa.png" alt="">
-                     <img src="Web/assets/img/pay-pal.png" alt="">
+                     <img src="{{ URL::asset('Web/assets/img/visa.png') }}" alt="">
+                     <img src="{{ URL::asset('Web/assets/img/pay-pal.png') }}" alt="">
                  </div>
              </div>
          </div>

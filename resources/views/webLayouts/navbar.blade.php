@@ -65,9 +65,9 @@
                          </ul>
                      </div>
                      <div class="images">
-                         <img src="Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png') }}" alt="">
                      </div>
                  </div>
              </div>
@@ -132,9 +132,9 @@
                          </ul>
                      </div>
                      <div class="images">
-                         <img src="Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png') }}" alt="">
                      </div>
                  </div>
              </div>
@@ -199,9 +199,9 @@
                          </ul>
                      </div>
                      <div class="images">
-                         <img src="Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png') }}" alt="">
                      </div>
                  </div>
              </div>
@@ -266,16 +266,18 @@
                          </ul>
                      </div>
                      <div class="images">
-                         <img src="Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png" alt="">
-                         <img src="Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/andrew-tanglao-tjvURCarBf0-unsplash.png') }}" alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-KL_SE98J4_0-unsplash.png') }}"
+                             alt="">
+                         <img src="{{ URL::asset('Web/assets/img/laura-chouette-_nCAYZjHg5I-unsplash.png') }}"
+                             alt="">
                      </div>
                  </div>
              </div>
          </div>
          <a class="navbar-brand" href="#">
              Outletship
-             <img src="Web/assets/img/logo.png" alt="">
+             <img src="{{ URL::asset('Web/assets/img/logo.png') }}" alt="">
          </a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" id="navbar-btn"
              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

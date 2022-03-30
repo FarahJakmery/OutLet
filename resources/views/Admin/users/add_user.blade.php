@@ -2,9 +2,9 @@
 
 @section('css')
     <!--- Animations css-->
-    <link href="../../assets/css/animate.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
     <!-- Internal Select2 css -->
-    <link href="../../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('title')
@@ -112,9 +112,9 @@
 
 @section('js')
     <!--Internal  Select2 js -->
-    <script src="../../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!-- JQuery min js -->
-    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Internal form-elements js -->
-    <script src="../../assets/js/form-elements.js"></script>
+    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 @endsection
