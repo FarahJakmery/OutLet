@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\WishlistController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
@@ -56,18 +57,24 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// Route::group(['middleware' => ['auth']], function () {
-Route::resource('Products', CustomerProductController::class);
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('Products', CustomerProductController::class);
+    Route::resource('Orders', CustomerOrderController::class);
 
-// WhishList Routes
-Route::post('wishlist', [WishlistController::class, 'store']);
-Route::delete('wishlistdestroy', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-Route::get('wishlist/products', [WishlistController::class, 'index']);
+    // WhishList Routes
+    Route::get('wishlist/products', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('wishlistdestroy', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 
-// Add To Cart
-Route::resource('carts', CartController::class);
-Route::post('cart', [CartController::class, 'store'])->name('cart.store');
-// });
+    // Add To Cart
+    Route::resource('carts', CartController::class);
+    Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
+
+
+    // Get The Sizes
+    Route::get('Color/{id}', [CustomerProductController::class, 'getSizes']);
+});
 
 
 
