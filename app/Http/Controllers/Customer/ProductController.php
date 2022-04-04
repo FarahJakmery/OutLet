@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -91,5 +93,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getSizes($id)
+    {
+        $Sizes_id = DB::table('color_size')->where('color_id', $id)->pluck('size_id');
+        $Sizes_names = Size::whereIn('id', $Sizes_id)->pluck('size_name');
+        return json_encode($Sizes_names);
     }
 }
