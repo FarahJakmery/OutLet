@@ -315,7 +315,7 @@
                              <span class="icon-angle"><i class="fa fa-angle-right"></i></span>
                              <ul class="user-type">
                                  <li class="active">
-                                     <a href="#">
+                                     <a href="{{ route('login') }}">
                                          مشتر
                                      </a>
                                  </li>
