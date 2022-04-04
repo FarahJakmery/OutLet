@@ -22,4 +22,12 @@ class Brand extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Mcategory::class);
     }
+
+    /**
+     * Get the products for the Brand.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
