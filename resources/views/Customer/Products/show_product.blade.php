@@ -20,7 +20,9 @@
                                 products
                             </span></a>
                         <span class="slash">\</span>
-                        <a href="#"><span class="title">{{ $product->translate('ar')->product_name }}</span></a>
+                        <a href="#">
+                            <span class="title">{{ $product->translate('ar')->product_name }}</span>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 work-comment">
@@ -44,50 +46,56 @@
             </div>
             <div class="prudact-details padbtm40">
                 <div class="row">
+                    {{-- The Images --}}
                     <div class="col-md-6 product-img-collection">
-                        <div class="secondry-imgs">
-                            <img src="Web/assets/img/main-img.png" alt="">
-                            <img src="Web/assets/img/main-img.png" alt="">
-                        </div>
-                        <div class="main-img">
-                            <img src="Web/assets/img/main-img.png" alt="">
-                        </div>
+                        @foreach ($images as $image)
+                            @if ($loop->first)
+                                <div class="main-img">
+                                    <img src="{{ asset('images/The_Product/' . $image->image_name) }}" alt="">
+                                </div>
+                            @endif
+                            @if ($loop->remaining)
+                                <div class="secondry-imgs">
+                                    <img src="{{ asset('images/The_Product/' . $image->image_name) }}" alt="">
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="col-md-6 product-detiels">
                         <span class="offer">تخفيض</span>
+                        {{-- The Name & Prices --}}
                         <div class="item-info">
                             <p>{{ $product->translate('ar')->product_name }}</p>
                             <div class="price">
-                                <span class="old">$119,99</span>
-                                <span class="new">$89.99</span>
+                                <span class="old">${{ $product->max_price }}</span>
+                                <span class="new">${{ $product->min_price }}</span>
                             </div>
                         </div>
+                        {{-- The Colors --}}
                         <div class="product-color">
                             <span class="title">اللون :</span>
-                            <ul class="colors">
-                                <li class="color"><span></span></li>
-                                <li class="color"><span></span></li>
-                                <li class="color"><span></span></li>
-                                <li class="color"><span></span></li>
+                            <ul class="colors" id="list_id">
+                                @foreach ($colors as $color)
+                                    <li class="color" id="{{ $color->id }}">
+                                        <span style="background-color:{{ $color->color }}">
+                                        </span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
+                        {{-- The Sizes --}}
                         <div class="product-size">
                             <span class="title">مقاس :</span>
                             <div class="input-group select-div mb-3">
-
-                                <select class="custom-select size-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">XS</option>
-                                    <option value="2">S</option>
-                                    <option value="3">L</option>
-                                    <option value="4">XL</option>
-                                    <option value="5">XXL</option>
+                                {{-- id="inputGroupSelect01" --}}
+                                <select name="Size" class="custom-select size-select" id="inputGroupSelect01">
                                 </select>
                                 <span class="icon">
                                     <i class="fa fa-angle-left"></i>
                                 </span>
                             </div>
                         </div>
+                        {{-- The Quantity --}}
                         <div class="product-amount">
                             <input type="hidden" name="" value="{{ $product->id }}" class="prod_id">
                             <span class="title">كمية :</span>
@@ -95,14 +103,19 @@
                                 <span class="minus clickable">
                                     <i class="fas fa-minus"></i>
                                 </span>
-                                <span class="number">1</span>
+                                <span class="number" data-number="">1</span>
                                 <span class="plus clickable">
                                     <i class="fas fa-plus"></i>
                                 </span>
                             </div>
-                            <button class="addToCart">أضف إلى السلة</button>
-                            <span class="love"><i class="far fa-heart"></i></span>
+                            <a class="addToCart" href="#" data-product_id="{{ $product->id }}">
+                                <button>أضف إلى السلة</button>
+                            </a>
+                            <a class="addtowishlist" href="#" data-product_id="{{ $product->id }}">
+                                <span class="love"><i class="far fa-heart"></i></span>
+                            </a>
                         </div>
+                        {{-- The Timer --}}
                         <div class="product-timer">
                             <div class="timer" id="timer" data-date="jan 20, 2022 01:30:00">
                             </div>
@@ -115,10 +128,10 @@
                     <!-- Nav tabs -->
                     <ul class="nav buttons">
                         <li class="nav-item">
-                            <a class=" tab-btn active" data-toggle="tab" href="#home">الوصف</a>
+                            <a class=" tab-btn active" data-toggle="tab" href="#home">التقييمات (2)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tab-btn" data-toggle="tab" href="#menu1">التقييمات (2)</a>
+                            <a class="nav-link tab-btn" data-toggle="tab" href="#menu1">الوصف</a>
                         </li>
                     </ul>
 
@@ -264,10 +277,7 @@
                                         </div>
                                         <span class="title">تفاصيل و وصف المنتج</span>
                                         <span class="body">
-                                            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، ل
-                                        </span>
-                                        <span class="body">
-                                            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، ل
+                                            {{ $product->translate('ar')->description }}
                                         </span>
                                     </div>
                                 </div>
@@ -419,17 +429,78 @@
 @endsection
 
 @section('scripts')
-    {{-- <script>
+    {{-- This script to get the Sizes that belongs to specific Color --}}
+    <script>
         $(document).ready(function() {
+            $("#list_id li").click(function() {
+                // alert(this.id); // id of clicked li by directly accessing DOMElement property
+                var ColorId = this.id;
+                // alert(ColorId);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-            $('.addToCart').click(function(e) {
-                e.preventDefault();
-                var product_id =
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
+                if (ColorId) {
+                    $.ajax({
+                        url: "{{ URL::to('Color') }}/" + ColorId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="Size"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="Size"]').append('<option value="' +
+                                    value + '">' + value + '</option>');
+                            });
+                        },
                     });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+
+        // $(document).ready(function() {
+        //     $('li[name="Color"]').on('change', function() {
+
+        //         var ColorId = $(this).val();
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+
+
+        //         if (ColorId) {
+        //             $.ajax({
+        //                 url: "{{ URL::to('Color') }}/" + ColorId,
+        //                 type: "GET",
+        //                 dataType: "json",
+        //                 success: function(data) {
+        //                     $('select[name="Size"]').empty();
+        //                     $.each(data, function(key, value) {
+        //                         $('select[name="Size"]').append('<option value="' +
+        //                             value + '">' + value + '</option>');
+        //                     });
+        //                 },
+        //             });
+        //         } else {
+        //             console.log('AJAX load did not work');
+        //         }
+        //     });
+        // });
+    </script>
+    {{-- This Script Is To Add To Wishlist --}}
+    <script>
+        $(document).ready(function() {
+            $('.addtowishlist').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
                 $.ajax({
                     type: "POST",
@@ -440,6 +511,36 @@
                     dataType: "json",
                     success: function(response) {
                         console.log(response);
+                    }
+                });
+            });
+
+        });
+    </script>
+    {{-- This Script Is To Add To Cart --}}
+    {{-- <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.addtoCart', function(e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/cart",
+                    data: {
+                        'productId': $(this).attr('data-Product_id'),
+                        'quantity': 1,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+
                     }
                 });
             });
