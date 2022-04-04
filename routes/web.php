@@ -51,7 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('productImages', ProductImageController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('statuses', StatusController::class);
-
+    // Get The MainCategories
+    Route::get('Brand/{id}', [ProductController::class, 'getMainCategories']);
     // Product Images Managment Routes
     Route::post('delete_image', [ProductController::class, 'destroy_image'])->name('delete_image');
 });
