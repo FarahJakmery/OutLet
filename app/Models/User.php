@@ -73,4 +73,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return self::wishlist()->where('product_id', $productId)->exists();
     }
+
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
