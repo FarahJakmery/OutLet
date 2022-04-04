@@ -1,7 +1,7 @@
 @extends('webLayouts.master')
 
 @section('web_title')
-    الطلبات
+    المفضلة
 @endsection
 
 @section('web_content')
@@ -13,8 +13,8 @@
                 <i class="fas fa-cog"></i>
             </div>
             <div class="user-info">
-                <img src="Web/assets/img/tshirt-02.png" alt="">
-                <h3>اسم المستخدم</h3>
+                <img src="{{ URL::asset('Web/assets/img/tshirt-02.png') }}" alt="">
+                <h3>{{ Auth::user()->first_name }}</h3>
             </div>
             <div class="options">
                 <div class="option">
@@ -26,18 +26,18 @@
                         تعديل البيانات
                     </a>
                 </div>
-                <div class="option active">
+                <div class="option">
                     <div class="overlay-bg"></div>
-                    <a href="#">
+                    <a href="{{ route('orders.index') }}">
                         <span class="icon">
                             <i class="fas fa-clipboard-list"></i>
                         </span>
                         طلباتي
                     </a>
                 </div>
-                <div class="option">
+                <div class="option active">
                     <div class="overlay-bg"></div>
-                    <a href="#">
+                    <a href="{{ route('wishlist.index') }}">
                         <span class="icon">
                             <i class="far fa-heart"></i>
                         </span>
@@ -46,72 +46,64 @@
                 </div>
                 <div class="option">
                     <div class="overlay-bg"></div>
-                    <a href="#">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <i class="fas fa-sign-out-alt fa-rotate-180"></i>
                         </span>
                         تسجيل الخروج
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
+
         <div class="profile-ordres">
             <header>
-                <h2 class="title">الطلبات</h2>
+                <h2 class="title">المفضلة</h2>
             </header>
             <div class="prudact-container">
                 <div class="purchase-status">
-                    <ul class="head-list">
-                        <li>اسم المنتج</li>
-                        <li>رقم المنتج</li>
-                        <li>من قبل</li>
-                        <li>سعر</li>
-                        <li>وضع مخزون</li>
-                        <li></li>
-                    </ul>
-                    @foreach ($products as $product)
-                        <ul class="item-in-list">
-                            <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                            <li class="prodact-name">{{ $product->translate('ar')->product_name }}</li>
-                            <li class="prodact-name">#{{ $product->product_number }}</li>
-                            {{-- <li class="usr-name">Fleen Flouleni</li> --}}
-                            <li class="price">${{ $product->max_price }}</li>
-                            <li><span class="status">{{ $product->value_status }}</span></li>
-                            <li><button>إضافة للعربة</button></li>
+                    @isset($products)
+                        <ul class="head-list">
+                            <li>اسم المنتج</li>
+                            <li>رقم المنتج</li>
+                            <li>السعر</li>
+                            <li></li>
+                            <li></li>
                         </ul>
-                    @endforeach
-                    {{-- <ul class="item-in-list">
-                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                        <li class="prodact-name">#5511</li>
-                        <li class="usr-name">Fleen Flouleni</li>
-                        <li class="price">$59.98</li>
-                        <li><span class="status"> في الخط</span></li>
-                        <li><button>إضافة للعربة</button></li>
-                    </ul>
-                    <ul class="item-in-list">
-                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                        <li class="prodact-name">#5511</li>
-                        <li class="usr-name">Fleen Flouleni</li>
-                        <li class="price">$59.98</li>
-                        <li><span class="status"> في الخط</span></li>
-                        <li><button>إضافة للعربة</button></li>
-                    </ul>
-                    <ul class="item-in-list">
-                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                        <li class="prodact-name">#5511</li>
-                        <li class="usr-name">Fleen Flouleni</li>
-                        <li class="price">$59.98</li>
-                        <li><span class="status"> في الخط</span></li>
-                        <li><button>إضافة للعربة</button></li>
-                    </ul>
-                    <ul class="item-in-list">
-                        <li class="img"><img src="Web/assets/img/img-item.png" alt=""></li>
-                        <li class="prodact-name">#5511</li>
-                        <li class="usr-name">Fleen Flouleni</li>
-                        <li class="price">$59.98</li>
-                        <li><span class="status"> في الخط</span></li>
-                        <li><button>إضافة للعربة</button></li>
-                    </ul> --}}
+                        @foreach ($products as $product)
+                            <ul class="item-in-list">
+
+                                <li class="img">
+                                    {{-- <img src="{{ asset('images/The_Product/' . $product->images->id) }}" alt=""> --}}
+                                </li>
+                                <li class="prodact-name">{{ $product->translate('ar')->product_name }}</li>
+                                <li class="prodact-name">#{{ $product->product_number }}</li>
+                                <li class="price">${{ $product->max_price }}</li>
+                                <li>
+                                    <a class="removeFromwishlist" href="#" data-product_id="{{ $product->id }}">
+                                        <button>
+                                            إزالة من المفضلة
+                                        </button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <button>
+                                        إضافة للعربة
+                                    </button>
+                                </li>
+                            </ul>
+                        @endforeach
+                    @endisset
+
+                    @empty($products)
+                        // $records is "empty"...
+                    @endempty
+
+
                 </div>
             </div>
         </div>
@@ -128,4 +120,34 @@
     </div>
 
     <!-- End User Information List -->
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.removeFromwishlist', function(e) {
+                e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "delete",
+                    url: "{{ route('wishlist.destroy') }}",
+                    data: {
+                        'productId': $(this).attr('data-product_id'),
+                    },
+                    success: function(data) {
+                        location.reload();
+                    }
+                });
+
+            });
+
+        });
+    </script>
 @endsection
