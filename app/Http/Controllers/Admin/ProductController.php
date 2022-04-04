@@ -294,21 +294,11 @@ class ProductController extends Controller
         return redirect('/products');
     }
 
-    // public function getSubCategories($id)
-    // {
-    //     $mcategory_id = DB::table('subcategories')->where('mcategory_id', $id)->pluck('mcategory_id');
-    //     $mcategory_id = DB::table('subcategory_translations')->where('mcategory_id', $mcategory_id)->pluck('mcategory_id');
-
-    //     return json_encode($subcategories);
-    // }
-
-
-
-
-    public function getSubCategories($id)
+    public function getMainCategories($id)
     {
-        $subcategories = Subcategory::where('mcategory_id', $id)->pluck('photo_name', 'id');
-        return json_encode($subcategories);
+        $Maincategories_id = DB::table('brand_mcategory')->where('brand_id', $id)->pluck('mcategory_id');
+        $Maincategories_Names = DB::table('mcategory_translations')->whereIn('mcategory_id', $Maincategories_id)->where('locale', 'en')->pluck('category_name', 'id');
+        return json_encode($Maincategories_Names);
     }
 
     public function destroy_image(Request $request)
