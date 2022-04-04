@@ -31,4 +31,12 @@ class Mcategory extends Model implements TranslatableContract
     {
         return $this->hasMany(Subcategory::class);
     }
+
+    /**
+     * Get the products for the MainCategory.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
