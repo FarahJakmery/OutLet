@@ -19,4 +19,20 @@ class Order extends Model
     {
         return $this->belongsToMany(Status::class);
     }
+
+    /**
+     * Get the user that owns the order.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the orderitems for the order.
+     */
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
