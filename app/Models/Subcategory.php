@@ -30,4 +30,12 @@ class Subcategory extends Model implements TranslatableContract
     {
         return $this->hasMany(Branch::class);
     }
+
+    /**
+     * Get the products for the Subcategory.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
