@@ -22,4 +22,12 @@ class Branch extends Model implements TranslatableContract
     {
         return $this->belongsTo(Subcategory::class);
     }
+
+    /**
+     * Get the products for the Branch.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
