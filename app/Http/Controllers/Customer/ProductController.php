@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Review;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -21,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $date = new Carbon;
-        $Products = Product::translated()->where('expiry_date', '>', $date)->get();
+        $Products = Product::translated()->where('expiry_date', '>', $date)->with('reviews')->orderBy('avg_rating', 'desc')->orderBy('reviews_count', 'desc')->get();
         $Products = Product::all();
         return view('Customer.Products.products', compact('Products'));
     }
@@ -55,10 +56,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('reviews')->find($id);
+        $reviews = Review::all();
         $colors = Color::where('product_id', $id)->get();
         $images = ProductImage::where('product_id', $id)->get();
-        return view('Customer.Products.show_product', compact('product', 'colors', 'images'));
+        return view('Customer.Products.show_product', compact('product', 'colors', 'images', 'reviews'));
     }
 
     /**
