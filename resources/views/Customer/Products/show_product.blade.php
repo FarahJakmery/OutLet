@@ -97,20 +97,20 @@
                         </div>
                         {{-- The Quantity --}}
                         <div class="product-amount">
-                            <input type="hidden" name="" value="{{ $product->id }}" class="prod_id">
+                            {{-- <input type="hidden" name="" value="{{ $product->id }}" class="prod_id"> --}}
                             <span class="title">كمية :</span>
                             <div class="increase-decrease">
                                 <span class="minus clickable">
                                     <i class="fas fa-minus"></i>
                                 </span>
-                                <span class="number" data-number="">1</span>
+                                <span class="number" data-number="1">1</span>
                                 <span class="plus clickable">
                                     <i class="fas fa-plus"></i>
                                 </span>
                             </div>
-                            <a class="addToCart" href="#" data-product_id="{{ $product->id }}">
-                                <button>أضف إلى السلة</button>
-                            </a>
+                            {{-- Add to Cart button --}}
+                            <button class="addToCart" data-product_id="{{ $product->id }}">أضف إلى السلة</button>
+                            {{-- Add To Wishlist --}}
                             <a class="addtowishlist" href="#" data-product_id="{{ $product->id }}">
                                 <span class="love"><i class="far fa-heart"></i></span>
                             </a>
@@ -137,13 +137,18 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
+                        {{-- Review And Ratings --}}
                         <div class="tab-pane container active" id="home">
                             <div class="evaluation">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="star-rate">
                                             <div class="star-rate-right">
-                                                <span class="rate">4.5</span>
+                                                {{-- Highest Review --}}
+                                                <span class="rate">
+                                                    {{ number_format($product->reviews()->avg('rating'), 1) }}
+                                                </span>
+                                                {{-- Stars --}}
                                                 <ul class="stars">
                                                     <li><i class="fas fa-star"></i></li>
                                                     <li><i class="fas fa-star"></i></li>
@@ -151,13 +156,15 @@
                                                     <li><i class="fas fa-star"></i></li>
                                                     <li><i class="fas fa-star-half-alt"></i></li>
                                                 </ul>
+                                                {{-- Total Reviews Number --}}
                                                 <span class="user-num">
                                                     <span class="icon-user">
                                                         <i class="far fa-user"></i>
                                                     </span>
-                                                    81 كل الأراء
+                                                    {{ $product->reviews()->count() }} كل الأراء
                                                 </span>
                                             </div>
+                                            {{-- Star-Rate-Left --}}
                                             <div class="star-rate-left">
                                                 <ul class="evaluations">
                                                     <li>
@@ -198,63 +205,153 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button class="add-evaluation">أضف الرأي</button>
+                                        @if (!$product->reviews()->where('user_id', auth()->id())->count() && $product->users()->where('user_id', '!=', auth()->id()))
+                                            {{-- Add Review Button --}}
+                                            <button class="add-evaluation" id="review">أضف الرأي</button>
+                                            <div id="apper" style="display:none">
+                                                <form action="{{ route('reviews.store') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    Your Rating:
+                                                    <br>
+                                                    {{-- Stars --}}
+                                                    <select name="rating" id="rating">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option selected>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                    {{-- <ul class="stars">
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star-half-alt"></i></li>
+                                                    </ul> --}}
+                                                    <br><br>
+                                                    Review (optional):
+                                                    <br>
+                                                    <textarea name="comment" id="comment" cols="60" rows="5"></textarea>
+                                                    <input type="submit" value="Save Rating">
+                                                </form>
+                                                <button id="close">colse</button>
+                                            </div>
+                                        @endif
                                     </div>
+                                    {{-- Previous Reviews --}}
                                     <div class="col-sm-6">
                                         <ul class="users-evaluations">
-                                            <li class="user-evaluation">
-                                                <span class="user-img">
-                                                    <img src="Web/assets/img/img-item.png" alt="">
-                                                </span>
-                                                <span class="user-info">
-                                                    <span class="user-name">
-                                                        Flena
-                                                    </span>
-                                                    <span class="star-givven">
-                                                        <ul class="stars">
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                                        </ul>
-                                                    </span>
-                                                    <span class="user-comment">
-                                                        هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-                                                        النص من مولد النص
-                                                        العربى،
-                                                    </span>
-                                                </span>
-                                            </li>
-                                            <li class="user-evaluation">
-                                                <span class="user-img">
-                                                    <img src="Web/assets/img/img-item.png" alt="">
-                                                </span>
-                                                <span class="user-info">
-                                                    <span class="user-name">
-                                                        Flena
-                                                    </span>
-                                                    <span class="star-givven">
-                                                        <ul class="stars">
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                                        </ul>
-                                                    </span>
-                                                    <span class="user-comment">
-                                                        هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-                                                        النص من مولد النص
-                                                        العربى،
-                                                    </span>
-                                                </span>
-                                            </li>
+                                            @foreach ($product->reviews as $review)
+                                                @if ($loop->first)
+                                                    <li class="user-evaluation">
+                                                        <span class="user-img">
+                                                            <img src="{{ asset('Web/assets/img/img-item.png') }}" alt="">
+                                                        </span>
+                                                        <span class="user-info">
+                                                            <span class="user-name">
+                                                                {{ $review->user->first_name }}
+                                                            </span>
+                                                            <span class="star-givven">
+                                                                <ul class="stars">
+                                                                    @if ($review->rating == 1)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 2)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 3)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 4)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 5)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                    @endif
+
+                                                                </ul>
+                                                            </span>
+                                                            <span class="user-comment">
+                                                                {{ $review->comment }}
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                @endif
+                                                @if ($loop->last)
+                                                    <li class="user-evaluation">
+                                                        <span class="user-img">
+                                                            <img src="{{ asset('Web/assets/img/img-item.png') }}" alt="">
+                                                        </span>
+                                                        <span class="user-info">
+                                                            <span class="user-name">
+                                                                {{ $review->user->first_name }}
+                                                            </span>
+                                                            <span class="star-givven">
+                                                                <ul class="stars">
+                                                                    @if ($review->rating == 1)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 2)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 3)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 4)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                                    @elseif ($review->rating == 5)
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                    @endif
+
+                                                                </ul>
+                                                            </span>
+                                                            <span class="user-comment">
+                                                                {{ $review->comment }}
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{-- materials and care --}}
                         <div class="tab-pane container fade" id="menu1">
                             <div class="description">
                                 <div class="row">
@@ -518,10 +615,10 @@
         });
     </script>
     {{-- This Script Is To Add To Cart --}}
-    {{-- <script>
+    <script>
         $(document).ready(function() {
 
-            $(document).on('click', '.addtoCart', function(e) {
+            $('.addToCart').click(function(e) {
                 e.preventDefault();
 
                 $.ajaxSetup({
@@ -535,7 +632,7 @@
                     url: "/cart",
                     data: {
                         'productId': $(this).attr('data-Product_id'),
-                        'quantity': 1,
+                        'val': $(this).attr('data-number'),
                     },
                     dataType: "json",
                     success: function(response) {
@@ -546,5 +643,18 @@
             });
 
         });
-    </script> --}}
+    </script>
+    {{-- This Script Is To Show/hide The Review Form --}}
+    <script>
+        $('#review').click(
+            function() {
+                $('#apper').show();
+            }
+        );
+        $('#close').click(
+            function() {
+                $('#apper').hide();
+            }
+        );
+    </script>
 @endsection
