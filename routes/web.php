@@ -16,6 +16,7 @@ use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\WishlistController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
+use App\Http\Controllers\Customer\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,8 +60,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('Products', CustomerProductController::class);
-    Route::resource('Orders', CustomerOrderController::class);
+    Route::resource('products', CustomerProductController::class);
+    Route::resource('CustomerOrders', CustomerOrderController::class);
+    Route::resource('reviews', ReviewController::class);
 
     // WhishList Routes
     Route::get('wishlist/products', [WishlistController::class, 'index'])->name('wishlist.index');
@@ -73,10 +75,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
 
 
+
     // Get The Sizes
     Route::get('Color/{id}', [CustomerProductController::class, 'getSizes']);
 });
-
 
 
 require __DIR__ . '/auth.php';
