@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BranchController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\McategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SubcategoryController;
 use App\Http\Controllers\Api\WishlistController;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::resource('SubCategories', SubcategoryController::class);
     Route::resource('Branches', BranchController::class);
     Route::resource('Products', ProductController::class);
+    Route::resource('Reviews', ReviewController::class);
     // Wishlist Routes
     Route::get('Wishlist/products', [WishlistController::class, 'index']);
     Route::post('Wishlist', [WishlistController::class, 'store']);
