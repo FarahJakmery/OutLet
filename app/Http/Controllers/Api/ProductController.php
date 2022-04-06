@@ -35,7 +35,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = Product::find($id)->with(['brand', 'maincategory', 'subcategory', 'branch', 'images:id,image_name,product_id', 'colors'])->get();
+        $products = Product::find($id)->with(['brand', 'maincategory', 'subcategory', 'branch', 'images:id,image_name,product_id', 'colors', 'reviews:id,rating,comment,product_id,user_id'])->get();
         if ($products) {
             return $this->apiResponse($products, 'OK', 200);
         }
