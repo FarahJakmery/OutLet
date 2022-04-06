@@ -149,7 +149,28 @@
                         </svg><span class="side-menu__label">المتجر</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         @can('قائمة المنتجات')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">المنتجات</a></li>
+                            <li class="sub-slide">
+                                <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="#">
+                                    <span class="sub-side-menu__label">المنتجات</span>
+                                    <i class="sub-angle fe fe-chevron-down"></i>
+                                </a>
+                                <ul class="sub-slide-menu">
+                                    <li><a class="sub-slide-item" href="{{ url('/' . ($page = 'products')) }}">المنتجات</a>
+                                    </li>
+                                    <li>
+                                        <a class="sub-slide-item" href="{{ url('/' . ($page = 'reviews')) }}">المراجعات</a>
+                                    </li>
+                                    {{-- <li class="sub-slide-sub">
+                                        <a class="sub-side-menu__item sub-slide-item" data-bs-toggle="sub-slide-sub"
+                                            href="#"><span class="sub-side-menu__label">Level03</span><i
+                                                class="sub-angle fe fe-chevron-down"></i></a>
+                                        <ul class="sub-slide-menu-sub">
+                                            <li><a class="sub-slide-item" href="#">Level11</a></li>
+                                            <li><a class="sub-slide-item" href="#">Level2</a></li>
+                                        </ul>
+                                    </li> --}}
+                                </ul>
+                            </li>
                         @endcan
                         @can('قائمة القياسات')
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'sizes')) }}">المقاسات</a></li>
