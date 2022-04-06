@@ -13,7 +13,7 @@ class Product extends Model implements TranslatableContract
     use HasFactory, Translatable;
 
     protected $table = 'products';
-    protected $fillable = ['product_number', 'max_price', 'min_price', 'decreasing_value', 'minutes', 'quantity', 'return_option', 'value_status', 'brand_id', 'mcategory_id', 'subcategory_id', 'branch_id'];
+    protected $fillable = ['product_number', 'max_price', 'min_price', 'decreasing_value', 'minutes', 'quantity', 'return_option', 'value_status', 'brand_id', 'mcategory_id', 'subcategory_id', 'branch_id', 'avg_rating', 'reviews_count'];
     public $translatedAttributes = ['product_name', 'description', 'status'];
 
     /**
@@ -60,5 +60,21 @@ class Product extends Model implements TranslatableContract
     public function colors()
     {
         return $this->hasMany(Color::class);
+    }
+
+    /**
+     * The users that belong to the produts.
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Get the reviews for the product.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
