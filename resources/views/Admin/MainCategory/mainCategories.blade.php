@@ -140,7 +140,7 @@
                                         </td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="{{ asset('images/Main_category/' . $MCtegory->photo_name) }}">
+                                                src="{{ asset($MCtegory->photo_name) }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">

@@ -137,7 +137,7 @@
                                         <td>{{ $Subctegory->translate('en')->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="{{ asset('images/Sub_category/' . $Subctegory->photo_name) }}">
+                                                src="{{ asset($Subctegory->photo_name) }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">
@@ -181,7 +181,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('subcategories.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.subcategories.store') }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="panel panel-primary tabs-style-2">

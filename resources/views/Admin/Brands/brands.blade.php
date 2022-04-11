@@ -127,7 +127,7 @@
                                         <td>{{ $brand->translate('en')->description }}</td>
                                         <td>
                                             <img alt="Responsive image" class="img-thumbnail wd-75p wd-sm-75"
-                                                src="{{ asset('images/Brand/' . $brand->logo_name) }}">
+                                                src="{{ asset($brand->logo_name) }}">
                                         </td>
                                         <td>
                                             <div class="btn-icon-list">
