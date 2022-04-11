@@ -47,11 +47,12 @@ class ProductImageController extends Controller
 
         $imageExtension = $request->file('image_name')->getClientOriginalExtension();
         $image_name =  md5(rand(1000, 100000)) .  '.' . $imageExtension;
+        $image_name_DataBase = 'images/The_Product/' . md5(rand(1000, 100000)) .  '.' . $imageExtension;
         Image::make($request->file('image_name'))->save('images/The_Product/' . $image_name, 60);
         $ProductImage = new ProductImage();
         $ProductImage->product_id = $request->product_id;
         $ProductImage->product_number = $request->product_number;
-        $ProductImage->image_name = $image_name;
+        $ProductImage->image_name = $image_name_DataBase;
         $ProductImage->save();
         session()->flash('Add', 'تم إضافة الصورة بنجاح');
         return back();

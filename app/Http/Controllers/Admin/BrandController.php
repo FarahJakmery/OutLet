@@ -25,16 +25,6 @@ class BrandController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,28 +72,6 @@ class BrandController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Brand $brand)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -134,7 +102,7 @@ class BrandController extends Controller
 
         // Update The Image
         if ($request->hasFile('logo_name')) {
-            $destination = 'images/Brand/' . $brand->logo_name;
+            $destination =  $brand->logo_name;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
@@ -169,7 +137,7 @@ class BrandController extends Controller
     {
         $id = $request->id;
         $brand = Brand::find($id);
-        $destination = 'images/Brand/' . $brand->logo_name;
+        $destination =  $brand->logo_name;
         if (File::exists($destination)) {
             File::delete($destination);
         }

@@ -84,28 +84,6 @@ class SubcategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -136,7 +114,7 @@ class SubcategoryController extends Controller
 
         // Update The Image
         if ($request->hasFile('photo_name')) {
-            $destination = 'images/Sub_category/' . $Subcate->photo_name;
+            $destination =  $Subcate->photo_name;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
@@ -172,7 +150,7 @@ class SubcategoryController extends Controller
     {
         $id = $request->id;
         $subcate = Subcategory::find($id);
-        $destination = 'images/Sub_category/' . $subcate->photo_name;
+        $destination =  $subcate->photo_name;
         if (File::exists($destination)) {
             File::delete($destination);
         }

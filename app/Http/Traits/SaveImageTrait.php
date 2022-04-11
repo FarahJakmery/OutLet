@@ -11,7 +11,8 @@ trait SaveImageTrait
         // Saving The Image
         $imageExtension = $photo->getClientOriginalExtension();
         $image_name = time() . '.' . $imageExtension;
+        $image_name_DataBase = $folder . '/' . time() . '.' . $imageExtension;
         Image::make($photo)->save($folder . '/' . $image_name, 60);
-        return $image_name;
+        return $image_name_DataBase;
     }
 }

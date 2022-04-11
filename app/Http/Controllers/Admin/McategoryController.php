@@ -26,16 +26,6 @@ class McategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -85,28 +75,6 @@ class McategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mcategory  $mcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mcategory $mcategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mcategory  $mcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mcategory $mcategory)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -137,7 +105,7 @@ class McategoryController extends Controller
 
         // Update The Image
         if ($request->hasFile('photo_name')) {
-            $destination = 'images/Main_category/' . $mcategory->photo_name;
+            $destination = $mcategory->photo_name;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
@@ -174,7 +142,7 @@ class McategoryController extends Controller
     {
         $id = $request->id;
         $mcate = Mcategory::find($id);
-        $destination = 'images/Main_category/' . $mcate->photo_name;
+        $destination =  $mcate->photo_name;
         if (File::exists($destination)) {
             File::delete($destination);
         }
