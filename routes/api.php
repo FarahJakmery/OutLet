@@ -36,11 +36,22 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
 
 Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::resource('Brands', BrandController::class);
-    Route::resource('MainCategories', McategoryController::class);
-    Route::resource('SubCategories', SubcategoryController::class);
-    Route::resource('Branches', BranchController::class);
-    Route::resource('Products', ProductController::class);
+    // Brands Routes
+    Route::get('/Brands', [BrandController::class, 'index']);
+    Route::get('/Brands/{BrandID}', [BrandController::class, 'show']);
+    // MainCategories Routes
+    Route::get('/MainCategories', [McategoryController::class, 'index']);
+    Route::get('MainCategory/{MainCategoriesID}/SubCategories', [McategoryController::class, 'show']);
+    // Subcategories Routes
+    Route::get('/SubCategories', [SubcategoryController::class, 'index']);
+    Route::get('MainCategory/{MainCategoriesID}/SubCategories/{SubCategoryID}/Branches', [SubcategoryController::class, 'show']);
+    // Branches Routes
+    Route::get('/Branches', [BranchController::class, 'index']);
+    Route::get('MainCategory/{MainCategoriesID}/SubCategories/{SubCategoryID}/Branches/products', [BranchController::class, 'show']);
+    // Products Routes
+    Route::get('/Products', [ProductController::class, 'index']);
+    Route::get('/Products/{ProductID}', [ProductController::class, 'show']);
+    // Reviews Routes
     Route::resource('Reviews', ReviewController::class);
     // Wishlist Routes
     Route::get('Wishlist/products', [WishlistController::class, 'index']);
