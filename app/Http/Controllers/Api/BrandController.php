@@ -16,7 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $Brands = Brand::translated()->get();
+        $Brands = Brand::with('products')->get();
 
         return $this->apiResponse($Brands, 'OK', 200);
     }

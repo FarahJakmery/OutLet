@@ -19,7 +19,7 @@ class McategoryController extends Controller
      */
     public function index()
     {
-        $MCtegories = Mcategory::translated()->with('brands')->get();
+        $MCtegories = Mcategory::translated()->with('subcategories')->get();
         return $this->apiResponse($MCtegories, 'OK', 200);
     }
 
@@ -31,13 +31,16 @@ class McategoryController extends Controller
      */
     public function show($id)
     {
+        $mainCategory = Mcategory::find($id);
+        $subcategories = Subcategory::where('mcategory_id', $id)->get();
+        $array = [
+            'mainCategory' => $mainCategory,
+            'subcategories' => $subcategories,
+        ];
 
-        $subcategories = Mcategory::find($id)->SubCategories->get;
-        // $subcategories = Subcategory::where('mcategory_id', $id)->get();
-
-        if ($subcategories)
-            return $this->apiResponse($subcategories, 'OK', 200);
+        if ($array)
+            return $this->apiResponse($array, 'OK', 200);
         else
-            return $this->apiResponse($subcategories, 'The Main category Not Found', 401);
+            return $this->apiResponse($array, 'The Main category Not Found', 401);
     }
 }
