@@ -50,6 +50,13 @@ ul {
 .marbtm-767 {
     padding-bottom: 0;
 }
+.brdr-r-20 {
+    border-radius: 20px;
+}
+.bg-mainColor {
+    background-color: var(--mainColor) !important;
+    color: #fff;
+}
 @media (max-width:767px) {
     .marbtm-767 {
         margin-bottom: 40px;
@@ -3323,13 +3330,19 @@ left: 0px;
 .empty .empty-cart {
     flex: 1;
 }
+.empty .no-product-found ,
 .empty .empty-order-list {
     margin:  0 auto;
 }
+.empty .no-product-found img,
 .empty .empty-order-list img {
     width: 150px;
-    
 }
+.empty .no-product-found img {
+    margin-right: -36px;
+    margin-top: 60px;
+}
+.empty .no-product-found h4 ,
 .empty .empty-order-list h1 {
     margin: 20px 0 100px 0;
 }
@@ -3415,17 +3428,20 @@ left: 0px;
 .complete-process .confirm-messege {
     text-align: center;
 }
+.empty .no-product-found h4 ,
 .empty .empty-order-list h1 ,
 .complete-process .confirm-messege .title {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 15px;
 }
+.empty .no-product-found p ,
 .empty .empty-order-list .messege-body ,
 .complete-process .confirm-messege .messege {
     color: #d8d8d8;
     font-size: 12px;
 }
+.empty .no-product-found a ,
 .empty .empty-order-list button ,
 .complete-process .confirm-payment button {
     width: 150px;
@@ -3863,7 +3879,7 @@ header h2.title {
     .cart-process .container .delevary-adress {
         font-size: 14px;
     }
-    .
+    
 }
 @media (max-width:340px) {
     .change-adress .container .continue-shopping .shipping ,
@@ -4346,6 +4362,104 @@ header h2.title {
     padding-top: 6px;
     display: block;
 }
+
+
+.modal pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #F5F5F5;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+    
+.modal .header {
+    padding:20px 0;
+    position:relative;
+    margin-bottom:10px;
+}
+    
+.modal .header:after {
+    content:"";
+    display:block;
+    height:1px;
+    background:#eee;
+    position:absolute; 
+    left:30%; right:30%;
+}
+    
+.modal .header h2 {
+    font-size:3em;
+    font-weight:300;
+    margin-bottom:0.2em;
+}
+
+.modal .header p {
+    font-size:14px;
+}
+    
+.modal .success-box {
+    margin:50px 0;
+    padding:10px 10px;
+    border:1px solid #eee;
+    background:#f9f9f9;
+}
+
+.modal .success-box img {
+    margin-right:10px;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.modal .success-box > div {
+    vertical-align:top;
+    display:inline-block;
+    color:#888;
+}
+    
+
+
+/* Rating Star Widgets Style */
+.modal .rating-stars ul {
+    list-style-type:none;
+    padding:0;
+    
+    -moz-user-select:none;
+    -webkit-user-select:none;
+}
+.modal .rating-stars ul > li.star {
+    display:inline-block;
+    
+}
+
+/* Idle State of the stars */
+.modal .rating-stars ul > li.star > i.fa {
+    font-size:26px; /* Change the size of the stars */
+    color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.modal .rating-stars ul > li.star:hover > i.fa {
+    color:#FFCC36;
+}
+
+/* Selected state of the stars */
+.modal .rating-stars ul > li.star.on > i.fa {
+    color:#FFCC36;
+}
+.modal input {
+    width: 100%;
+    border-radius: 20px;
+    padding: 7px;
+    border: 1px solid #aaa;
+}
+    
+
 @media (max-width:992px) {
     .product-info .evaluation .star-rate-right .rate{
         font-size: 50px;

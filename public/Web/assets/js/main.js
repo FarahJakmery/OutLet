@@ -341,6 +341,20 @@ $(window).ready(function () {
   // })
 
   // input two sliders in prudacts page 
+
+  $(document).ready(function(){
+    $('.star').click(function(){
+        $(this).addClass('on');
+         
+    //  How to select the parent div of 'this'?
+        $(this).parent().addClass('rated');
+         
+    //  How to select stars to the left side of 'this'?
+        $(this).prevAll().addClass('on');
+        $(this).nextAll().removeClass('on');
+    });
+      
+    });
  
 })
 
@@ -383,6 +397,8 @@ function updateTimer() {
 };
  // Call timer function
 setInterval('updateTimer()', 1000);
+
+// Price-Range Section
 window.onload = function () {
   slideOne();
   slideTwo();
