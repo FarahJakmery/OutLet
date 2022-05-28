@@ -45,12 +45,15 @@
                 </div>
                 <div class="option">
                     <div class="overlay-bg"></div>
-                    <a href="{{ route('logout') }}">
+                    <a href="{{ route('user.logout') }}"
+                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <i class="fas fa-sign-out-alt fa-rotate-180"></i>
                         </span>
                         تسجيل الخروج
                     </a>
+                    <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">@csrf
+                    </form>
                 </div>
             </div>
         </div>
