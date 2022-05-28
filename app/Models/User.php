@@ -18,18 +18,14 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array
      */
-    protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'mobile_number', 'roles_name', 'Status'
-    ];
+    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'mobile_number'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast to native types.
@@ -50,6 +46,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -59,7 +56,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
 
     /**
      * Get the wishlist of the user.
