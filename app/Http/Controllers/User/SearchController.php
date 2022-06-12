@@ -12,6 +12,10 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
+        if ($request->searchWord !== null) {
+            $products = Product::whereTranslationLike('product_name', "%$request->searchWord%")->get();
+        } elseif ($request->searchWord == null) {
+        }
         $Products = Product::translated()->where('product_name', 'like', "%$request->q%");
         // ->orWhere('description', 'like', "%$request->q%");
         // ->orWhereHas('tags', function (Builder $query) use ($request) {

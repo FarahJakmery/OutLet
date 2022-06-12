@@ -6,94 +6,62 @@
                 <div class="navbar-list-flex">
                     <div class="navbar-list">
                         <ul class="list1">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Lifestyle
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Running
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Soccer
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list2">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Pants
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Hoodies & Sweatshirts
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Vests
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list3">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Originals
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     New CasualNew Casual
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Reviving Retro
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Summer Vibes
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list4">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Backpacks
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Handbags
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Luggage
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list5">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Parkas
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Jackets
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Coats
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                     </div>
                     <div class="images">
@@ -107,92 +75,60 @@
                 <div class="navbar-list-flex">
                     <div class="navbar-list">
                         <ul class="list1">
-                            <li>
-                                <a href="#">
-                                    Lifestyle</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Running</a>
-                            </li>
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
+                                    Lifestyle</a></li>
+                            <li><a href="#">
+                                    Running</a></li>
+                            <li><a href="#">
                                     Soccer
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list2">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Pants
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Hoodies & Sweatshirts
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Vests
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list3">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Originals
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     New CasualNew Casual
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Reviving Retro
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Summer Vibes
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list4">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Backpacks
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Handbags
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Luggage
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list5">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Parkas
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Jackets
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Coats
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                     </div>
                     <div class="images">
@@ -206,94 +142,60 @@
                 <div class="navbar-list-flex">
                     <div class="navbar-list">
                         <ul class="list1">
-                            <li>
-                                <a href="#">
-                                    Lifestyle
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Running
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
+                                    Lifestyle</a></li>
+                            <li><a href="#">
+                                    Running</a></li>
+                            <li><a href="#">
                                     Soccer
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list2">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Pants
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Hoodies & Sweatshirts
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Vests
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list3">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Originals
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     New CasualNew Casual
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Reviving Retro
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Summer Vibes
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list4">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Backpacks
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Handbags
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Luggage
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list5">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Parkas
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Jackets
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Coats
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                     </div>
                     <div class="images">
@@ -307,92 +209,60 @@
                 <div class="navbar-list-flex">
                     <div class="navbar-list">
                         <ul class="list1">
-                            <li>
-                                <a href="#">
-                                    Lifestyle</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Running</a>
-                            </li>
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
+                                    Lifestyle</a></li>
+                            <li><a href="#">
+                                    Running</a></li>
+                            <li><a href="#">
                                     Soccer
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list2">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Pants
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Hoodies & Sweatshirts
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Vests
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list3">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Originals
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     New CasualNew Casual
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Reviving Retro
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Summer Vibes
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list4">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Backpacks
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Handbags
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Luggage
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                         <ul class="list5">
-                            <li>
-                                <a href="#">
+                            <li><a href="#">
                                     Parkas
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Jackets
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
+                                </a></li>
+                            <li><a href="#">
                                     Coats
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                     </div>
                     <div class="images">
@@ -403,14 +273,17 @@
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">
+        {{-- Navbar Brand --}}
+        <a class="navbar-brand" href="{{ route('user.home') }}">
             Outletship
             <img src="{{ URL::asset('Web/assets/img/logo.png') }}" alt="">
         </a>
+        {{-- Navbar Toggler --}}
         <button class="navbar-toggler" type="button" data-toggle="collapse" id="navbar-btn"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item active" data-type="#men">
@@ -429,43 +302,68 @@
                     <ul class="icons">
                         {{-- Search Icon --}}
                         <li class="icon">
-                            <span class="icon-search">
-                                <i class="fas fa-search fa-lg search"></i>
-                            </span>
-                            {{-- <form action="{{ route('search') }}" method="get"> --}}
-                            <input type="search" name="q" id="search" placeholder="Search ..."
-                                value="{{ old('q') }}">
-                            {{-- </form> --}}
+                            <span class="icon-search"><i class="fas fa-search fa-lg search"></i></span>
+                            <form action="#">
+                                <input type="search" name="" id="">
+                            </form>
                         </li>
                         {{-- Cart Icon --}}
                         <li class="icon">
-                            {{-- <a href="{{ route('carts.index') }}"> --}}
-                            <span class="icon-cart">
-                                <i class="fas fa-shopping-cart fa-lg"></i>
-                            </span>
+                            <a href="#">
+                                <span class="icon-cart"><i class="fas fa-shopping-cart fa-lg"></i></span>
                             </a>
                         </li>
                         {{-- User Icon --}}
-                        <li class="icon">
-                            <span class="icon-user">
-                                <i id="user-type" class="fas fa-user fa-lg"></i>
-                            </span>
-                            <span class="icon-angle">
-                                <i class="fa fa-angle-right"></i>
-                            </span>
-                            <ul class="user-type">
-                                <li class="active">
-                                    {{-- <a href="{{ route('login') }}"> --}}
-                                    مشتر
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        تاجر
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (!Auth::guest())
+                            <li class="icon">
+                                <span class="icon-user">
+                                    <i id="user-type" class="fas fa-user fa-lg"></i>
+                                </span>
+                                <span class="icon-angle">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                <ul class="user-type">
+                                    <li class="active">
+                                        <a href="{{ route('user.editProfile', Auth::user()->id) }}"
+                                            class="user-name">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('user.logout') }}"
+                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            تسجيل خروج
+                                        </a>
+                                        <form action="{{ route('user.logout') }}" method="POST"
+                                            class="d-none" id="logout-form">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if (Auth::guest())
+                            <li class="icon">
+                                <span class="icon-user">
+                                    <i id="user-type" class="fas fa-user fa-lg"></i>
+                                </span>
+                                <span class="icon-angle">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                <ul class="user-type">
+                                    <li class="active">
+                                        <a href="{{ route('user.login') }}">
+                                            تسجيل دخول
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('user.register') }}">
+                                            إنشاء حساب
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             </ul>

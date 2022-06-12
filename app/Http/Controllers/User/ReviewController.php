@@ -16,6 +16,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         Review::create($request->all() + ['user_id' => auth()->id()]);
         return redirect()->route('products.show', $request->product_id);
     }

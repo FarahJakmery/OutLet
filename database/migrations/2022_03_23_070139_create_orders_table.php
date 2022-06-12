@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('order_number');
             $table->date('order_date');
             $table->string('total_price');
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('seller_id')->constrained()->onDelete('cascade');
+            $table->string('order_status');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

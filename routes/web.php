@@ -1,9 +1,11 @@
 <?php
-
+// Admin
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\McategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -12,8 +14,11 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\SubcategoryController;
+
+// User
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
+use App\Http\Controllers\User\PageController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ReviewController;
@@ -33,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('User.Auth.home');
 });
 
 
@@ -45,38 +50,49 @@ Route::get('/', function () {
 
 
 // ============================ Users Routes ============================
+// Add_To_Cart Route
+Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
+
+
 Route::name('user.')->group(function () {
+    // Send Message To Email
+    Route::post('/sent_message_to_email', [PageController::class, 'sent_message_to_email'])->name('sent_message_to_email');
+    // Contact Us Route
+    Route::view('/contact', 'User.Contact.contact')->name('contact');
+    // Register Route
+    Route::post('/create', [UserController::class, 'create'])->name('create');
+    Route::view('/register', 'User.Auth.register')->name('register');
+    // Login Route
+    Route::post('/check', [UserController::class, 'check'])->name('check');
+    Route::view('/login', 'User.Auth.login')->name('login');
+    // Home View
+    Route::view('/home', 'User.Auth.home')->name('home');
+    // Welcome View
+    Route::view('/welcome', 'User.Auth.welcome')->name('welcome');
+    // Product Route
+    Route::resource('products', UserProductController::class);
+    // Order Routes
+    Route::resource('orders', UserOrderController::class);
+    //  Review Route
+    Route::resource('reviews', ReviewController::class);
+    // Cart Route
+    Route::get('/Cart', [CartController::class, 'show'])->name('Cart');
+    // Remove From Cart Route
+    Route::delete('remove_From_Cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+    // Get The Sizes
+    Route::get('Color/{id}', [UserProductController::class, 'getSizes']);
+    // Search
+    Route::get('search', [SearchController::class, 'search'])->name('search');
+    // Filters
+    Route::get('productFilters', [UserProductController::class, 'getProducts'])->name('getProducts');
 
-    Route::middleware(['guest:web', 'PreventBackHistory'])->group(function () {
-        // User Register Route
-        Route::post('/create', [UserController::class, 'create'])->name('create');
-        Route::view('/register', 'User.Auth.register')->name('register');
-        // Login Route
-        Route::post('/check', [UserController::class, 'check'])->name('check');
-        Route::view('/login', 'User.Auth.login')->name('login');
-        // Home View
-        Route::view('/home', 'User.Auth.home')->name('home');
-        // Product Route
-        Route::resource('products', CustomerProductController::class);
-        // Order Routes
-        Route::resource('CustomerOrders', CustomerOrderController::class);
-        //  Review Route
-        Route::resource('reviews', ReviewController::class);
-        // Add To Cart
-        Route::resource('carts', CartController::class);
-        Route::post('cart', [CartController::class, 'store'])->name('cart.store');
-        Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
-        // Get The Sizes
-        Route::get('Color/{id}', [CustomerProductController::class, 'getSizes']);
-        // Search
-        Route::get('search', [SearchController::class, 'search'])->name('search');
-        // Filters
-        Route::get('productFilters', [CustomerProductController::class, 'getProducts'])->name('getProducts');
-    });
 
-    Route::middleware(['auth:web', 'PreventBackHistory'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         // logout Route
         Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+        // Edit_Profile Route
+        Route::get('/profile/{profile}/edit', [UserController::class, 'edit'])->name('editProfile');
+        Route::put('/profile/{profile}', [UserController::class, 'update'])->name('updateProfile');
         // WhishList Route
         Route::get('wishlist/products', [WishlistController::class, 'index'])->name('wishlist.index');
         // Add To Wishlist Route
@@ -120,10 +136,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('colors', ColorController::class);
         // Order Route
         Route::resource('orders', OrderController::class);
+        // Order types Routes
+        Route::get('/paying', [OrderController::class, 'paying_order']);
+        Route::get('/wait_shimp', [OrderController::class, 'wait_shimp']);
+        Route::get('/shimp', [OrderController::class, 'shimp']);
+        Route::get('/done', [OrderController::class, 'done']);
+        Route::get('/canceled', [OrderController::class, 'canceled']);
         // Get The MainCategories
         Route::get('Brand/{id}', [ProductController::class, 'getMainCategories']);
         // Product Images Managment Routes
         Route::post('delete_image', [ProductController::class, 'destroy_image'])->name('delete_image');
+        // About Routes
+        Route::resource('about', AboutController::class);
+        // Features Routes
+        Route::resource('features', FeatureController::class);
     });
 });
 
@@ -132,10 +158,10 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
     Route::middleware(['guest:seller', 'PreventBackHistory'])->group(function () {
         // Seller Rigister Route
-        Route::post('/create', [SellerController::class, 'create'])->name('create');
+        // Route::post('/create', [SellerController::class, 'create'])->name('create');
         Route::view('/register', 'dashboard.seller.register')->name('register');
         // Seller Login Route
-        Route::post('/check', [SellerController::class, 'check'])->name('check');
+        // Route::post('/check', [SellerController::class, 'check'])->name('check');
         Route::view('/login', 'dashboard.seller.login')->name('login');
         // Home Route
         Route::view('/home', 'dashboard.seller.home')->name('home');
@@ -143,6 +169,6 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
     Route::middleware(['auth:seller', 'PreventBackHistory'])->group(function () {
         // Logout Route
-        Route::post('logout', [SellerController::class, 'logout'])->name('logout');
+        // Route::post('logout', [SellerController::class, 'logout'])->name('logout');
     });
 });

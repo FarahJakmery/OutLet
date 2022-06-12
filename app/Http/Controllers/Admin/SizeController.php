@@ -21,16 +21,6 @@ class SizeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,29 +43,7 @@ class SizeController extends Controller
         ]);
 
         session()->flash('Add', 'تم إضافة المقاس بنجاح');
-        return redirect('/sizes');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Size $size)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Size $size)
-    {
-        //
+        return redirect('admin/sizes');
     }
 
     /**
@@ -102,7 +70,7 @@ class SizeController extends Controller
         ]);
 
         session()->flash('edit', 'تم تعديل المقاس بنجاح');
-        return redirect('/sizes');
+        return redirect('admin/sizes');
     }
 
     /**
@@ -116,6 +84,6 @@ class SizeController extends Controller
         $id = $request->id;
         Size::find($id)->delete();
         session()->flash('delete', 'تم حذف المقاس بنجاح');
-        return redirect('/sizes');
+        return redirect('admin/sizes');
     }
 }

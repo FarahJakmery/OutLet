@@ -163,7 +163,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/12.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/12.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-3">
@@ -176,7 +176,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/1.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/1.jpg') }}"></span>
                             </div>
                             <div class="ms-3">
                                 <strong>Anthony</strong> New product Launching...
@@ -188,7 +188,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/2.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/2.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-3">
@@ -201,7 +201,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/8.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/8.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-3">
@@ -214,7 +214,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/11.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/11.jpg') }}"></span>
                             </div>
                             <div class="ms-3">
                                 <strong>Anthony</strong> New product Launching...
@@ -226,7 +226,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/6.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/6.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-3">
@@ -239,7 +239,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-lg brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/9.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/9.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-3">
@@ -256,7 +256,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/9.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/9.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -271,7 +271,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/11.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/11.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -285,7 +285,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/10.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/10.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -300,7 +300,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/2.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/2.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -315,7 +315,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/13.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/13.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -329,7 +329,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/12.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/12.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -343,7 +343,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/4.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/4.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -357,7 +357,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/7.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/7.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -370,7 +370,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/2.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/2.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -384,7 +384,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/14.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/14.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -398,7 +398,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/11.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/11.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -412,7 +412,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/9.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/9.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">
@@ -426,7 +426,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/15.jpg"><span
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/15.jpg') }}"><span
                                         class="avatar-status bg-success"></span></span>
                             </div>
                             <div class="ms-2">
@@ -441,7 +441,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div>
                                 <span class="avatar avatar-md brround cover-image"
-                                    data-bs-image-src="../../assets/img/faces/4.jpg"></span>
+                                    data-bs-image-src="{{ URL::asset('assets/img/faces/4.jpg') }}"></span>
                             </div>
                             <div class="ms-2">
                                 <div class="fw-semibold" data-bs-toggle="modal" data-bs-target="#chatmodel">

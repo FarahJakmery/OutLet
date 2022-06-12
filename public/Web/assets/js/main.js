@@ -278,6 +278,7 @@ $(window).ready(function () {
             color: "#000",
           });
         }
+        // totalPriceCalc()
       })
     })
   }
@@ -300,6 +301,7 @@ $(window).ready(function () {
   // Remove Item
   $(".cart-process .cart-item .cancel i").on("click", function () {
     $(this).parents(".cart-item").remove();
+    totalPriceCalc()
   })
   // Promo Code Input
   $(".cart-process .container .row .promo-code input").focus(function () {
@@ -319,17 +321,24 @@ $(window).ready(function () {
   // End Product Evaluation Page
 
    // calculation total price in Cart Page
-   var item = $(".cart-process .cart-item");
-   let cartTotalPrice = 0;
    function totalPriceCalc() {
-     item.each(function (){
-      var itemCount = $(this).find(".number-of-item .increase-decrease .number").data("number");
-      var itemPrice = parseInt($(this).find(".price").text());
-      cartTotalPrice = cartTotalPrice + (itemCount * itemPrice);
+    var item = $(".cart-process .cart-item");
+    let cartTotalPrice = 0;
+    item.each(function (){
+      var itemCount = parseInt($(this).find(".number-of-item .increase-decrease .number").text());
+      var itemPrice = parseFloat($(this).find(".price").text());
+      var itemTotalPrice = itemCount * itemPrice;
+      console.log(itemTotalPrice)
+      cartTotalPrice = cartTotalPrice + itemTotalPrice;
+      $(this).find('.item-total-price').text(itemTotalPrice.toFixed(2))
     })
-     $(".cart-process .container .total-price .total #total-price").text(cartTotalPrice)
+    $(".cart-process .container .total-price .total #total-price").text(cartTotalPrice.toFixed(3))
   }
   totalPriceCalc()
+  $('.cart-process .cart-item .number-of-item .increase-decrease span.clickable').on('click', function () {
+    totalPriceCalc()
+  // }
+  })
 
   // Tabs in Prudact Details
   // $(".product-info .evaluation .tab-btn").on("click", function () {
@@ -354,7 +363,20 @@ $(window).ready(function () {
         $(this).nextAll().removeClass('on');
     });
       
-    });
+  });
+  
+  // add class(on) to stars, if thier is value gets from database
+  const starCount = $('.modal .rating-stars ul').data('star') ;
+  console.log(starCount)
+  if (starCount !== '') {
+    var itemClick = $('.modal .rating-stars ul .star')
+    itemClick.each((id , e) => {
+      var thisItem = e
+      if (id < starCount ) {
+        $(thisItem).addClass("on")
+      }
+    })
+  } 
  
 })
 
@@ -399,36 +421,7 @@ function updateTimer() {
 setInterval('updateTimer()', 1000);
 
 // Price-Range Section
-window.onload = function () {
-  slideOne();
-  slideTwo();
-}
-let sliderOne = document.getElementById("slider-1");
-let sliderTwo = document.getElementById("slider-2");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 0;
-let sliderTrack = document.querySelector(".slider-track");
-let sliderMaxValue = document.getElementById("slider-1").max;
-function slideOne(){
-    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
-        sliderOne.value = parseInt(sliderTwo.value) - minGap;
-    }
-    displayValOne.textContent = sliderOne.value;
-    fillColor();
-}
-function slideTwo(){
-    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
-        sliderTwo.value = parseInt(sliderOne.value) + minGap;
-    }
-    displayValTwo.textContent = sliderTwo.value;
-    fillColor();
-}
-function fillColor(){
-    percent1 = (sliderOne.value / sliderMaxValue) * 100;
-    percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-    sliderTrack.style.background = `linear-gradient(to left, #dadae5 ${percent1}% , #000 ${percent1}% , #000 ${percent2}%, #dadae5 ${percent2}%)`;
-}
+
 
 var headerSlider = new Swiper(".header-slider", {
     slidesPerView: 1,

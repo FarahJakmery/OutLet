@@ -55,8 +55,11 @@ class ColorController extends Controller
         );
 
         $data = [
-            'color'    => $request['color'],
-            'product_id'    => $request['product_id'],
+            'color'       => $request['color'],
+            'product_id'  => $request['product_id'],
+            'size_name'   => $request['size_name'],
+            'quantity'    => $request['quantity'],
+            'material'    => $request['material'],
             'ar' => [
                 'name'    => $request['name_ar'],
             ],
@@ -67,7 +70,17 @@ class ColorController extends Controller
 
         $color = Color::create($data);
 
-        $color->sizes()->attach($request->sizes);
+        // $color->sizes()->attach($request->sizes);
+        $color->sizes()->attach(
+            $request->sizes,
+            [
+                'product_id'  => $request['product_id'],
+                'size_name'   => $request['size_name'],
+                'quantity'    => $request['quantity'],
+                'material'    => $request['material'],
+            ]
+        );
+
 
         session()->flash('Add', 'تم إضافة اللون بنجاح');
         return redirect('/colors');

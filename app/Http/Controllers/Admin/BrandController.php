@@ -51,7 +51,7 @@ class BrandController extends Controller
         );
 
         // Store Image
-        $image_name = $this->saveImage($request->file('logo_name'), 'images/Brand');
+        $image_name = $this->saveImage($request->file('logo_name'), 'images/Brand', 183, 83);
 
         $data = [
             'logo_name'        => $image_name,
@@ -68,7 +68,7 @@ class BrandController extends Controller
         Brand::create($data);
 
         session()->flash('Add', 'تم إضافة العلامة التجارية بنجاح');
-        return redirect('/brands');
+        return redirect('admin/brands');
     }
 
     /**
@@ -124,7 +124,7 @@ class BrandController extends Controller
         $brand->update($data);
 
         session()->flash('edit', 'تم تعديل العلامة التجارية بنجاح');
-        return redirect('/brands');
+        return redirect('admin/brands');
     }
 
     /**
@@ -143,6 +143,6 @@ class BrandController extends Controller
         }
         $brand->delete();
         session()->flash('delete', 'تم حذف العلامة التجارية بنجاح');
-        return redirect('/brands');
+        return redirect('admin/brands');
     }
 }

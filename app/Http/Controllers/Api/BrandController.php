@@ -29,7 +29,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $Brand = Brand::find($id)->with('products.images:id,image_name,product_id')->get();
+        $Brand = Brand::with('products.images:id,image_name,product_id')->find($id);
         if ($Brand) {
             return $this->apiResponse($Brand, 'OK', 200);
         }

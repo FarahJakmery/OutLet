@@ -31,7 +31,7 @@ class ProductController extends Controller
         $SubCategories = Subcategory::all();
         $Sizes = Size::all();
         $Products = Product::all();
-        return view('Customer.Products.products', compact('Products', 'Brands', 'mainCategories', 'SubCategories', 'Sizes'));
+        return view('User.Products.products', compact('Products', 'Brands', 'mainCategories', 'SubCategories', 'Sizes'));
     }
 
     /**
@@ -67,7 +67,26 @@ class ProductController extends Controller
         $reviews = Review::all();
         $colors = Color::where('product_id', $id)->get();
         $images = ProductImage::where('product_id', $id)->get();
-        return view('Customer.Products.show_product', compact('product', 'colors', 'images', 'reviews'));
+
+        // Calculate the time difference between two dates in seconds
+        $d1 = strtotime($product->product_date);
+        $d2 = strtotime($product->expiry_date);
+        $totalSecondsDiff = abs($d2 - $d1);
+
+        // Calculate the time difference between two dates in hours
+        $totalHoursDiff   = $totalSecondsDiff / 60 / 60;
+
+        //
+        $minutes = $product->minutes;
+        $hour = $minutes / 60;
+        $TwoPriceDiff = $product->max_price - $product->min_price;
+        $one_item = $TwoPriceDiff * $hour;
+        $total_for_one_item = $one_item / $totalHoursDiff;
+
+        // Product price decreasing period in seconds
+        $seconds = $minutes * 60;
+
+        return view('User.Products.show_product', compact('product', 'colors', 'images', 'reviews', 'totalHoursDiff', 'seconds'));
     }
 
     /**
@@ -137,7 +156,7 @@ class ProductController extends Controller
             return view('Customer.Products.filteredProducts', compact('Products'));
         } else {
             $Products = Product::translated()->get(); // now we are fetching all products
-            return view('Customer.Products.products', compact('Products'));
+            return view('User.Products.products', compact('Products'));
         }
     }
 }

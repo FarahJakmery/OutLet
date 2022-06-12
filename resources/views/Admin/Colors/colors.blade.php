@@ -173,7 +173,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('colors.store') }}" method="POST" autocomplete="on">
+                    <form action="{{ route('admin.colors.store') }}" method="POST" autocomplete="on">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             {{-- حقل إدخال اسم اللون بالعربي --}}
@@ -214,7 +214,7 @@
                                 </select>
                             </div>
                             {{-- حقل اختيار المقاسات المتاحة من هذا اللون --}}
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <p class="mg-b-10"><b>المقاسات</b></p>
                                 <select multiple="multiple" class="testselect2" name="sizes[]" id="size[]" required>
                                     @foreach ($sizes as $size)
@@ -223,6 +223,30 @@
                                         </option>
                                     @endforeach
                                 </select>
+                            </div> --}}
+
+                            {{-- حقل إدخال المقاس --}}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>اسم المقاس</b>
+                                </label>
+                                <input type="text" class="form-control" name="size_name" id="size_name" required>
+                            </div>
+
+                            {{-- حقل إدخال الكمية المتوفرة من هذا اللون و هذا المقاس --}}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>الكمية</b>
+                                </label>
+                                <input type="text" class="form-control" name="quantity" id="quantity" required>
+                            </div>
+
+                            {{-- حقل إدخال المادة --}}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>المادة المصنع منها المنتج</b>
+                                </label>
+                                <input type="text" class="form-control" name="material" id="material" required>
                             </div>
                         </div>
 

@@ -20,11 +20,10 @@ class CreateProductsTable extends Migration
             $table->dateTime('expiry_date')->nullable();
             $table->string('min_price', 50);
             $table->string('max_price', 50);
-            $table->string('decreasing_value', 50);
             $table->string('minutes', 50);
-            $table->string('quantity', 50);
             $table->string('return_option', 50);
-            $table->integer('value_status');
+            $table->float('avg_rating')->default(0);
+            $table->unsignedInteger('reviews_count')->default(0);
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->foreignId('mcategory_id')->constrained()->onDelete('cascade');
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');

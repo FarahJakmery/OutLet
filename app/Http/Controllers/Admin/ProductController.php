@@ -69,12 +69,8 @@ class ProductController extends Controller
                 'product_name_en'            => ['required'],
                 'max_price'                  => ['required'],
                 'min_price'                  => ['required'],
-                'decreasing_value'           => ['required'],
                 'quantity'                   => ['required'],
                 'return_option'              => ['required'],
-                'status_ar'                  => ['required'],
-                'status_en'                  => ['required'],
-                'value_status'               => ['required'],
                 'description_ar'             => ['required'],
                 'description_en'             => ['required'],
                 'brand_id'                   => ['required'],
@@ -96,11 +92,9 @@ class ProductController extends Controller
             'expiry_date'                => $request['expiry_date'],
             'min_price'                  => $request['min_price'],
             'max_price'                  => $request['max_price'],
-            'decreasing_value'           => $request['decreasing_value'],
             'minutes'                    => $request['minutes'],
             'quantity'                   => $request['quantity'],
             'return_option'              => $request['return_option'],
-            'value_status'               => 'waiting',
             'brand_id'                   => $request['brand_id'],
             'mcategory_id'               => $request['mcategory_id'],
             'subcategory_id'             => $request['subcategory_id'],
@@ -108,12 +102,10 @@ class ProductController extends Controller
             'ar' => [
                 'product_name'    => $request['product_name_ar'],
                 'description'     => $request['description_ar'],
-                'status'          => 'farah',
             ],
             'en' => [
                 'product_name'    => $request['product_name_en'],
                 'description'     => $request['description_en'],
-                'status'          => 'gfggh',
             ],
         ];
         $product = Product::create($data);
@@ -141,7 +133,7 @@ class ProductController extends Controller
         }
 
         session()->flash('Add', 'تم إضافة المنتج بنجاح');
-        return redirect('/products');
+        return redirect('admin/products');
     }
 
     /**
@@ -192,12 +184,8 @@ class ProductController extends Controller
                 'product_name_en'            => ['required'],
                 'max_price'                  => ['required'],
                 'min_price'                  => ['required'],
-                'decreasing_value'           => ['required'],
                 'quantity'                   => ['required'],
                 'return_option'              => ['required'],
-                'status_ar'                  => ['required'],
-                'status_en'                  => ['required'],
-                'value_status'               => ['required'],
                 'description_ar'             => ['required'],
                 'description_en'             => ['required'],
                 'brand_id'                   => ['required'],
@@ -248,11 +236,9 @@ class ProductController extends Controller
             'expiry_date'                => $request['expiry_date'],
             'min_price'                  => $request['min_price'],
             'max_price'                  => $request['max_price'],
-            'decreasing_value'           => $request['decreasing_value'],
             'minutes'                    => $request['minutes'],
             'quantity'                   => $request['quantity'],
             'return_option'              => $request['return_option'],
-            'value_status'               => '2',
             'brand_id'                   => $request['brand_id'],
             'mcategory_id'               => $request['mcategory_id'],
             'subcategory_id'             => $request['subcategory_id'],
@@ -260,19 +246,17 @@ class ProductController extends Controller
             'ar' => [
                 'product_name'    => $request['product_name_ar'],
                 'description'     => $request['description_ar'],
-                'status'          => 'farah',
             ],
             'en' => [
                 'product_name'    => $request['product_name_en'],
                 'description'     => $request['description_en'],
-                'status'          => 'gfggh',
             ],
         ];
 
         $product->update($data);
 
         session()->flash('Add', 'تم تعديل المنتج بنجاح');
-        return redirect('/products');
+        return redirect('admin/products');
     }
 
     /**
@@ -293,7 +277,7 @@ class ProductController extends Controller
         }
         $product->delete();
         session()->flash('delete', 'تم حذف المنتج بنجاح');
-        return redirect('/products');
+        return redirect('admin/products');
     }
 
     public function getMainCategories($id)

@@ -1,7 +1,7 @@
 @extends('webLayouts.master')
 
 @section('web_title')
-    الصفحة الرئيسية
+    Outletship
 @endsection
 
 @section('web_content')
@@ -63,7 +63,6 @@
                     <a href="#">
                         <img src="{{ URL::asset('Web/assets/img/icon/ammerica.png') }}" alt="">
                     </a>
-
                 </div>
                 <div class="header-slider swiper">
                     <div class="swiper-wrapper">
@@ -74,12 +73,9 @@
                                     <p>اشترِ من مجموعة الصيف</p>
                                     <h1>لتجعل</h1>
                                     <h1 class="under">منك الأفضل</h1>
-                                    <span>
-                                        <a href="#">
-                                            <i class="fa fa-arrow-left"></i>
-                                            <span>تسوق الآن</span>
-                                        </a>
-                                    </span>
+                                    <span><a href="#">
+                                            <i class="fa fa-arrow-left"></i><span>تسوق الآن</span>
+                                        </a></span>
                                 </div>
                             </div>
                         </div>
@@ -90,12 +86,9 @@
                                     <p>اشترِ من مجموعة الصيف</p>
                                     <h1>لتجعل</h1>
                                     <h1 class="under">منك الأفضل</h1>
-                                    <span>
-                                        <a href="#">
-                                            <i class="fa fa-arrow-left"></i>
-                                            <span>تسوق الآن</span>
-                                        </a>
-                                    </span>
+                                    <span><a href="#">
+                                            <i class="fa fa-arrow-left"></i><span>تسوق الآن</span>
+                                        </a></span>
                                 </div>
                             </div>
                         </div>
@@ -106,12 +99,9 @@
                                     <p>اشترِ من مجموعة الصيف</p>
                                     <h1>لتجعل</h1>
                                     <h1 class="under">منك الأفضل</h1>
-                                    <span>
-                                        <a href="#">
-                                            <i class="fa fa-arrow-left"></i>
-                                            <span>تسوق الآن</span>
-                                        </a>
-                                    </span>
+                                    <span><a href="#">
+                                            <i class="fa fa-arrow-left"></i><span>تسوق الآن</span>
+                                        </a></span>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +115,6 @@
         </div>
     </div>
     <!-- End Header -->
-
     <!-- Start Collection -->
     <div class="collection padbtm40">
         <div class="container">
@@ -161,7 +150,6 @@
         </div>
     </div>
     <!-- End Collection -->
-
     <!-- Start Services -->
     <div class="service padbtm40">
         <div class="container">
@@ -172,8 +160,7 @@
                         <i class="fa fa-truck-moving"></i>
                     </span>
                     <h1>الشحن مجاناً</h1>
-                    <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى،
-                    </p>
+                    <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى،</p>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <span class="icon-service mrg-auto">
@@ -200,7 +187,6 @@
         </div>
     </div>
     <!-- End Services -->
-
     <!-- Start Slider -->
     <div class="fast-price-slider padbtm40">
         <div class="container">
@@ -208,6 +194,23 @@
             <div class="slider-container-index">
                 <div class="child main-slider swiper swiper-padbtm88 ">
                     <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="{{ URL::asset('Web/assets/img/newCollection-02.png') }}" alt="">
+                            </a>
+                            <div class="timer-collec">
+                                <h4>السعر قادم في</h4>
+                                <div class="timer" id="timer" data-date="jan 20, 2022 01:30:00">
+                                </div>
+                            </div>
+                            <div class="info-collec">
+                                <span>T-shirt Summer Vibes</span>
+                                <div class="price">
+                                    <span class="new">$89.99</span>
+                                    <span class="old">$119.99</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="swiper-slide">
                             <a href="#">
                                 <img src="{{ URL::asset('Web/assets/img/newCollection-01.png') }}" alt="">
@@ -243,22 +246,22 @@
                             </div>
                         </div>
                         <!-- <div class="swiper-slide">
-                                                                                            <a href="#">
-                                                                                                <img src="{{ URL::asset('Web/assets/img/newCollection-03.png') }}" alt="">
-                                                                                            </a>
-                                                                                            <div class="timer-collec">
-                                                                                                <h4>السعر قادم في</h4>
-                                                                                                <div class="timer" id="timer" data-date="jan 20, 2022 11:30:00">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="info-collec">
-                                                                                                <span>T-shirt Summer Vibes</span>
-                                                                                                <div class="price">
-                                                                                                    <span class="new">$89.99</span>
-                                                                                                    <span class="old">$119.99</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div> -->
+                                                <a href="#">
+                                                    <img src="{{ URL::asset('Web/assets/img/newCollection-03.png') }}" alt="">
+                                                </a>
+                                                <div class="timer-collec">
+                                                    <h4>السعر قادم في</h4>
+                                                    <div class="timer" id="timer" data-date="jan 20, 2022 11:30:00">
+                                                    </div>
+                                                </div>
+                                                <div class="info-collec">
+                                                    <span>T-shirt Summer Vibes</span>
+                                                    <div class="price">
+                                                        <span class="new">$89.99</span>
+                                                        <span class="old">$119.99</span>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                     </div>
                 </div>
                 <span class="main-slider-btn-next slider-next-btn">
@@ -271,7 +274,6 @@
         </div>
     </div>
     <!-- End Slider -->
-
     <!-- Start Bag Offer -->
     <div class="bag-offer padbtm40">
         <div class="container">
@@ -292,7 +294,6 @@
         </div>
     </div>
     <!-- End Bag Offer -->
-
     <!-- Start Gallery -->
     <div class="gallery gallery-shuffle padbtm40">
         <div class="container">
@@ -421,88 +422,87 @@
                 </div>
             </div>
             <!-- <div class="gallery-slider">
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="Dark"  src="{{ URL::asset('Web/assets/img/summer-01.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="White"  src="{{ URL::asset('Web/assets/img/summer-02.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="Yellow"  src="{{ URL::asset('Web/assets/img/summer-03.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="Dark"  src="{{ URL::asset('Web/assets/img/summer-04.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="White"  src="{{ URL::asset('Web/assets/img/summer-05.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="White"  src="{{ URL::asset('Web/assets/img/summer-06.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="item">
-                                                                                    <span class="offer">30%</span>
-                                                                                    <img class="Yellow"  src="{{ URL::asset('Web/assets/img/summer-07.png') }}" alt="">
-                                                                                    <div class="item-info">
-                                                                                        <p>T-shirt Summer Vibes</p>
-                                                                                        <div class="price">
-                                                                                            <span class="old">$119,99</span>
-                                                                                            <span class="new">$89.99</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> -->
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="Dark"  src="{{ URL::asset('Web/assets/img/summer-01.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="White"  src="{{ URL::asset('Web/assets/img/summer-02.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="Yellow"  src="{{ URL::asset('Web/assets/img/summer-03.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="Dark"  src="{{ URL::asset('Web/assets/img/summer-04.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="White"  src="{{ URL::asset('Web/assets/img/summer-05.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="White"  src="{{ URL::asset('Web/assets/img/summer-06.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <span class="offer">30%</span>
+                                        <img class="Yellow"  src="{{ URL::asset('Web/assets/img/summer-07.png') }}" alt="">
+                                        <div class="item-info">
+                                            <p>T-shirt Summer Vibes</p>
+                                            <div class="price">
+                                                <span class="old">$119,99</span>
+                                                <span class="new">$89.99</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
         </div>
     </div>
     <!-- End Gallery -->
-
     <!-- Start Fashion Sale  -->
     <div class="fashion-sale padbtm40">
         <div class="container">
@@ -538,7 +538,6 @@
         </div>
     </div>
     <!-- End Fashion Sale  -->
-
     <!-- Start Second Gallery -->
     <div class="container padbtm40">
         <h3 class="section-header">مختارة خصيصاً لك</h3>
@@ -660,7 +659,6 @@
         </div>
     </div>
     <!-- End Second Gallery -->
-
     <!-- Start Summer Sales -->
     <div class="summer-sale padbtm40">
         <div class="container">
@@ -701,7 +699,6 @@
         </div>
     </div>
     <!-- End Summer Sales -->
-
     <!-- Start Brnds -->
     <div class="brand padbtm40">
         <div class="container">
@@ -745,7 +742,6 @@
         </div>
     </div>
     <!-- End Brnds -->
-
     <!-- Start Subscribe -->
     <div class="subscribe padbtm40">
         <div class="container">
@@ -760,7 +756,6 @@
         </div>
     </div>
     <!-- End Subscribe -->
-
     <!-- Start Instagram -->
     <div class="instagram padbtm40">
         <div class="insta-imgs">

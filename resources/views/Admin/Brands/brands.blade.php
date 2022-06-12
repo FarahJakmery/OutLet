@@ -171,7 +171,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data"
+                    <form action="{{ route('admin.brands.store') }}" method="POST" enctype="multipart/form-data"
                         autocomplete="on">
                         {{ csrf_field() }}
                         <div class="modal-body">

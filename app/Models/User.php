@@ -57,18 +57,22 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    // ================================ Product WishList ================================
+
     /**
      * Get the wishlist of the user.
      */
     public function wishlist()
     {
-        return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'product_wishlist')->withTimestamps();
     }
 
     public function wishlistHas($productId)
     {
         return self::wishlist()->where('product_id', $productId)->exists();
     }
+
+    // ================================ Order Relationship  ================================
 
     /**
      * Get the orders for the user.

@@ -47,20 +47,35 @@
             <div class="prudact-details padbtm40">
                 <div class="row">
                     {{-- The Images --}}
-                    <div class="col-md-6 product-img-collection">
-                        @foreach ($images as $image)
-                            @if ($loop->first)
-                                <div class="main-img">
-                                    <img src="{{ asset('images/The_Product/' . $image->image_name) }}" alt="">
+                    <div class="col-md-6">
+                        <div class="product-img-collection">
+                            <div class="secondry-imgs swiper product-imgs">
+                                <div class="swiper-wrapper">
+                                    @foreach ($images as $image)
+                                        @if ($loop->iteration)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($image->image_name) }}" alt="">
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
-                            @endif
-                            @if ($loop->remaining)
-                                <div class="secondry-imgs">
-                                    <img src="{{ asset('images/The_Product/' . $image->image_name) }}" alt="">
-                                </div>
-                            @endif
-                        @endforeach
+                                <span class="product-slider-btn-next slider-next-btn">
+                                    <i class="fa fa-arrow-right"></i>
+                                </span>
+                                <span class="product-slider-btn-prev slider-prev-btn">
+                                    <i class="fa fa-arrow-left"></i>
+                                </span>
+                            </div>
+                            @foreach ($images as $image)
+                                @if ($loop->first)
+                                    <div class="main-img">
+                                        <img src="{{ asset($image->image_name) }}" alt="">
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
+                    {{-- Product Detiels --}}
                     <div class="col-md-6 product-detiels">
                         <span class="offer">تخفيض</span>
                         {{-- The Name & Prices --}}
@@ -117,7 +132,9 @@
                         </div>
                         {{-- The Timer --}}
                         <div class="product-timer">
-                            <div class="timer" id="timer" data-date="jan 20, 2022 01:30:00">
+                            <div class="timer" id="timer" data-id="12" data-end="jun 11, 2022 01:30:00"
+                                data-start="jun 9, 2022 01:30:00" data-diff="48" data-maxprice="7500" data-minprice="7020"
+                                data-decresetime="3600" data-endtime="false" data-decreaseprice="10">
                             </div>
                         </div>
                     </div>
@@ -208,146 +225,63 @@
                                         {{-- @if (!$product->reviews()->where('user_id', auth()->id())->count() &&
     $product->users()->where('user_id', '!=', auth()->id())) --}}
                                         {{-- Add Review Button --}}
-                                        {{-- <button class="add-evaluation" id="review">أضف الرأي</button> --}}
                                         <button class="add-evaluation" data-toggle="modal"
                                             data-target="#add-evaluation">أضف الرأي</button>
-                                        <div>
-                                            <form action="{{ route('reviews.store') }}" method="POST">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                Your Rating:
-                                                <br>
-                                                {{-- Stars --}}
-                                                <select name="rating" id="rating">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option selected>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                                {{-- <ul class="stars">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    </ul> --}}
-                                                <br><br>
-                                                Review (optional):
-                                                <br>
-                                                <textarea name="comment" id="comment" cols="60" rows="5"></textarea>
-                                                <input type="submit" value="Save Rating">
-                                            </form>
-                                            <button id="close">colse</button>
-                                        </div>
                                         {{-- @endif --}}
                                     </div>
                                     {{-- Previous Reviews --}}
                                     <div class="col-sm-6">
                                         <ul class="users-evaluations">
                                             @foreach ($product->reviews as $review)
-                                                @if ($loop->first)
-                                                    <li class="user-evaluation">
-                                                        <span class="user-img">
-                                                            <img src="{{ asset('Web/assets/img/img-item.png') }}" alt="">
+                                                <li class="user-evaluation">
+                                                    <span class="user-img">
+                                                        <img src="{{ asset('Web/assets/img/img-item.png') }}" alt="">
+                                                    </span>
+                                                    <span class="user-info">
+                                                        <span class="user-name">
+                                                            {{ $review->user->first_name }}
                                                         </span>
-                                                        <span class="user-info">
-                                                            <span class="user-name">
-                                                                {{ $review->user->first_name }}
-                                                            </span>
-                                                            <span class="star-givven">
-                                                                <ul class="stars">
-                                                                    @if ($review->rating == 1)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 2)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 3)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 4)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 5)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                    @endif
+                                                        <span class="star-givven">
+                                                            <ul class="stars">
+                                                                @if ($review->rating == 1)
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                @elseif ($review->rating == 2)
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                @elseif ($review->rating == 3)
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                @elseif ($review->rating == 4)
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fa-regular fa-star"></i></li>
+                                                                @elseif ($review->rating == 5)
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    <li><i class="fas fa-star"></i></li>
+                                                                @endif
 
-                                                                </ul>
-                                                            </span>
-                                                            <span class="user-comment">
-                                                                {{ $review->comment }}
-                                                            </span>
+                                                            </ul>
                                                         </span>
-                                                    </li>
-                                                @endif
-                                                @if ($loop->last)
-                                                    <li class="user-evaluation">
-                                                        <span class="user-img">
-                                                            <img src="{{ asset('Web/assets/img/img-item.png') }}" alt="">
+                                                        <span class="user-comment">
+                                                            {{ $review->comment }}
                                                         </span>
-                                                        <span class="user-info">
-                                                            <span class="user-name">
-                                                                {{ $review->user->first_name }}
-                                                            </span>
-                                                            <span class="star-givven">
-                                                                <ul class="stars">
-                                                                    @if ($review->rating == 1)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 2)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 3)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 4)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                                    @elseif ($review->rating == 5)
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                        <li><i class="fas fa-star"></i></li>
-                                                                    @endif
-
-                                                                </ul>
-                                                            </span>
-                                                            <span class="user-comment">
-                                                                {{ $review->comment }}
-                                                            </span>
-                                                        </span>
-                                                    </li>
-                                                @endif
+                                                    </span>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -389,6 +323,7 @@
             </div>
         </div>
     </div>
+
     <!-- Start Second Gallery -->
     <div class="container padbtm40">
         <h3 class="section-header">مختارة خصيصاً لك</h3>
@@ -398,7 +333,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-01.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-01.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -411,7 +346,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-02.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-02.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -424,7 +359,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-03.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-03.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -437,7 +372,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-04.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-04.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -450,7 +385,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-05.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-05.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -463,7 +398,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-06.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-06.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -476,7 +411,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-07.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-07.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -489,7 +424,7 @@
                     <div class="swiper-slide">
                         <span class="offer">30%</span>
                         <a href="#">
-                            <img class="Dark" src="Web/assets/img/tshirt-08.png" alt="">
+                            <img class="Dark" src="{{ URL::asset('Web/assets/img/tshirt-08.png') }}" alt="">
                         </a>
                         <div class="info-collec">
                             <p>T-shirt Summer Vibes</p>
@@ -511,7 +446,6 @@
     </div>
     <!-- End Second Gallery -->
 
-
     <!-- Start Subscribe -->
     <div class="subscribe padbtm40">
         <div class="container">
@@ -527,8 +461,6 @@
     </div>
     <!-- End Subscribe -->
 
-
-
     <!-- Modal -->
     <div class="modal fade" id="add-evaluation" tabindex="-1" role="dialog" aria-labelledby="add-evaluationTitle"
         aria-hidden="true">
@@ -540,18 +472,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('reviews.store') }}" method="POST">
+                <form action="{{ route('user.reviews.store') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <header class='header '>
                             <h6>تقييم النجوم :</h6>
                         </header>
-
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <section class='rating-widget'>
 
                             <!-- Rating Stars Box -->
                             <div class='rating-stars text-center'>
-                                <ul id='stars' name="rating">
+                                <ul id='stars' data-star="">
+                                    <input type="hidden" name="rating" value="">
                                     <li class='star selected' title='Poor' data-value='1'>
                                         <i class='fa fa-star fa-fw'></i>
                                     </li>
@@ -574,10 +507,11 @@
                         <header class="header">
                             <h6>إكتب رأيك (إختياري):</h6>
                         </header>
-                        <input type="text">
+                        <input type="text" name="comment" id="comment">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-mainColor brdr-r-20">Save changes</button>
+                        <button type="button" class="btn btn-secondary brdr-r-20 " data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-mainColor brdr-r-20 ">Save changes</button>
                     </div>
                 </form>
             </div>
@@ -703,5 +637,15 @@
             });
 
         });
+    </script>
+    {{-- This Script Is To Get The Value Of The star --}}
+    <script>
+        $(window).ready(function() {
+            $('.modal .rating-stars ul .star').on('click', function() {
+                var valueStar = $(this).data('value')
+                // console.log()
+                $('.modal .rating-stars ul input').val(valueStar)
+            })
+        })
     </script>
 @endsection

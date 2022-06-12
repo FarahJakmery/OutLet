@@ -31,16 +31,17 @@ class McategoryController extends Controller
      */
     public function show($id)
     {
-        $mainCategory = Mcategory::find($id);
-        $subcategories = Subcategory::where('mcategory_id', $id)->get();
-        $array = [
-            'mainCategory' => $mainCategory,
-            'subcategories' => $subcategories,
-        ];
+        // $mainCategory = Mcategory::find($id);
+        // $subcategories = Subcategory::where('mcategory_id', $id)->get();
+        // $array = [
+        //     'mainCategory' => $mainCategory,
+        //     'subcategories' => $subcategories,
+        // ];
+        $MainCategory = Mcategory::with('subcategories')->find($id);
 
-        if ($array)
-            return $this->apiResponse($array, 'OK', 200);
+        if ($MainCategory)
+            return $this->apiResponse($MainCategory, 'OK', 200);
         else
-            return $this->apiResponse($array, 'The Main category Not Found', 401);
+            return $this->apiResponse($MainCategory, 'The Main category Not Found', 401);
     }
 }

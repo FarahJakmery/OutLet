@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/datatables.min.css') }}" rel="stylesheet" />
@@ -21,35 +20,27 @@
     <!--- Select2 css --->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
-    <!---Internal  Prism css-->
-    <link href="{{ URL::asset('assets/plugins/prism/prism.css') }}" rel="stylesheet">
-
-    <!--Internal  Font Awesome -->
-    <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-
-    <!--Internal Sumoselect css-->
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
+    <!--- Animations css-->
+    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
 @endsection
-
 @section('title')
-    قائمة الطلبات
+    سجل الطلبات
 @endsection
-
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الطلبات</h4><span class="text-muted mt-1 tx-13 ms-2 mb-0">/
-                    قائمة الطلبات</span>
+        <div class="left-content">
+            <div class="my-auto">
+                <div class="d-flex">
+                    <h4 class="content-title mb-0 my-auto">الطلبات</h4><span class="text-muted mt-1 tx-13 ms-2 mb-0">/
+                        سجل الطلبات</span>
+                </div>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
-
 @section('content')
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -89,7 +80,6 @@
 
     <!-- row -->
     <div class="row row-sm">
-
         <!--Bordered Table-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
@@ -99,13 +89,14 @@
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0"><b>#</b></th>
-                                    <th class="border-bottom-0"><b>رقم الطلب</b></th>
-                                    <th class="border-bottom-0"><b>تاريخ الطلب</b></th>
-                                    <th class="border-bottom-0"><b>اسم البائع</b></th>
-                                    <th class="border-bottom-0"><b>السعر الإجمالي</b></th>
-                                    <th class="border-bottom-0"><b>حالة الطلب</b></th>
-                                    <th class="border-bottom-0"><b>الخيارات</b></th>
+                                    <th class="border-bottom-0">#</th>
+                                    <th class="border-bottom-0">رقم الطلب</th>
+                                    <th class="border-bottom-0">تاريخ الطلب</th>
+                                    <th class="border-bottom-0">الزبون</th>
+                                    <th class="border-bottom-0">التكلفة الإجمالية</th>
+                                    <th class="border-bottom-0">حالة الطلب</th>
+                                    <th class="border-bottom-0">تفاصيل الطلب</th>
+                                    <th class="border-bottom-0">العمليات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,24 +105,64 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $order->order_number }}</td>
                                         <td>{{ $order->created_at }}</td>
-                                        <td>{{ $order->seller_id }}</td>
+                                        <td>{{ $order->user->name }}</td>
                                         <td>{{ $order->total_price }}</td>
-                                        <td>{{ $order->statuses->status }}</td>
                                         <td>
-                                            <div class="btn-icon-list">
-                                                <a href="{{ route('orders.show', $order->id) }}"
-                                                    class="btn btn-primary btn-icon">
-                                                    <i class="las la-search"></i>
-                                                </a>
-                                                <a href="{{ route('orders.edit', $order->id) }}"
-                                                    class="btn btn-info btn-icon">
-                                                    <i class="las la-pen"></i>
-                                                </a>
-                                                <a class="modal-effect btn btn-danger btn-icon"
-                                                    data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                                    data-id="{{ $order->id }}" data-name="{{ $order->order_number }}"
-                                                    href="#DeleteModal">
-                                                    <i class="las la-trash"></i>
+                                            @if ($order->order_status == 'paying')
+                                                <h4 class="text-info">
+                                                    <span class="badge bg-info">
+                                                        مدفوع
+                                                    </span>
+                                                </h4>
+                                            @elseif($order->order_status == 'wait_shimp')
+                                                <h4 class="text-danger">
+                                                    <span class="badge bg-danger">
+                                                        بانتظار الشحن
+                                                    </span>
+                                                </h4>
+                                            @elseif($order->order_status == 'shimp')
+                                                <h4 class="text-warning">
+                                                    <span class="badge bg-warning">
+                                                        تم الشحن
+                                                    </span>
+                                                </h4>
+                                            @elseif ($order->order_status == 'done')
+                                                <h4 class="text-success">
+                                                    <span class="badge bg-success">
+                                                        تم التسليم
+                                                    </span>
+                                                </h4>
+                                            @else
+                                                <h4 class="text-danger">
+                                                    <span class="badge bg-danger">
+                                                        ملغي
+                                                    </span>
+                                                </h4>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.orders.show', $order->id) }}">
+                                                <button class="btn btn-info btn-block">تفاصيل الطلب</button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button data-bs-toggle="dropdown" class="btn btn-primary btn-block">
+                                                العمليات
+                                                <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i>
+                                            </button>
+
+                                            <div class="dropdown-menu">
+                                                <a class="modal-effect dropdown-item" data-bs-effect="effect-scale"
+                                                    data-id="{{ $order->id }}"
+                                                    data-order_number="{{ $order->order_number }}"
+                                                    data-total_price="{{ $order->total_price }}"
+                                                    data-user_name="{{ $order->user->name }}" data-bs-toggle="modal"
+                                                    href="#modaldemo8">تغيير حالة الدفع</a>
+                                                <a class="modal-effect dropdown-item" data-bs-effect="effect-flip-vertical"
+                                                    data-id="{{ $order->id }}"
+                                                    data-order_number="{{ $order->order_number }}" data-bs-toggle="modal"
+                                                    href="#DeleteModal" title="حذف">
+                                                    حذف الطلب
                                                 </a>
                                             </div>
                                         </td>
@@ -144,41 +175,98 @@
             </div>
         </div>
         <!--/div-->
-    </div>
-    <!-- row closed -->
 
-    <!-- Modal effects -->
-    <div class="modal fade" id="DeleteModal">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-                <form method="POST" action="orders/destroy">
-                    {{ method_field('delete') }}
-                    {{ csrf_field() }}
-                    <div class="modal-body tx-center pd-y-20 pd-x-20">
+
+        <!-- Modal effects -->
+        <div class="modal fade" id="modaldemo8">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">تغيير حالة الطلب</h6>
                         <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <i class="icon icon ion-ios-close-circle-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block">
-                        </i>
-                        <h1 class="tx-danger mg-b-20">خطر !!</h1>
-                        <p class="mg-b-20 mg-x-20">
-                        <h3>هل تريد حقا حذف هذا الطلب ؟؟</h3>
-                        </p>
-                        <input type="hidden" name="id" id="id" value="">
-                        <input class="form-control" name="order_number" id="name" type="text" readonly>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn ripple btn-danger">حفظ التغييرات</button>
-                        <button type="button" class="btn ripple btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                    </div>
-                </form>
+                    <form action="orders/update" method="POST">
+                        {{ method_field('patch') }}
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            {{-- حقل عرض رقم الطلب --}}
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>رقم الطلب</b>
+                                </label>
+                                <input type="hidden" name="id" id="id" value="">
+                                <input type="text" class="form-control" name="order_number" id="order_number" required
+                                    readonly>
+                            </div>
+                            {{-- حقل عرض التكلفة الإجمالية --}}
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>التكلفة الإجمالية</b>
+                                </label>
+                                <input type="text" class="form-control" name="total_price" id="total_price" required
+                                    readonly>
+                            </div>
+                            {{-- حقل عرض اسم الزبون --}}
+                            <div class=" form-group">
+                                <label for="exampleInputEmail1">
+                                    <b>اسم الزبون</b>
+                                </label>
+                                <input type="text" class="form-control" name="user_id" id="user_name" required readonly>
+                            </div>
+                            {{-- تغيير حالة الطلب --}}
+                            <p class="mg-b-10">تغيير حالة الطلب</p>
+                            <select id="order_status" name="order_status" required class="form-control SlectBox">
+                                <!--placeholder-->
+                                <option selected="true" disabled="disabled">-- حدد حالة الطلب --</option>
+                                <option value="wait_shimp">بانتظار الشحن</option>
+                                <option value="shimp">قيد الشحن</option>
+                                <option value="done">تم التسليم</option>
+                                <option value="canceled">ملغي</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn ripple btn-primary" type="submit">حفظ التعديلات</button>
+                            <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Modal effects-->
-@endsection
+        <!-- End Modal effects-->
 
+        <!-- Delete order -->
+        <div class="modal fade" id="DeleteModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content tx-size-sm">
+                    <form method="POST" action="orders/destroy">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <div class="modal-body tx-center pd-y-20 pd-x-20">
+                            <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="icon icon ion-ios-close-circle-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block">
+                            </i>
+                            <h1 class="tx-danger mg-b-20">خطر !!</h1>
+                            <p class="mg-b-20 mg-x-20">هل تريد حقا حذف هذا الطلب؟؟</h3>
+                            </p>
+                            <input type="hidden" name="id" id="id" value="">
+                            <input class="form-control" name="order_number" id="order_number" type="text" readonly>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn ripple btn-danger">حفظ التغييرات</button>
+                            <button type="button" class="btn ripple btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End modal -->
+    </div>
+@endsection
 @section('js')
     <!--Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -194,30 +282,27 @@
     <script src="{{ URL::asset('assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-
-    <!--Internal  Form-elements js-->
-    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
-
     <!-- Internal Select2.min js -->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-
-    <!--Internal Sumoselect js-->
-    <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
-
     <!-- Internal Modal js-->
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
-
-    <!--Internal  Clipboard js-->
-    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
-
-    <!-- Internal Prism js-->
-    <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
-
+    {{-- This script return the value of each input for editing it --}}
+    <script>
+        $('#modaldemo8').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var order_number = button.data('order_number')
+            var total_price = button.data('total_price')
+            var user_name = button.data('user_name')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #order_number').val(order_number);
+            modal.find('.modal-body #total_price').val(total_price);
+            modal.find('.modal-body #user_name').val(user_name);
+        })
+    </script>
     {{-- This script return the value of each input for deleting it --}}
     <script>
         $('#DeleteModal').on('show.bs.modal', function(event) {

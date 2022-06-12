@@ -75,7 +75,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
             <div class="card">
                 <div class="card-header pb-0">
-                    <a href="{{ route('users.create') }}">
+                    <a href="{{ route('admin.users.create') }}">
                         <button type="submit" class="btn btn-primary">إضافة مستخدم</button>
                     </a>
                 </div>

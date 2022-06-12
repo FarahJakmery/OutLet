@@ -157,10 +157,24 @@
                     <div class="prudact-images">
                         @foreach ($Products as $Product)
                             <div class="item">
-                                <a href="#" class="item-fav addtowishlist" data-product_id="{{ $Product->id }}">
-                                    <span class="love"><i class="far fa-heart"></i></span>
-                                </a>
-                                <a href="{{ route('products.show', $Product->id) }}" class="to-item-page">
+                                {{-- Add To Wishlist --}}
+                                @if (Auth::user() == null)
+                                    <a href="#">
+                                        <span class="love"><i class="far fa-heart"></i></span>
+                                    </a>
+                                @else
+                                    @if (DB::table('wishlists')->where('product_id', $product->id)->where('user_id', Auth::user()->id)->exists())
+                                        <a class="addtowishlist" href="#" data-product_id="{{ $Product->id }}">
+                                            <span class="love like"><i class="far fa-heart"></i></span>
+                                        </a>
+                                    @else
+                                        <a class="addtowishlist" href="#" data-product_id="{{ $Product->id }}">
+                                            <span class="love"><i class="far fa-heart"></i></span>
+                                        </a>
+                                    @endif
+                                @endif
+
+                                <a href="{{ route('user.products.show', $Product->id) }}" class="to-item-page">
                                     <img class="Yellow" src="Web/assets/img/tshirt-06.png" alt="">
                                     <div class="item-info">
                                         <p>{{ $Product->translate('ar')->product_name }}</p>
@@ -211,8 +225,6 @@
 @endsection
 
 @section('scripts')
-    <!-- Main JS File -->
-    <script src="{{ URL::asset('Web/assets/js/multirange.js') }}"></script>
     {{-- This Script is to Add to Wishlist --}}
     <script>
         $(document).ready(function() {
@@ -259,7 +271,7 @@
                 $.ajax({
                     type: 'get',
                     data: "brand=" + Finalbrand,
-                    url: '{{ route('getProducts') }}',
+                    url: '{{ route('user.getProducts') }}',
                     success: function(response) {
                         $('#updateDiv').html(response);
                     }
@@ -279,7 +291,7 @@
                 $.ajax({
                     type: 'get',
                     data: "mainCategory=" + FinalMainCategory,
-                    url: '{{ route('getProducts') }}',
+                    url: '{{ route('user.getProducts') }}',
                     success: function(response) {
                         $('#updateDiv').html(response);
                     }
@@ -299,7 +311,7 @@
                 $.ajax({
                     type: 'get',
                     data: "SubCategory=" + FinalSubCategory,
-                    url: '{{ route('getProducts') }}',
+                    url: '{{ route('user.getProducts') }}',
                     success: function(response) {
                         $('#updateDiv').html(response);
                     }
@@ -319,7 +331,7 @@
                 $.ajax({
                     type: 'get',
                     data: "Size=" + FinalSize,
-                    url: '{{ route('getProducts') }}',
+                    url: '{{ route('user.getProducts') }}',
                     success: function(response) {
                         $('#updateDiv').html(response);
                     }

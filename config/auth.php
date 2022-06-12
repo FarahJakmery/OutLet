@@ -14,8 +14,18 @@ return [
     */
 
     'defaults' => [
-        'guard'     => 'api',
+        'guard'     => 'web',
         'passwords' => 'users',
+    ],
+
+    'admin' => [
+        'driver'    => 'eloquent',
+        'model'     => App\Models\Admin::class,
+    ],
+
+    'seller' => [
+        'driver'   => 'eloquent',
+        'model'    => App\Models\Seller::class,
     ],
 
     /*
@@ -39,6 +49,16 @@ return [
         'web' => [
             'driver'   => 'session',
             'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver'   => 'session',
+            'provider' => 'admins',
+        ],
+
+        'seller' => [
+            'driver'   => 'session',
+            'provider' => 'sellers',
         ],
 
         'api' => [
@@ -71,10 +91,15 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Seller::class,
+        ],
     ],
 
     /*
@@ -99,6 +124,16 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Admin::class,
+        ],
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Seller::class,
+        ]
     ],
 
     /*

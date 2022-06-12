@@ -19,7 +19,6 @@ class CreateProductTranslationsTable extends Migration
             $table->string('locale')->index();
             $table->string('product_name', 50);
             $table->string('description', 50);
-            $table->string('status', 50);
             $table->unique(['product_id', 'locale']);
         });
     }

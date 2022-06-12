@@ -15,18 +15,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $products = auth()->user()->wishlist()->latest()->get();
-        return view('User.Orders.wishlist', compact('products'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $products = auth()->user()->wishlist()->latest()->paginate(10);
+        return view('User.Wishlist.wishlist', compact('products'));
     }
 
     /**
@@ -40,39 +30,6 @@ class WishlistController extends Controller
         if (!auth()->user()->wishlistHas(request('productId'))) {
             auth()->user()->wishlist()->attach(request('productId'));
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

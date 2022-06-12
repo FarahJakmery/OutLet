@@ -80,7 +80,7 @@ class SubcategoryController extends Controller
         Subcategory::create($data);
 
         session()->flash('Add', 'تم إضافة التصنيف الثانوي بنجاح');
-        return redirect('/subcategories');
+        return redirect('admin/subcategories');
     }
 
     /**
@@ -137,7 +137,7 @@ class SubcategoryController extends Controller
         $Subcate->update($data);
 
         session()->flash('edit', 'تم تعديل التصنيف الثانوي بنجاح');
-        return redirect('/subcategories');
+        return redirect('admin/subcategories');
     }
 
     /**
@@ -156,6 +156,6 @@ class SubcategoryController extends Controller
         }
         $subcate->delete();
         session()->flash('delete', 'تم حذف التصنيف الثانوي بنجاح');
-        return redirect('/subcategories');
+        return redirect('admin/subcategories');
     }
 }

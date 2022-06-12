@@ -95,7 +95,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
+                    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data"
                         autocomplete="on">
                         {{ csrf_field() }}
 
@@ -127,19 +127,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <p class="mg-b-20">تاريخ إنشاء المنتج</p>
-                                        {{-- <div class="row row-sm">
-                                            <div class="input-group">
-                                                <div class="input-group-text">
-                                                    <div class="input-group-text">
-                                                        <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                    </div>
-                                                </div>
-                                                <input class="form-control fc-datepicker" name="product_date" type="text"
-                                                    value="{{ date('Y-m-d H:i:s') }}" required>
-                                            </div>
-                                        </div> --}}
-
-                                        <div class="input-group col-md-4">
+                                        <div class="input-group">
                                             <div class="input-group-text">
                                                 <div class="input-group-text">
                                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
@@ -148,7 +136,7 @@
                                                 type="text" value="{{ date('Y-m-d H:i:s') }}" required>
                                         </div>
                                     </div>
-                                    {{-- <div class="col">
+                                    <div class="col">
                                         <p class="mg-b-20">تاريخ إنتهاء فترة عرض المنتج</p>
                                         <div class="row row-sm">
                                             <div class="input-group">
@@ -161,14 +149,15 @@
                                                     name="expiry_date" class="form-control" required>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div><br>
 
                                 {{-- Row 3 --}}
                                 <div class="row">
                                     <div class="col">
                                         <p class="mg-b-10">العلامات التجارية</p>
-                                        <select name="brand_id" class="SlectBox form-control">
+                                        <select name="brand_id" class="SlectBox form-control"
+                                            onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">
                                                     {{ $brand->translate('en')->brand_name }}
@@ -179,8 +168,7 @@
 
                                     <div class="col">
                                         <p class="mg-b-10">التصنيفات الرئيسية</p>
-                                        <select name="mcategory_id" class="SlectBox form-control"
-                                            onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                        <select id="mcategory_id" name="mcategory_id" class="SlectBox form-control">
                                             @foreach ($MCates as $MCate)
                                                 <option value="{{ $MCate->id }}">
                                                     {{ $MCate->translate('en')->category_name }}
@@ -405,4 +393,37 @@
             autoclose: true
         }).val();
     </script>
+
+    {{-- This script to get the products that belongs to specific Section --}}
+    {{-- <script>
+        $(document).ready(function() {
+            $('select[name="brand_id"]').on('change', function() {
+                var BrandId = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                if (BrandId) {
+                    $.ajax({
+                        url: "{{ URL::to('Brand') }}/" + BrandId,
+                        type: "GET",
+                        dataType: "json",
+
+                        success: function(data) {
+                            $('select[name="mcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="mcategory_id"]').append(
+                                    '<option value="' +
+                                    value + '">' + value + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+    </script> --}}
 @endsection

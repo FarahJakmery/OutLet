@@ -3,15 +3,18 @@
 <aside class="app-sidebar sidebar-scroll">
 
     <div class="main-sidebar-header active">
-        <a class="desktop-logo logo-light active" href="index.html"><img
-                src="{{ URL::asset('assets/img/brand/logo.png') }}" class="main-logo" alt="logo"></a>
-        <a class="desktop-logo logo-dark active" href="index.html"><img
-                src="{{ URL::asset('assets/img/brand/logo-white.png') }}" class="main-logo dark-theme" alt="logo"></a>
-        <a class="logo-icon mobile-logo icon-light active" href="index.html"><img
-                src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="logo-icon" alt="logo"></a>
-        <a class="logo-icon mobile-logo icon-dark active" href="index.html"><img
-                src="{{ URL::asset('assets/img/brand/favicon-white.png') }}" class="logo-icon dark-theme"
-                alt="logo"></a>
+        <a class="desktop-logo logo-light active" href="{{ route('admin.home') }}">
+            <img src="{{ URL::asset('assets/img/brand/logo.png') }}" class="main-logo" alt="logo">
+        </a>
+        <a class="desktop-logo logo-dark active" href="{{ route('admin.home') }}">
+            <img src="{{ URL::asset('assets/img/brand/logo-white.png') }}" class="main-logo dark-theme" alt="logo">
+        </a>
+        <a class="logo-icon mobile-logo icon-light active" href="{{ route('admin.home') }}">
+            <img src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="logo-icon" alt="logo">
+        </a>
+        <a class="logo-icon mobile-logo icon-dark active" href="{{ route('admin.home') }}">
+            <img src="{{ URL::asset('assets/img/brand/favicon-white.png') }}" class="logo-icon dark-theme" alt="logo">
+        </a>
     </div>
 
     <div class="main-sidemenu">
@@ -19,8 +22,8 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ URL::asset('assets/img/faces/6.jpg') }}"><span
-                        class="avatar-status profile-status bg-green"></span>
+                        src="{{ URL::asset('assets/img/faces/6.jpg') }}">
+                    <span class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
                     <h4 class="fw-semibold mt-3 mb-0">{{ Auth::user()->name }}</h4>
@@ -32,7 +35,7 @@
         <ul class="side-menu">
             <li class="side-item side-item-category">الرئيسية</li>
             <li class="slide">
-                <a class="side-menu__item" href="index.html">
+                <a class="side-menu__item" href="{{ route('admin.home') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
@@ -44,123 +47,125 @@
                     </span>
                 </a>
             </li>
-            @can('العلامات التجارية')
-                <li class="slide">
-                    <a class="side-menu__item" href="{{ url('/' . ($page = 'brands')) }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M5 5h4v4H5zm10 10h4v4h-4zM5 15h4v4H5zM16.66 4.52l-2.83 2.82 2.83 2.83 2.83-2.83z"
-                                opacity=".3" />
-                            <path
-                                d="M16.66 1.69L11 7.34 16.66 13l5.66-5.66-5.66-5.65zm-2.83 5.65l2.83-2.83 2.83 2.83-2.83 2.83-2.83-2.83zM3 3v8h8V3H3zm6 6H5V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm8-2v8h8v-8h-8zm6 6h-4v-4h4v4z" />
-                        </svg>
-                        <span class="side-menu__label">
-                            العلامات التجارية
-                        </span>
-                    </a>
-                </li>
-            @endcan
-            @can('التصنيفات')
-                <li class="slide ">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path
-                                d="M5 9h14V5H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5S7.83 8.5 7 8.5 5.5 7.83 5.5 7 6.17 5.5 7 5.5zM5 19h14v-4H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"
-                                opacity=".3" />
-                            <path
-                                d="M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zm-1 6H5v-4h14v4zm-12-.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6H5V5h14v4zM7 8.5c.83 0 1.5-.67 1.5-1.5S7.83 5.5 7 5.5 5.5 6.17 5.5 7 6.17 8.5 7 8.5z" />
-                        </svg>
-                        <span class="side-menu__label">
-                            التصنيفات
-                        </span>
-                        <i class="angle fe fe-chevron-down"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        @can('قائمة التصنيفات الرئيسية')
-                            <li>
-                                <a class="slide-item" href="{{ url('/' . ($page = 'mcategories')) }}">
-                                    التصنيفات الرئيسية
-                                </a>
-                            </li>
-                        @endcan
-                        @can('قائمة التصنيفات الثانوية')
-                            <li>
-                                <a class="slide-item" href="{{ url('/' . ($page = 'subcategories')) }}">
-                                    التصنيفات الثانوية
-                                </a>
-                            </li>
-                        @endcan
-                        @can('قائمة الفروع')
-                            <li>
-                                <a class="slide-item" href="{{ url('/' . ($page = 'branches')) }}">
-                                    الفروع
-                                </a>
-                            </li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan
+            {{-- @can('العلامات التجارية') --}}
+            <li class="slide">
+                <a class="side-menu__item" href="{{ url('/' . ($page = 'admin/brands')) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M5 5h4v4H5zm10 10h4v4h-4zM5 15h4v4H5zM16.66 4.52l-2.83 2.82 2.83 2.83 2.83-2.83z"
+                            opacity=".3" />
+                        <path
+                            d="M16.66 1.69L11 7.34 16.66 13l5.66-5.66-5.66-5.65zm-2.83 5.65l2.83-2.83 2.83 2.83-2.83 2.83-2.83-2.83zM3 3v8h8V3H3zm6 6H5V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm8-2v8h8v-8h-8zm6 6h-4v-4h4v4z" />
+                    </svg>
+                    <span class="side-menu__label">
+                        العلامات التجارية
+                    </span>
+                </a>
+            </li>
+            {{-- @endcan --}}
+            {{-- @can('التصنيفات') --}}
+            <li class="slide ">
+                <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M5 9h14V5H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5S7.83 8.5 7 8.5 5.5 7.83 5.5 7 6.17 5.5 7 5.5zM5 19h14v-4H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"
+                            opacity=".3" />
+                        <path
+                            d="M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zm-1 6H5v-4h14v4zm-12-.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6H5V5h14v4zM7 8.5c.83 0 1.5-.67 1.5-1.5S7.83 5.5 7 5.5 5.5 6.17 5.5 7 6.17 8.5 7 8.5z" />
+                    </svg>
+                    <span class="side-menu__label">
+                        التصنيفات
+                    </span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+                    {{-- @can('قائمة التصنيفات الرئيسية') --}}
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/mcategories')) }}">
+                            التصنيفات الرئيسية
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('قائمة التصنيفات الثانوية') --}}
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/subcategories')) }}">
+                            التصنيفات الثانوية
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('قائمة الفروع') --}}
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/branches')) }}">
+                            الفروع
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+                </ul>
+            </li>
+            {{-- @endcan --}}
 
-            @can('المستخدمين')
-                <li class="slide ">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path
-                                d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z"
-                                opacity=".3" />
-                            <circle cx="15.5" cy="9.5" r="1.5" />
-                            <circle cx="8.5" cy="9.5" r="1.5" />
-                            <path
-                                d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
-                        </svg>
-                        <span class="side-menu__label">المستخدمين</span>
-                        <i class="angle fe fe-chevron-down"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        @can('قائمة المستخدمين')
-                            <li>
-                                <a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">
-                                    المستخدمين
-                                </a>
+            {{-- @can('المستخدمين') --}}
+            <li class="slide ">
+                <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 4c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-7 0c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm3.5 9.5c-2.33 0-4.32-1.45-5.12-3.5h1.67c.7 1.19 1.97 2 3.45 2s2.76-.81 3.45-2h1.67c-.8 2.05-2.79 3.5-5.12 3.5z"
+                            opacity=".3" />
+                        <circle cx="15.5" cy="9.5" r="1.5" />
+                        <circle cx="8.5" cy="9.5" r="1.5" />
+                        <path
+                            d="M12 16c-1.48 0-2.75-.81-3.45-2H6.88c.8 2.05 2.79 3.5 5.12 3.5s4.32-1.45 5.12-3.5h-1.67c-.69 1.19-1.97 2-3.45 2zm-.01-14C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                    </svg>
+                    <span class="side-menu__label">المستخدمين</span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+                    {{-- @can('قائمة المستخدمين') --}}
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/users')) }}">
+                            المستخدمين
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('صلاحيات المستخدمين') --}}
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/roles')) }}">
+                            أدوار المستخدمين
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+                </ul>
+            </li>
+            {{-- @endcan --}}
+            {{-- @can('المتجر') --}}
+            <li class="slide">
+                <a class="side-menu__item" data-bs-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                        class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path
+                            d="M3.31 11l2.2 8.01L18.5 19l2.2-8H3.31zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+                            opacity=".3" />
+                        <path
+                            d="M22 9h-4.79l-4.38-6.56c-.19-.28-.51-.42-.83-.42s-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1zM12 4.8L14.8 9H9.2L12 4.8zM18.5 19l-12.99.01L3.31 11H20.7l-2.2 8zM12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg><span class="side-menu__label">المتجر</span><i class="angle fe fe-chevron-down"></i></a>
+                <ul class="slide-menu">
+                    {{-- @can('قائمة المنتجات') --}}
+                    <li class="sub-slide">
+                        <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="#">
+                            <span class="sub-side-menu__label">المنتجات</span>
+                            <i class="sub-angle fe fe-chevron-down"></i>
+                        </a>
+                        <ul class="sub-slide-menu">
+                            <li><a class="sub-slide-item"
+                                    href="{{ url('/' . ($page = 'admin/products')) }}">المنتجات</a>
                             </li>
-                        @endcan
-                        @can('صلاحيات المستخدمين')
                             <li>
-                                <a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">
-                                    أدوار المستخدمين
-                                </a>
+                                <a class="sub-slide-item"
+                                    href="{{ url('/' . ($page = 'admin/reviews')) }}">المراجعات</a>
                             </li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan
-            @can('المتجر')
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                            class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path
-                                d="M3.31 11l2.2 8.01L18.5 19l2.2-8H3.31zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
-                                opacity=".3" />
-                            <path
-                                d="M22 9h-4.79l-4.38-6.56c-.19-.28-.51-.42-.83-.42s-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1zM12 4.8L14.8 9H9.2L12 4.8zM18.5 19l-12.99.01L3.31 11H20.7l-2.2 8zM12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                        </svg><span class="side-menu__label">المتجر</span><i class="angle fe fe-chevron-down"></i></a>
-                    <ul class="slide-menu">
-                        @can('قائمة المنتجات')
-                            <li class="sub-slide">
-                                <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="#">
-                                    <span class="sub-side-menu__label">المنتجات</span>
-                                    <i class="sub-angle fe fe-chevron-down"></i>
-                                </a>
-                                <ul class="sub-slide-menu">
-                                    <li><a class="sub-slide-item" href="{{ url('/' . ($page = 'products')) }}">المنتجات</a>
-                                    </li>
-                                    <li>
-                                        <a class="sub-slide-item" href="{{ url('/' . ($page = 'reviews')) }}">المراجعات</a>
-                                    </li>
-                                    {{-- <li class="sub-slide-sub">
+                            {{-- <li class="sub-slide-sub">
                                         <a class="sub-side-menu__item sub-slide-item" data-bs-toggle="sub-slide-sub"
                                             href="#"><span class="sub-side-menu__label">Level03</span><i
                                                 class="sub-angle fe fe-chevron-down"></i></a>
@@ -169,33 +174,109 @@
                                             <li><a class="sub-slide-item" href="#">Level2</a></li>
                                         </ul>
                                     </li> --}}
-                                </ul>
-                            </li>
-                        @endcan
-                        @can('قائمة القياسات')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'sizes')) }}">المقاسات</a></li>
-                        @endcan
-                        @can('قائمة الألوان')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'colors')) }}">الألوان</a></li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan
-
+                        </ul>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('قائمة القياسات') --}}
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/sizes')) }}">المقاسات</a></li>
+                    {{-- @endcan --}}
+                    {{-- @can('قائمة الألوان') --}}
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/colors')) }}">الألوان</a></li>
+                    {{-- @endcan --}}
+                </ul>
+            </li>
+            {{-- @endcan --}}
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                <a class="side-menu__item" data-bs-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M13 4H6v16h12V9h-5V4zm3 14H8v-2h8v2zm0-6v2H8v-2h8z" opacity=".3" />
                         <path
                             d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
-                    </svg><span class="side-menu__label">الطلبات</span><i class="angle fe fe-chevron-down"></i></a>
+                    </svg>
+                    <span class="side-menu__label">سجل الطلبات</span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'orders')) }}">قائمة الطلبات</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'statuses')) }}">حالات الطلب</a></li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/orders')) }}">
+                            الطلبات
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/paying')) }}">
+                            الطلبات المدفوعة
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/wait_shimp')) }}">
+                            الطلبات بانتظار الشحن
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/shimp')) }}">
+                            الطلبات قيد الشحن
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/done')) }}">
+                            الطلبات المسلمة
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/canceled')) }}">
+                            الطلبات الملغية
+                        </a>
+                    </li>
                 </ul>
             </li>
-
+            <li class="slide">
+                <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" class="side-menu__icon"
+                        viewBox="0 0 24 24">
+                        <g>
+                            <rect fill="none" />
+                        </g>
+                        <g>
+                            <g />
+                            <g>
+                                <path
+                                    d="M21,5c-1.11-0.35-2.33-0.5-3.5-0.5c-1.95,0-4.05,0.4-5.5,1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45,4.9,1,6v14.65 c0,0.25,0.25,0.5,0.5,0.5c0.1,0,0.15-0.05,0.25-0.05C3.1,20.45,5.05,20,6.5,20c1.95,0,4.05,0.4,5.5,1.5c1.35-0.85,3.8-1.5,5.5-1.5 c1.65,0,3.35,0.3,4.75,1.05c0.1,0.05,0.15,0.05,0.25,0.05c0.25,0,0.5-0.25,0.5-0.5V6C22.4,5.55,21.75,5.25,21,5z M3,18.5V7 c1.1-0.35,2.3-0.5,3.5-0.5c1.34,0,3.13,0.41,4.5,0.99v11.5C9.63,18.41,7.84,18,6.5,18C5.3,18,4.1,18.15,3,18.5z M21,18.5 c-1.1-0.35-2.3-0.5-3.5-0.5c-1.34,0-3.13,0.41-4.5,0.99V7.49c1.37-0.59,3.16-0.99,4.5-0.99c1.2,0,2.4,0.15,3.5,0.5V18.5z" />
+                                <path
+                                    d="M11,7.49C9.63,6.91,7.84,6.5,6.5,6.5C5.3,6.5,4.1,6.65,3,7v11.5C4.1,18.15,5.3,18,6.5,18 c1.34,0,3.13,0.41,4.5,0.99V7.49z"
+                                    opacity=".3" />
+                            </g>
+                            <g>
+                                <path
+                                    d="M17.5,10.5c0.88,0,1.73,0.09,2.5,0.26V9.24C19.21,9.09,18.36,9,17.5,9c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,10.69,16.18,10.5,17.5,10.5z" />
+                                <path
+                                    d="M17.5,13.16c0.88,0,1.73,0.09,2.5,0.26V11.9c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,13.36,16.18,13.16,17.5,13.16z" />
+                                <path
+                                    d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z" />
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="side-menu__label">الصفحات</span><i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/about')) }}">
+                            من نحن
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slide-item" href="{{ url('/' . ($page = 'admin/features')) }}">
+                            مميزات OutLet
+                        </a>
+                    </li>
+                    {{-- <li><a class="slide-item" href="invoice.html">Invoice</a></li>
+                    <li><a class="slide-item" href="pricing.html">Pricing</a></li>
+                    <li><a class="slide-item" href="gallery.html">Gallery</a></li>
+                    <li><a class="slide-item" href="todotask.html">Todotask</a></li>
+                    <li><a class="slide-item" href="faq.html">Faqs</a></li>
+                    <li><a class="slide-item" href="empty.html">Empty Page</a></li> --}}
+                </ul>
+            </li>
             {{-- <li class="side-item side-item-category">General</li>
             <li class="slide">
                 <a class="side-menu__item" href="icons.html">

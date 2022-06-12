@@ -150,7 +150,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('sizes.store') }}" method="POST" autocomplete="on">
+                    <form action="{{ route('admin.sizes.store') }}" method="POST" autocomplete="on">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             {{-- حقل إدخال اسم المقاس --}}

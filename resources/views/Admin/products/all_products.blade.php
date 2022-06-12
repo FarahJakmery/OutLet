@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="main-dashboard-header-right">
-            <a href="{{ route('products.create') }}">
+            <a href="{{ route('admin.products.create') }}">
                 <button type="submit" class="btn btn-primary">إضافة منتج</button>
             </a>
         </div>
@@ -232,7 +232,7 @@
             <div class="row row-sm">
                 @foreach ($products as $product)
                     <div class="col-md-6 col-lg-6 col-xl-4  col-sm-6">
-                        <a href="{{ route('products.show', $product->id) }}">
+                        <a href="{{ route('admin.products.show', $product->id) }}">
                             <div class="card">
                                 <div class="card-body h-100">
                                     <div class="pro-img-box">
@@ -242,9 +242,16 @@
                                                 <i class="mdi mdi-heart-outline ms-auto wishlist"></i>
                                             </a>
                                         </div>
-                                        <img class="w-100"
-                                            src="{{ asset('images/The_Product/' . $product->photo_name) }}"
-                                            alt="product-image">
+                                        @foreach ($product->images as $image)
+                                            @if ($loop->first)
+                                                <div class="main-img">
+                                                    <img class="w-100" src="{{ asset($image->image_name) }}"
+                                                        alt="product-image">
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                        {{-- <img class="w-100" src="{{ asset($product->photo_name) }}"
+                                            alt="product-image"> --}}
                                     </div>
                                     <div class="text-center pt-3">
                                         <h3 class="h6 mb-2 mt-4 fw-bold text-uppercase">

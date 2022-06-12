@@ -167,7 +167,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('branches.store') }}" method="POST">
+                    <form action="{{ route('admin.branches.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             {{-- حقل إدخال اسم الفرع باللغة العربية --}}

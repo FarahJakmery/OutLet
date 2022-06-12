@@ -71,7 +71,7 @@ class McategoryController extends Controller
         $mcategory->brands()->attach($request->brands);
 
         session()->flash('Add', 'تم إضافة التصنيف الرئيسي بنجاح');
-        return redirect('/mcategories');
+        return redirect('admin/mcategories');
     }
 
     /**
@@ -109,7 +109,7 @@ class McategoryController extends Controller
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-            $image_name = $this->saveImage($request->file('photo_name'), 'images/Main_category');
+            $image_name = $this->saveImage($request->file('photo_name'), 'images/Main_category', 243, 83);
         }
 
         $data = [
@@ -129,7 +129,7 @@ class McategoryController extends Controller
         $mcategory->brands()->sync($request->brands);
 
         session()->flash('edit', 'تم تعديل التصنيف الرئيسي بنجاح');
-        return redirect('/mcategories');
+        return redirect('admin/mcategories');
     }
 
     /**
@@ -148,6 +148,6 @@ class McategoryController extends Controller
         }
         $mcate->delete();
         session()->flash('delete', 'تم حذف التصنيف الرئيسي بنجاح');
-        return redirect('/mcategories');
+        return redirect('admins/mcategories');
     }
 }

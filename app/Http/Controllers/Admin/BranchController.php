@@ -52,7 +52,7 @@ class BranchController extends Controller
         Branch::create($data);
 
         session()->flash('Add', 'تم إضافة الفرع بنجاح');
-        return redirect('/branches');
+        return redirect('admin/branches');
     }
 
     /**
@@ -89,7 +89,7 @@ class BranchController extends Controller
         $branch->update($data);
 
         session()->flash('Add', 'تم تعديل الفرع بنجاح');
-        return redirect('/branches');
+        return redirect('admin//branches');
     }
 
     /**
@@ -103,6 +103,6 @@ class BranchController extends Controller
         $id = $request->id;
         Branch::find($id)->delete();
         session()->flash('delete', 'تم حذف الفرع بنجاح');
-        return redirect('/branches');
+        return redirect('admin//branches');
     }
 }

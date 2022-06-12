@@ -12,7 +12,7 @@
                 <div class="col-sm-5 info-side">
                     <div class="first-section">
                         <span>
-                            <a href="index.html">
+                            <a href="{{ route('user.home') }}">
                                 <i class="fa fa-arrow-right next"></i>
                                 عودة إلى المتجر
                             </a>
@@ -26,26 +26,43 @@
                                     {{ Session::get('fail') }}
                                 </div>
                             @endif
+                            @if (Session::get('Ok'))
+                                <div class="alert alert-danger">
+                                    {{ Session::get('Ok') }}
+                                </div>
+                            @endif
                             {{ csrf_field() }}
-                            <input name="email" value="{{ old('email') }}" type="text" placeholder="بريدك الالكتروني"
-                                required autocomplete="email" autofocus>
-                            <span class="text-danger">
-                                @error('email')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                            <div class="password">
-                                <i id="showpassword" class="far fa-eye-slash"></i>
-                                <input name="password" value="{{ old('password') }}" type="password"
-                                    placeholder="كلمة السر" required autocomplete="current-password">
+                            <div class="input-feild">
+                                <span class="icon">
+                                    <i class="fa-solid fa-at"></i>
+                                </span>
+                                <input name="email" value="{{ old('email') }}" type="text" placeholder="بريدك الالكتروني"
+                                    required autocomplete="email">
                                 <span class="text-danger">
-                                    @error('password')
+                                    @error('email')
                                         {{ $message }}
                                     @enderror
                                 </span>
                             </div>
+                            <div class="input-feild">
+                                <span class="icon">
+                                    <i class="fas fa-key"></i>
+                                </span>
+                                <div class="password">
+                                    <i id="showpassword" class="far fa-eye-slash"></i>
+                                    <input name="password" value="{{ old('password') }}" type="password" id="password"
+                                        placeholder="كلمة السر" required autocomplete="current-password">
+                                    <span class="text-danger">
+                                        @error('password')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="buttons">
-                                <button class="btn-one">Facebook
+                                <button class="btn-one">
+                                    Facebook
                                     <i class="fab fa-facebook-f"></i>
                                 </button>
                                 <button class="btn-two">
@@ -53,11 +70,13 @@
                                     <img src="{{ URL::asset('Web/assets/img/gmail.png') }}" alt="">
                                 </button>
                             </div>
-                            <button type="submit" class="log-btn"> تسجيل الدخول </button>
+                            <button class="log-btn" type="submit">
+                                تسجيل الدخول
+                            </button>
                             <span class="sign-up-link">
                                 لست عضواً ؟
                                 <a href="{{ route('user.register') }}">
-                                    سجل اللآن
+                                    سجل الآن
                                 </a>
                             </span>
                         </form>

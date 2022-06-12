@@ -2,16 +2,16 @@
 <title>@yield('title')</title>
 
 <!-- Favicon -->
-<link rel="icon" href="{{ URL::asset('public/assets/img/brand/favicon.png') }}" type="image/x-icon" />
+<link rel="icon" href="{{ URL::asset('assets/img/brand/favicon.png') }}" type="image/x-icon" />
 
 <!-- Icons css -->
-<link href="{{ URL::asset('public/assets/css/icons.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet">
 
 <!-- Bootstrap css -->
-<link href="{{ URL::asset('public/assets/plugins/bootstrap/css/bootstrap.rtl.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/bootstrap/css/bootstrap.rtl.min.css') }}" rel="stylesheet">
 
 <!--  Owl-carousel css-->
-<link href="{{ URL::asset('public/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet" />
 
 <!-- P-scroll bar css-->
 <link href="{{ URL::asset('assets/plugins/perfect-scrollbar/p-scrollbar.css') }}" rel="stylesheet" />
