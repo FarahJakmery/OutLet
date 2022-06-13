@@ -56,9 +56,11 @@ Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart
 
 Route::name('user.')->group(function () {
     // Send Message To Email
-    Route::post('/sent_message_to_email', [PageController::class, 'sent_message_to_email'])->name('sent_message_to_email');
+    Route::post('sent_message_to_email', [PageController::class, 'sent_message_to_email'])->name('sent_message_to_email');
     // Contact Us Route
-    Route::view('/contact', 'User.Contact.contact')->name('contact');
+    Route::view('contact', 'User.Contact.contact')->name('contact');
+    // pages Routes
+    Route::get('about', [PageController::class, 'about'])->name('about');
     // Register Route
     Route::post('/create', [UserController::class, 'create'])->name('create');
     Route::view('/register', 'User.Auth.register')->name('register');
