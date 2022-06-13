@@ -51,7 +51,7 @@
                         <div class="product-img-collection">
                             <div class="secondry-imgs swiper product-imgs">
                                 <div class="swiper-wrapper">
-                                    @foreach ($images as $image)
+                                    @foreach ($product->images as $image)
                                         @if ($loop->iteration)
                                             <div class="swiper-slide">
                                                 <img src="{{ asset($image->image_name) }}" alt="">
@@ -66,7 +66,7 @@
                                     <i class="fa fa-arrow-left"></i>
                                 </span>
                             </div>
-                            @foreach ($images as $image)
+                            @foreach ($product->images as $image)
                                 @if ($loop->first)
                                     <div class="main-img">
                                         <img src="{{ asset($image->image_name) }}" alt="">
@@ -75,7 +75,6 @@
                             @endforeach
                         </div>
                     </div>
-                    {{-- Product Detiels --}}
                     <div class="col-md-6 product-detiels">
                         <span class="offer">تخفيض</span>
                         {{-- The Name & Prices --}}
@@ -132,9 +131,11 @@
                         </div>
                         {{-- The Timer --}}
                         <div class="product-timer">
-                            <div class="timer" id="timer" data-id="12" data-end="jun 11, 2022 01:30:00"
-                                data-start="jun 9, 2022 01:30:00" data-diff="48" data-maxprice="7500" data-minprice="7020"
-                                data-decresetime="3600" data-endtime="false" data-decreaseprice="10">
+                            <div class="timer" id="timer" data-id="12" data-end="{{ $product->expiry_date }}"
+                                data-start="{{ $product->product_date }}" data-diff="{{ $totalHoursDiff }}"
+                                data-maxprice="{{ $product->max_price }}" data-minprice="{{ $product->min_price }}"
+                                data-decresetime="{{ $seconds }}" data-endtime="false"
+                                data-decreaseprice="{{ $total_for_one_item }}">
                             </div>
                         </div>
                     </div>
@@ -274,7 +275,6 @@
                                                                     <li><i class="fas fa-star"></i></li>
                                                                     <li><i class="fas fa-star"></i></li>
                                                                 @endif
-
                                                             </ul>
                                                         </span>
                                                         <span class="user-comment">
