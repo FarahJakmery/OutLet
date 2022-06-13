@@ -6,10 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\testMail;
+use App\Models\About;
 use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
+    public function about()
+    {
+        $about = About::translated()->first();
+        return view('User.pages.about', compact('about'));
+    }
+
     public function sent_message_to_email(Request $request)
     {
         $email = 'farahesp8266@gmail.com';
