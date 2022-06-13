@@ -173,7 +173,6 @@
                                         </a>
                                     @endif
                                 @endif
-
                                 <a href="{{ route('user.products.show', $Product->id) }}" class="to-item-page">
                                     <img class="Yellow" src="Web/assets/img/tshirt-06.png" alt="">
                                     <div class="item-info">
@@ -192,21 +191,13 @@
         </div>
 
         {{-- Pagination --}}
-        <div class="prudact-page-number">
-            <ul class="page-number">
-                <li class="number"><i class="fa fa-angle-right"></i></li>
-                <li class="number active">1</li>
-                <li class="number">2</li>
-                <li class="number">3</li>
-                <li class="number">4</li>
-                <li class="number"><i class="fa fa-angle-left"></i></li>
-            </ul>
+        <div class="section-pagination">
+            {{ $Products->links() }}
         </div>
         {{-- End Pagination --}}
 
     </div>
     <!-- End Prudact Page -->
-
 
     <!-- Start Subscribe -->
     <div class="subscribe padbtm40">
@@ -225,10 +216,11 @@
 @endsection
 
 @section('scripts')
-    {{-- This Script is to Add to Wishlist --}}
+    <!-- Main JS File -->
+    <script src="{{ URL::asset('Web/assets/js/multirange.js') }}"></script>
+    {{-- This Script Is To Add To Wishlist --}}
     <script>
         $(document).ready(function() {
-
             $(document).on('click', '.addtowishlist', function(e) {
                 e.preventDefault();
 
@@ -238,15 +230,20 @@
                     }
                 });
 
+                var X = $(this).attr('data-product_id')
+                console.log(X);
                 $.ajax({
                     type: "POST",
-                    url: "/wishlist",
+                    url: "{{ route('user.wishlist.store') }}",
                     data: {
                         'productId': $(this).attr('data-product_id'),
                     },
                     dataType: "json",
                     success: function(response) {
                         console.log(response);
+                    },
+                    error: function() {
+                        alert("error!!!!");
                     }
                 });
             });
