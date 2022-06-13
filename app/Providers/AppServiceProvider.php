@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\ProductComposer;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Using class based composers...
+        View::composer('*', ProductComposer::class);
     }
 }
