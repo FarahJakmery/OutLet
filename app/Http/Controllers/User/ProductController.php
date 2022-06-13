@@ -24,35 +24,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $date = new Carbon;
-        $Products = Product::translated()->where('expiry_date', '>', $date)->with('reviews')->orderBy('avg_rating', 'desc')->orderBy('reviews_count', 'desc')->get();
-        $Brands = Brand::all();
-        $mainCategories = Mcategory::all();
-        $SubCategories = Subcategory::all();
-        $Sizes = Size::all();
-        $Products = Product::all();
-        return view('User.Products.products', compact('Products', 'Brands', 'mainCategories', 'SubCategories', 'Sizes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $Products = Product::translated()->all();
+        return view('User.Products.products', compact('Products'));
     }
 
     /**
@@ -63,64 +36,33 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::with('reviews')->find($id);
-        $reviews = Review::all();
-        $colors = Color::where('product_id', $id)->get();
-        $images = ProductImage::where('product_id', $id)->get();
+        $product = Product::with('reviews', 'images:id,image_name,product_id')->find($id);
 
-        // Calculate the time difference between two dates in seconds
+        $totalHoursDiff   = $this->Date_Time_Difference_In_Seconds($product) / 60 / 60;
+
+        $total_for_one_item = $this->Amount_Of_Price_Decrease($product, $totalHoursDiff);
+
+        $seconds = $product->minutes * 60;
+
+        return view('User.Products.show_product', compact('product', 'totalHoursDiff', 'total_for_one_item', 'seconds'));
+    }
+
+    public function Date_Time_Difference_In_Seconds($product)
+    {
         $d1 = strtotime($product->product_date);
         $d2 = strtotime($product->expiry_date);
         $totalSecondsDiff = abs($d2 - $d1);
+        return $totalSecondsDiff;
+    }
 
-        // Calculate the time difference between two dates in hours
-        $totalHoursDiff   = $totalSecondsDiff / 60 / 60;
-
-        //
+    public function Amount_Of_Price_Decrease($product, $totalHoursDiff)
+    {
         $minutes = $product->minutes;
         $hour = $minutes / 60;
         $TwoPriceDiff = $product->max_price - $product->min_price;
         $one_item = $TwoPriceDiff * $hour;
         $total_for_one_item = $one_item / $totalHoursDiff;
-
-        // Product price decreasing period in seconds
-        $seconds = $minutes * 60;
-
-        return view('User.Products.show_product', compact('product', 'colors', 'images', 'reviews', 'totalHoursDiff', 'seconds'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $total_for_one_item;
     }
 
     public function getSizes($id)
@@ -129,7 +71,6 @@ class ProductController extends Controller
         $Sizes_names = Size::whereIn('id', $Sizes_id)->pluck('size_name');
         return json_encode($Sizes_names);
     }
-
 
     public function getProducts(Request $request)
     {
