@@ -364,28 +364,160 @@ $(window).ready(function () {
     });
       
   });
+  $('.product-info .product-img-collection .secondry-imgs img').on('click', function () {
+    $('.product-info .product-img-collection .main-img img').attr('src',$(this).attr('src'))
+  })
   
   // add class(on) to stars, if thier is value gets from database
-  const starCount = $('.modal .rating-stars ul').data('star') ;
-  console.log(starCount)
-  if (starCount !== '') {
-    var itemClick = $('.modal .rating-stars ul .star')
-    itemClick.each((id , e) => {
-      var thisItem = e
-      if (id < starCount ) {
-        $(thisItem).addClass("on")
-      }
-    })
-  } 
+  
+  // if (starCount !== '') {
+  //   var itemClick = $('.modal .rating-stars ul .star')
+  //   itemClick.each((id , e) => {
+  //     var thisItem = e
+  //     if (id < starCount ) {
+    //       $(thisItem).addClass("on")
+    //     }
+    //   })
+    // } 
+    
+    const starCount = $('.modal .rating-stars ul').data('star') ;
+  var itemClick = $('.modal .rating-stars ul .star')
+    const starRating = $('.product-info .evaluation .star-rate-right .stars').data('star') ;
+  var itemClickRate = $('.product-info .evaluation .star-rate-right .stars li')
+  function starLight(count, stars) {
+    if (count !== '') {
+      stars.each((id , e) => {
+        var thisItem = e
+        if (id < count ) {
+          $(thisItem).addClass("on")
+        }
+      })
+    } 
+  }
+  starLight(starCount,itemClick)
+  starLight(starRating,itemClickRate)
  
 })
 
-
+var temp1 = 0;
+	function counterTemp() {
+		temp1 += 1;
+	}
+	setInterval(counterTemp,1000)
+	// var price = 0;
+	// let timer2=$('.data-left-time');
+	// timer2.each(function () { 
+	// 	var maxPrice = $(this).data("maxprice");
+	// 	price = maxPrice
+	// })
+	function updateTimer2() {
+		let timer=$('.timer');
+		timer.each(function () {
+			var thisItem = $(this)
+			var maxPrice = $(this).data("maxprice");
+			var minPrice = $(this).data("minprice");
+			var currentPrice;
+			var decreasePrice = $(this).data("decreaseprice");
+			var decreseTime = parseInt($(this).data("decresetime"));
+			var thisItemPrice = $(this).parents('.product-detiels').find('.price .new .new-price')
+			var endTime = $(this).data("endtime");
+			
+			
+			var dataStart= $(this).data("start");
+			var dataEnd= $(this).data("end");
+			var future = Date.parse(dataEnd);
+			var past = Date.parse(dataStart);
+			var now = new Date();
+			var now1 = Date.parse(now);
+			var diff = parseFloat($(this).data('diff')) * 1000 * 60 * 60;
+			var diffSecs = diff / 1000;
+			var left = now - past;
+			// console.log(diffSecs)
+			var diffCounter = future - now;
+			var leftTime = left * 100 / diff ;
+			var days = Math.floor(diffCounter / (1000 * 60 * 60 * 24));
+			var hours = Math.floor(diffCounter / (1000 * 60 * 60));
+			var minutes = Math.floor(diffCounter / (1000 * 60 ));
+			// console.log(hours)
+			// Count the seconds that have passed
+			var secsPassed = Math.floor(left / (1000));
+			// Count how many groups of 20 minutes that have passed
+			var secs2 = (secsPassed / (decreseTime));
+			// floor value
+			var secs3 = Math.floor(secsPassed / (decreseTime));
+			// Subtracting these values we get rate of seconds for the current 20 minutes group
+			var secLeft = secs2 - secs3
+			// Count how many seconds that have passed in the current 20 minutes group
+			var secsCount = Math.round(decreseTime - secLeft * decreseTime);
+			// console.log(secsCount)
+			if ( temp1 == 1 ) {
+				currentPrice = (maxPrice - (secs3 * decreasePrice)).toFixed(3);
+				$(this).attr('data-currentprice', currentPrice);
+				thisItemPrice.text(currentPrice);
+			}
+			if ( secsCount == 1 ) {
+				var currentPrice1 = parseFloat(thisItemPrice.text());
+				// console.log(currentPrice1)
+				if ( currentPrice1 > minPrice ) {
+					currentPrice1 = (currentPrice1 - decreasePrice).toFixed(3);
+					// console.log(decreasePrice)
+					if (currentPrice1 < minPrice) {
+						currentPrice1 = minPrice;
+					}
+					$(this).attr('data-currentprice', currentPrice1);
+					// console.log(currentPrice)
+				} else if ( currentPrice1 < minPrice ){
+					currentPrice1 = minPrice;
+				}
+				thisItemPrice.text(currentPrice1);
+				// console.log(currentPrice)
+			}
+			// $(this).attr('data-currentprice', currentPrice);
+			var mins = Math.floor(diffCounter / (1000 * 60));
+			var secs = Math.floor(diffCounter / 1000);
+			if(diffCounter > 0 ){
+        d = days;
+        // h = hours - days * 24;
+        h = hours ;
+        h2 = Math.floor(h / 10);
+        h1 = Math.floor(h - h2*10);
+        m = mins - hours * 60;
+        m2 = Math.floor(m / 10);
+        m1 = Math.floor(m - m2*10);
+        s = secs - mins * 60;
+        s2 =Math.floor(s / 10);
+        s1 = Math.floor(s - s2*10);
+			}else if (diffCounter <= 0) {
+        h2 = 0;
+        h1 = 0;
+        m2 = 0;
+        m1 = 0;
+        s2 =0;
+        s1 = 0;
+				parseFloat(thisItemPrice.text(minPrice))
+			}
+			if (minutes <= -120) {
+				thisItem.attr('data-endtime', 'true')
+			}
+			thisItem.html(
+    '<div class="time"><span class="line"></span><span class="time-n">' + h2 + '</span></div>' +
+    '<div class="time"><span class="line"></span><span class="time-n">' + h1 + '</span></div>' +
+    '<div class="dots"> : </div>' +
+    '<div class="time"><span class="line"></span><span class="time-n">' + m2 + '</span></div>' +
+    '<div class="time"><span class="line"></span><span class="time-n">' + m1 + '</span></div>' +
+    '<div class="dots"> : </div>' +
+    '<div class="time"><span class="line"></span><span class="time-n">' + s2 + '</span></div>' +
+        '<div class="time"><span class="line"></span><span class="time-n">' + s1 + '</span></div>'
+      );
+		})
+};
+	// Call timer function
+setInterval(updateTimer2, 1000);
 // Timer function ::
 function updateTimer() {
   let timer=document.querySelectorAll(".timer");
   timer.forEach(ele => {
-  datePrice = ele.getAttribute("data-date")
+  datePrice = ele.getAttribute("data-start")
   future = Date.parse(datePrice);
   now = new Date();
   diff = future - now;
@@ -418,7 +550,7 @@ function updateTimer() {
 })
 };
  // Call timer function
-setInterval('updateTimer()', 1000);
+// setInterval('updateTimer()', 1000);
 
 // Price-Range Section
 
@@ -555,7 +687,7 @@ var brandSlider = new Swiper(".brand-slider", {
   },
 });
 var swiper = new Swiper(".product-classification-small-screen", {
-    slidesPerView: 4,
+    slidesPerView: 3,
     spaceBetween: 10,
     loop: false,
     freeMode: true,
@@ -566,6 +698,22 @@ var swiper = new Swiper(".product-classification-small-screen", {
       el: ".swiper-scrollbar",
       hide: true,
   },
+  breakpoints: {
+    380: {
+      slidesPerView: 4,
+    },
+  },
+});
+var productImgs = new Swiper(".product-imgs", {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    direction: "vertical",
+    loop: false,
+    // freeMode: true,
+    navigation: {
+      nextEl: '.product-slider-btn-next',
+      prevEl: '.product-slider-btn-prev',
+    },
 });
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 4,
@@ -573,8 +721,8 @@ var swiper = new Swiper(".mySwiper", {
     loop: true,
     freeMode: true,
     navigation: {
-        nextEl: '.mySwiper-btn-next',
-        prevEl: '.mySwiper-btn-prev',
+        nextEl: '.product-slider-btn-next',
+        prevEl: '.product-slider-btn-prev',
     },
     pagination: {
         el: ".swiper-pagination",
